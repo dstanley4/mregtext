@@ -339,7 +339,7 @@ highschool %>%
 geom_hline(yintercept = 22)
 
 
-# Challenge help. Use the .fitted column in reg_diagnostics
+# Challenge help. Use the .resid column in reg_diagnostics
 library(broom)
 reg_diagnostics <- lrm_for_your_data %>% augment()
 
