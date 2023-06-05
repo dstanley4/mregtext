@@ -227,6 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#obtain-data-and-save-it-to-your-computer-2" id="toc-obtain-data-and-save-it-to-your-computer-2" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer-2"><span class="toc-section-number">3.4.2</span>  Obtain data and save it to your computer</a></li>
   <li><a href="#load-data-from-your-computer-2" id="toc-load-data-from-your-computer-2" class="nav-link" data-scroll-target="#load-data-from-your-computer-2"><span class="toc-section-number">3.4.3</span>  Load data from your computer</a></li>
   <li><a href="#inspect-data-2" id="toc-inspect-data-2" class="nav-link" data-scroll-target="#inspect-data-2"><span class="toc-section-number">3.4.4</span>  Inspect data</a></li>
+  <li><a href="#helpful-commands-for-exercise" id="toc-helpful-commands-for-exercise" class="nav-link" data-scroll-target="#helpful-commands-for-exercise"><span class="toc-section-number">3.4.5</span>  Helpful Commands for Exercise</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -841,9 +842,9 @@ life_satis  -5.989863  -1.593489</code></pre>
 <p>The values above are the predicted values for opioid_od_death_rate. We put everything in the table below for clarity. The predicted opioid_od_death_rate value provides a corresponding point on the regression line. That is, all (life_satis value, predicted opioid_od_death_rate value) points fall on the regression line.</p>
 <table class="table">
 <colgroup>
-<col style="width: 31%">
-<col style="width: 43%">
+<col style="width: 28%">
 <col style="width: 24%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1021,6 +1022,18 @@ $ academic_clubs       &lt;dbl&gt; 1.61, 0.69, 1.10, 0.00, 0.69, 0.00, 0.69, 1.6
 $ alcohol_use          &lt;dbl&gt; 1.39, 0.69, 0.69, 0.69, 0.00, 1.10, 1.95, 0.69, 1…
 $ gpa                  &lt;dbl&gt; 3.25, 4.00, 4.00, 2.88, 4.00, 2.25, 2.12, 3.62, 3…</code></pre>
 </div>
+</div>
+</section>
+<section id="helpful-commands-for-exercise" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="helpful-commands-for-exercise"><span class="header-section-number">3.4.5</span> Helpful Commands for Exercise</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># horizontal line</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">22</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Challenge help. Use the .fitted column in reg_diagnostics</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>reg_diagnostics <span class="ot">&lt;-</span> lrm_for_your_data <span class="sc">%&gt;%</span> <span class="fu">augment</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

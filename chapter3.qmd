@@ -242,7 +242,7 @@ predict(lrm3_1, fit_for_values)
 The values above are the predicted values for opioid_od_death_rate. We put everything in the table below for clarity. The predicted opioid_od_death_rate value provides a corresponding point on the regression line. That is, all (life_satis value, predicted opioid_od_death_rate value) points fall on the regression line.
 
 | Percentile life_satis | life_satis value | predicted opioid_od_death_rate value |
-|-----------------------|------------------|--------------------------------------|
+|---------------------|------------------|----------------------------------|
 | 25th                  | 51.1             | 18.30148                             |
 | 50th                  | 51.6             | 16.40564                             |
 | 75th                  | 52.3             | 13.75146                             |
@@ -328,3 +328,20 @@ highschool <- read_csv("highschool.csv") %>%
 highschool %>% 
   glimpse()  
 ```
+
+
+### Helpful Commands for Exercise
+
+```{r}
+#| eval: false
+
+# horizontal line
+geom_hline(yintercept = 22)
+
+
+# Challenge help. Use the .fitted column in reg_diagnostics
+library(broom)
+reg_diagnostics <- lrm_for_your_data %>% augment()
+
+```
+
