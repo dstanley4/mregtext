@@ -1,2 +1,17 @@
 # Chapter 4
 
+## Required packages
+
+The following CRAN packages must be installed:
+
+| Required CRAN Packages |
+|-------------------|
+|tidyverse          |
+|usethis            |
+|janitor            |
+|skimr            |
+|apaTables          |
+|broom          |
+|psych             |
+
+REMINDER: Never use the command library(psych).

@@ -1,12 +1,28 @@
 # Chapter 3
 
+## Required packages
+
+The following CRAN packages must be installed:
+
+| Required CRAN Packages |
+|-------------------|
+|tidyverse          |
+|usethis            |
+|janitor            |
+|skimr            |
+|apaTables          |
+|broom          |
+|psych             |
+
+REMINDER: Never use the command library(psych).
+
+
 ```{r}
 #| include: false
 library(tidyverse)
 library(usethis) # use_github_file() 
 library(janitor) # clean_names() 
 library(skimr) # skim()
-library(apaTables)
 library(apaTables)
 ```
 
@@ -188,7 +204,6 @@ library(apaTables)
 knitr::kable(apa.reg.table(lrm3_1)$latex.body)
 ```
 
-
 You can get extra information (e.g., exact $p$-values) about specific predictors using:
 
 ```{r}
@@ -201,7 +216,6 @@ You can get extra overall fit information using:
 ```{r}
 glance(lrm3_1)
 ```
-
 
 ## Pages 49 to 50
 
@@ -257,7 +271,7 @@ predict(lrm3_1, fit_for_values)
 The values above are the predicted values for opioid_od_death_rate. We put everything in the table below for clarity. The predicted opioid_od_death_rate value provides a corresponding point on the regression line. That is, all (life_satis value, predicted opioid_od_death_rate value) points fall on the regression line.
 
 | Percentile life_satis | life_satis value | predicted opioid_od_death_rate value |
-|---------------------|------------------|----------------------------------|
+|---------------------|------------------|---------------------------------|
 | 25th                  | 51.1             | 18.30148                             |
 | 50th                  | 51.6             | 16.40564                             |
 | 75th                  | 52.3             | 13.75146                             |
@@ -344,7 +358,6 @@ highschool %>%
   glimpse()  
 ```
 
-
 ### Helpful Commands for Exercise
 
 ```{r}
@@ -359,4 +372,3 @@ library(broom)
 reg_diagnostics <- lrm_for_your_data %>% augment()
 
 ```
-
