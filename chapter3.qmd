@@ -192,7 +192,7 @@ knitr::kable(apa.reg.table(lrm3_1)$latex.body)
 
 ### Fitted values
 
-When you look at the graph with life_satis on the x-axis and opioid_od_death_rate on the y-axis you see a regression line. The points that fall on this line are predicted scores for opioid_od_death_rate based on life_satis. Alternatively, we might call these **fitted** values for opioid_od_death_rate based on life_satis. We can obtained a predicted score (i.e., fitted score) for each x-axis value using augment() command fromm the broom package. When you inspect the output below only pay attention to the opioid_od_death_rate, life_satis, and .fitted columns.  The column pioid_od_death_rate is the measured opiod overdose death rate, the column life_satis is the measured life satisfaction, the column .fitted is the predicted opiod overdose death rate for a given life_satis value.
+When you look at the graph with life_satis on the x-axis and opioid_od_death_rate on the y-axis you see a regression line. The points that fall on this line are predicted scores for opioid_od_death_rate based on life_satis. Alternatively, we might call these **fitted** values for opioid_od_death_rate based on life_satis. We can obtained a predicted score (i.e., fitted score) for each x-axis value using augment() command fromm the broom package. When you inspect the output below only pay attention to the opioid_od_death_rate, life_satis, and .fitted columns. The column pioid_od_death_rate is the measured opiod overdose death rate, the column life_satis is the measured life satisfaction, the column .fitted is the predicted opiod overdose death rate for a given life_satis value.
 
 ```{r}
 lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
@@ -202,7 +202,6 @@ library(broom)
 lrm3_1 %>%
   augment()
 ```
-
 
 ### Fitted values and percentiles
 
@@ -243,7 +242,7 @@ predict(lrm3_1, fit_for_values)
 The values above are the predicted values for opioid_od_death_rate. We put everything in the table below for clarity. The predicted opioid_od_death_rate value provides a corresponding point on the regression line. That is, all (life_satis value, predicted opioid_od_death_rate value) points fall on the regression line.
 
 | Percentile life_satis | life_satis value | predicted opioid_od_death_rate value |
-|-----------------------|--------------------------------|------------------|
+|-----------------------|------------------|--------------------------------------|
 | 25th                  | 51.1             | 18.30148                             |
 | 50th                  | 51.6             | 16.40564                             |
 | 75th                  | 52.3             | 13.75146                             |
