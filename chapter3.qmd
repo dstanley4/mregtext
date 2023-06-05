@@ -167,7 +167,7 @@ confint(lrm3_1)
 
 #### Analysis apa.reg.table()
 
-Using apaTables to display the regression results is probably a better approach. It's one step and combines everything into one table. But summary() approach does give additional information (e.g., adjusted $R^2)$) - so it's good to be familiar with both approaches.
+Using apaTables to display the regression results is probably a better approach. It's one step and combines everything into one table. You can get the extra fit information using summary() or the glance() command from the broom package.
 
 ```{r}
 #| eval: false
@@ -187,6 +187,21 @@ lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
 library(apaTables)
 knitr::kable(apa.reg.table(lrm3_1)$latex.body)
 ```
+
+
+You can get extra information (e.g., exact $p$-values) about specific predictors using:
+
+```{r}
+library(broom)
+tidy(lrm3_1)
+```
+
+You can get extra overall fit information using:
+
+```{r}
+glance(lrm3_1)
+```
+
 
 ## Pages 49 to 50
 
