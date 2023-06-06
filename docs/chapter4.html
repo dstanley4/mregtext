@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Regression Textbook Supplement - 4&nbsp; Chapter 4</title>
+<title>Regression Textbook Supplement - 4&nbsp; Multiple Linear Regression Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Chapter 4</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression Models</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -172,22 +172,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Chapter 1</span></a>
+  <a href="./chapter1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Chapter 2</span></a>
+  <a href="./chapter2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Review</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 3</span></a>
+  <a href="./chapter3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Linear Regression Models</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter4.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Chapter 4</span></a>
+  <a href="./chapter4.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression Models</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -231,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Chapter 4</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Multiple Linear Regression Models</span></h1>
 </div>
 
 
@@ -651,8 +651,8 @@ Attaching package: 'plotly'</code></pre>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(focal_data, <span class="at">x =</span> <span class="sc">~</span>per_child_poverty, <span class="at">y =</span> <span class="sc">~</span>med_hh_income, <span class="at">z =</span> <span class="sc">~</span>violent_crime_rate,</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"scatter3d"</span>, <span class="at">mode =</span> <span class="st">"markers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cbf029ccac440155213e" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-cbf029ccac440155213e">{"x":{"visdat":{"5baa49330a3":["function () ","plotlyVisDat"]},"cur_data":"5baa49330a3","attrs":{"5baa49330a3":{"x":{},"y":{},"z":{},"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"per_child_poverty"},"yaxis":{"title":"med_hh_income"},"zaxis":{"title":"violent_crime_rate"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[24,13,20,24,17,12,14,17,19,20,12,15,16,18,14,15,22,26,12,11,12,19,12,28,18,14,14,17,10,14,27,19,20,9,19,21,15,17,18,22,16,22,21,9,11,13,13,24,14,13],"y":[48486,76715,56213,45726,71228,68811,76106,65627,53267,55679,78084,53089,63575,54325,58580,57422,48948,47942,55425,81868,77378,54938,68411,43567,53560,52559,59116,57598,74057,79363,48059,65323,52413,63473,54533,51424,59393,59445,63296,51015,59499,50972,59570,68374,60076,71564,70116,44921,59209,62268],"z":[427.4,635.8,399.9,480.1,396.1,309.1,236.9,489.1,540.5,377.3,259.2,212.2,370,365.3,273.5,348.6,211.6,514.7,127.8,446.1,391.4,427.3,229.1,278.5,442.9,323.7,280.4,635.6,196.1,261.2,597.4,381.8,329.5,265.1,284.9,406,232.3,314.1,219.2,497.7,326.5,608.4,405.9,215.6,99.3,196.2,285.2,302,290.3,195.5],"mode":"markers","type":"scatter3d","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-01f9844263b66b78c912" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-01f9844263b66b78c912">{"x":{"visdat":{"5e406cde2643":["function () ","plotlyVisDat"]},"cur_data":"5e406cde2643","attrs":{"5e406cde2643":{"x":{},"y":{},"z":{},"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"per_child_poverty"},"yaxis":{"title":"med_hh_income"},"zaxis":{"title":"violent_crime_rate"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[24,13,20,24,17,12,14,17,19,20,12,15,16,18,14,15,22,26,12,11,12,19,12,28,18,14,14,17,10,14,27,19,20,9,19,21,15,17,18,22,16,22,21,9,11,13,13,24,14,13],"y":[48486,76715,56213,45726,71228,68811,76106,65627,53267,55679,78084,53089,63575,54325,58580,57422,48948,47942,55425,81868,77378,54938,68411,43567,53560,52559,59116,57598,74057,79363,48059,65323,52413,63473,54533,51424,59393,59445,63296,51015,59499,50972,59570,68374,60076,71564,70116,44921,59209,62268],"z":[427.4,635.8,399.9,480.1,396.1,309.1,236.9,489.1,540.5,377.3,259.2,212.2,370,365.3,273.5,348.6,211.6,514.7,127.8,446.1,391.4,427.3,229.1,278.5,442.9,323.7,280.4,635.6,196.1,261.2,597.4,381.8,329.5,265.1,284.9,406,232.3,314.1,219.2,497.7,326.5,608.4,405.9,215.6,99.3,196.2,285.2,302,290.3,195.5],"mode":"markers","type":"scatter3d","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
@@ -796,7 +796,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./chapter3.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Chapter 3</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Linear Regression Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

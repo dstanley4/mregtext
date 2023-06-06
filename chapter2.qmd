@@ -1,4 +1,4 @@
-# Chapter 2
+# Review
 
 ## Required packages
 
@@ -341,4 +341,3 @@ ggplot(americans, aes(x=educate, y = american)) +
   geom_jitter()
 
 ```
-
