@@ -5,17 +5,16 @@
 The following CRAN packages must be installed:
 
 | Required CRAN Packages |
-|-------------------|
-|tidyverse          |
-|usethis            |
-|janitor            |
-|skimr            |
-|psych            |
-
+|------------------------|
+| tidyverse              |
+| usethis                |
+| janitor                |
+| skimr                  |
+| psych                  |
 
 REMINDER: Never use the command library(psych).
 
-## Page 12
+## Page 12 Normal Density Plot
 
 ### Normal Distribution
 
@@ -63,9 +62,7 @@ income_graph <- ggplot(data = income_data,
 print(income_graph)
 ```
 
-## Page 27
-
-### Standardized Scores
+## Page 27 Standardized Scores
 
 ```{r}
 sample1_oz <- c(40, 45, 50, 55, 60, 65, 70)
@@ -85,9 +82,7 @@ weight_data <- data.frame(sample1_oz, sample2_grams, z_sample1_oz, z_sample2_gra
 knitr::kable(weight_data)
 ```
 
-## Page 30
-
-### Correlation and Covariance
+## Page 30 Correlation /Covariance
 
 ```{r}
 sample1_oz <- c(40, 45, 50, 55, 60, 65, 70)
@@ -112,11 +107,9 @@ correlation_sample1 * sd(sample1_oz) * sd(sample1_length)
 print(cov_sample1)
 ```
 
-## Page 34
+## Page 34 Nations Data Inspection
 
-### Nations 2018
-
-#### Activate packages
+### Activate packages
 
 ```{r}
 library(usethis) # use_github_file() 
@@ -125,7 +118,7 @@ library(janitor) # clean_names()
 library(skimr) # skim()
 ```
 
-#### Obtain data and save it to your computer
+### Obtain data and save it to your computer
 
 ```{r}
 #| include: false
@@ -149,7 +142,7 @@ nations2018 <- read_csv("nations2018.csv") %>%
   clean_names()
 ```
 
-#### Inspect data
+### Inspect data
 
 ```{r}
 nations2018 %>% 
@@ -169,7 +162,7 @@ nations2018 %>%
 knitr::kable(nations2018)
 ```
 
-#### Descriptive with skim()
+### Descriptive with skim()
 
 ```{r}
 library(skimr)
@@ -178,7 +171,7 @@ nations2018 %>%
   skim()  
 ```
 
-#### Descriptives with describe()
+### Descriptives with describe()
 
 Alternatively, you could use the describe() command from the psych package as per the book. But, NEVER use library(psych) it will break the tidyverse. Instead use psyc:: before each psych package command.
 
@@ -189,7 +182,7 @@ nations2018 %>%
   psych::describe()  
 ```
 
-### GSS 2018
+## Page 34 GSS t-test
 
 ```{r}
 library(usethis) # use_github_file 
@@ -267,3 +260,85 @@ gss2018 %>%
   apa.ind.t.test(female, pincome, var.equal = FALSE)
 
 ```
+
+## Page 35 Chapter Exercises
+
+### Activate packages
+
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/American.csv",
+                save_as = "americans.csv")
+
+americans <- read_csv("americans.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/American.csv",
+                save_as = "americans.csv")
+```
+
+### Load data from your computer
+
+```{r}
+#| eval: false
+americans <- read_csv("americans.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+```{r}
+americans %>% 
+  glimpse()  
+```
+
+### Hints
+
+```{r}
+library(tidyverse)
+
+glimpse(americans)
+```
+
+Notice the column, group, is a chr column. We need to make it a factor.
+
+```{r}
+americans <- americans %>%
+  mutate(group = as_factor(group))
+```
+
+Now skim() that column. Recall skim() is from the skimr package.
+
+```{r}
+#| eval: false
+
+americans %>%
+  select(group) %>%
+  skim()
+
+```
+
+Compare the reults of the two commands below. Be sure to read the documentation for geom_jitter. Use ?geom_jitter in the console.
+
+```{r}
+#| eval: false
+
+ggplot(americans, aes(x=educate, y = american)) + 
+  geom_point()
+
+
+ggplot(americans, aes(x=educate, y = american)) + 
+  geom_jitter()
+
+```
+

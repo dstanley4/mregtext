@@ -25,11 +25,9 @@ library(skimr) # skim()
 library(apaTables)
 ```
 
-## Page 40
+## Page 40 Expenditures Graph
 
-### Expenditures vs Labour Graph
-
-#### Activate packages
+### Activate packages
 
 ```{r}
 library(usethis) # use_github_file()
@@ -37,7 +35,7 @@ library(tidyverse) # read_csv()
 library(janitor) # clean_names() 
 ```
 
-#### Obtain data and save it to your computer
+### Obtain data and save it to your computer
 
 ```{r}
 #| include: false
@@ -53,7 +51,7 @@ use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/
                 save_as = "nations2018.csv")
 ```
 
-#### Load data from your computer
+### Load data from your computer
 
 ```{r}
 #| eval: false
@@ -61,7 +59,7 @@ nations2018 <- read_csv("nations2018.csv") %>%
   clean_names()
 ```
 
-#### Inspect data
+### Inspect data
 
 ```{r}
 nations2018 %>% 
@@ -97,11 +95,9 @@ nations_plot <- ggplot(data = nations2018,
 print(nations_plot)
 ```
 
-## Pages 44 to 46
+## Pages 44 to 46 Opioid Analysis
 
-### Opioid vs Satisfaction Analysis
-
-#### Activate packages
+### Activate packages
 
 ```{r}
 library(usethis) # use_github_file()
@@ -109,7 +105,7 @@ library(tidyverse) # read_csv()
 library(janitor) # clean_names() 
 ```
 
-#### Obtain data and save it to your computer
+### Obtain data and save it to your computer
 
 ```{r}
 #| include: false
@@ -125,7 +121,7 @@ use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/
                 save_as = "statedata2018.csv")
 ```
 
-#### Load data from your computer
+### Load data from your computer
 
 Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.
 
@@ -145,7 +141,7 @@ statedata2018 %>%
   glimpse()  
 ```
 
-#### Graph
+### Graph
 
 ```{r}
 state_plot <- ggplot(data = statedata2018,
@@ -170,7 +166,7 @@ state_plot <- ggplot(data = statedata2018,
 print(state_plot)
 ```
 
-#### Analysis using summary()
+### Analysis using summary()
 
 ```{r}
 lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
@@ -180,7 +176,7 @@ summary(lrm3_1)
 confint(lrm3_1)
 ```
 
-#### Analysis apa.reg.table()
+### Analysis apa.reg.table()
 
 Using apaTables to display the regression results is probably a better approach. It's one step and combines everything into one table. You can get the extra fit information using summary() or the glance() command from the broom package.
 
@@ -216,9 +212,7 @@ You can get extra overall fit information using:
 glance(lrm3_1)
 ```
 
-## Pages 49 to 50
-
-### Fitted values
+## Pages 49 to 50 Fitted values
 
 When you look at the graph with life_satis on the x-axis and opioid_od_death_rate on the y-axis you see a regression line. The points that fall on this line are predicted scores for opioid_od_death_rate based on life_satis. Alternatively, we might call these **fitted** values for opioid_od_death_rate based on life_satis. We can obtained a predicted score (i.e., fitted score) for each x-axis value using augment() command fromm the broom package. When you inspect the output below only pay attention to the opioid_od_death_rate, life_satis, and .fitted columns. The column pioid_od_death_rate is the measured opiod overdose death rate, the column life_satis is the measured life satisfaction, the column .fitted is the predicted opiod overdose death rate for a given life_satis value.
 
@@ -316,7 +310,7 @@ $$
 \end{aligned}
 $$
 
-## Chapter Exercises
+## Page 62 Chapter Exercises
 
 ### Activate packages
 

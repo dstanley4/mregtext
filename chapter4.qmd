@@ -12,7 +12,7 @@ The following CRAN packages must be installed:
 | skimr                  |
 | apaTables              |
 | broom                  |
-| corrr               |
+| corrr                  |
 | psych                  |
 
 REMINDER: Never use the command library(psych).
@@ -28,9 +28,7 @@ library(broom)
 library(corrr)
 ```
 
-
-
-## Page 66
+## Page 66 Correlations
 
 ### Activate packages
 
@@ -83,8 +81,8 @@ focal_data <- statedata2018 %>%
   select(violent_crime_rate, per_child_poverty, med_hh_income)
 ```
 
-
 ### Select focal variables
+
 ```{r}
 library(corrr)
 
@@ -103,14 +101,12 @@ focal_data %>%
 
 #### apaTables package
 
-
 ```{r}
 library(apaTables)
 
 focal_data %>% 
   apa.cor.table()
 ```
-
 
 #### corrr package
 
@@ -126,7 +122,6 @@ focal_data %>%
   fashion()
 ```
 
-
 But more importantly the corr package has network_plot() to visual relations among variables. Here we only plot relations where the magnitude of the correlation is greater than .20:
 
 ```{r}
@@ -139,7 +134,6 @@ focal_data %>%
                colors = c("red", "green"), 
                legend = "full")
 ```
-
 
 ## Page 67
 
@@ -157,11 +151,8 @@ apa.reg.table(lm4_1)
 lm4_1 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
             data = focal_data)
 
-x<-apa.reg.table(lm4_1)
-
-knitr::kable(x$table_body)
+knitr::kable(apa.reg.table(lm4_1)$latex.body)
 ```
-
 
 ```{r}
 #  select(violent_crime_rate, per_child_poverty, med_hh_income)
@@ -170,4 +161,3 @@ library(plotly)
 plot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_crime_rate,
         type = "scatter3d", mode = "markers")
 ```
-
