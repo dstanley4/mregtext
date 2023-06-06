@@ -5,13 +5,169 @@
 The following CRAN packages must be installed:
 
 | Required CRAN Packages |
-|-------------------|
-|tidyverse          |
-|usethis            |
-|janitor            |
-|skimr            |
-|apaTables          |
-|broom          |
-|psych             |
+|------------------------|
+| tidyverse              |
+| usethis                |
+| janitor                |
+| skimr                  |
+| apaTables              |
+| broom                  |
+| corrr               |
+| psych                  |
 
 REMINDER: Never use the command library(psych).
+
+```{r}
+#| include: false
+library(tidyverse)
+library(usethis) # use_github_file() 
+library(janitor) # clean_names() 
+library(skimr) # skim()
+library(apaTables)
+library(broom)
+library(corrr)
+```
+
+
+
+## Page 66
+
+### Activate packages
+
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/StateData2018.csv",
+                save_as = "statedata2018.csv")
+
+statedata2018 <- read_csv("statedata2018.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/StateData2018.csv",
+                save_as = "statedata2018.csv")
+```
+
+#### Load data from your computer
+
+Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.
+
+```{r}
+#| eval: false
+statedata2018 <- read_csv("statedata2018.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+There are so many column names in this data set that we do the glimpse a bit differently. That is, we sort the order of the columns alphabetically prior to doing the glimpse(). It affects only the display of the column names - not the structure of the data.
+
+```{r}
+statedata2018 %>% 
+  select(sort(names(statedata2018))) %>%
+  glimpse()  
+```
+
+### Select focal variables
+
+```{r}
+focal_data <- statedata2018 %>%
+  select(violent_crime_rate, per_child_poverty, med_hh_income)
+```
+
+
+### Select focal variables
+```{r}
+library(corrr)
+
+focal_data %>% 
+  correlate()
+```
+
+### Correlation options
+
+#### psych package
+
+```{r}
+focal_data %>% 
+  psych::corr.test()
+```
+
+#### apaTables package
+
+
+```{r}
+library(apaTables)
+
+focal_data %>% 
+  apa.cor.table()
+```
+
+
+#### corrr package
+
+We use correlate() to get the correlations, shave() to remove upper diagonal, and fashion() to make it nice:
+
+```{r}
+#| message: false
+library(corrr)
+
+focal_data %>% 
+  correlate() %>%
+  shave() %>%
+  fashion()
+```
+
+
+But more importantly the corr package has network_plot() to visual relations among variables. Here we only plot relations where the magnitude of the correlation is greater than .20:
+
+```{r}
+#| message: false
+#| warning: false
+#| 
+focal_data %>% 
+  correlate() %>%
+  network_plot(min_cor = .2,
+               colors = c("red", "green"), 
+               legend = "full")
+```
+
+
+## Page 67
+
+```{r}
+#| eval: false
+lm4_1 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+apa.reg.table(lm4_1)
+
+```
+
+```{r}
+#| echo: false
+lm4_1 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+x<-apa.reg.table(lm4_1)
+
+knitr::kable(x$table_body)
+```
+
+
+```{r}
+#  select(violent_crime_rate, per_child_poverty, med_hh_income)
+
+library(plotly)
+plot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_crime_rate,
+        type = "scatter3d", mode = "markers")
+```
+

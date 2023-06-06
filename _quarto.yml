@@ -17,9 +17,11 @@ book:
 bibliography: references.bib
 
 format:
-  html:
+  html: 
+    grid:
+      body-width: 1200px
     theme: cosmo
-    toc-depth: 4
+    toc-depth: 5
   pdf:
     documentclass: scrreprt
 
