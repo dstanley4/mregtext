@@ -305,3 +305,8 @@ teenbirths <- teenbirths %>%
 teenbirths %>% 
   glimpse()  
 ```
+
+```{r}
+teenbirths %>% 
+  skim()  
+```
