@@ -154,8 +154,6 @@ lm4_1 <- lm(violent_crime_rate ~ per_child_poverty,
 knitr::kable(apa.reg.table(lm4_1)$latex.body)
 ```
 
-
-
 ## Page 68 Two Predictors
 
 ```{r}
@@ -177,7 +175,6 @@ knitr::kable(apa.reg.table(lm4_2)$latex.body)
 
 ### Two Predictors: Predicted Scores
 
-
 Two help us interpret the data we will make a graph. But to do so we need to know the range for per_child_poverty. We find it ranges from 9 percent to 28 percent from the skim() output below.
 
 ```{r}
@@ -185,7 +182,6 @@ focal_data %>%
   select(per_child_poverty) %>%
   skim()
 ```
-
 
 Now we want to know the mean of med_hh_income. We find it is 60252.
 
@@ -195,8 +191,7 @@ focal_data %>%
   skim()
 ```
 
-
-Now we want to HOLD med_hh_income constant at 60252 see how violent_crime_rate changes with  per_child_poverty. We create a dataset where this is the case:
+Now we want to HOLD med_hh_income constant at 60252 see how violent_crime_rate changes with per_child_poverty. We create a dataset where this is the case:
 
 ```{r}
 
@@ -222,7 +217,6 @@ predict4values <- predict4values %>%
 print(predict4values)  
 ```
 
-
 Now graph it:
 
 ```{r}
@@ -240,7 +234,6 @@ prediction_graph <- ggplot(data = predict4values,
 print(prediction_graph)
 ```
 
-
 ## Page 71 Scatter plot
 
 ```{r}
@@ -251,7 +244,6 @@ library(plotly)
 plot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_crime_rate,
         type = "scatter3d", mode = "markers")
 ```
-
 
 ## Page 72 Understanding b-weights
 
@@ -264,6 +256,52 @@ plot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_cri
 ## Page 86 Chapter Exercises
 
 
+### Activate packages
 
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+```
 
+### Obtain data and save it to your computer
 
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/TeenBirths.csv",
+                save_as = "teenbirths.csv")
+
+teenbirths <- read_csv("teenbirths.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/TeenBirths.csv",
+                save_as = "teenbirths.csv")
+```
+
+### Load data from your computer
+
+```{r}
+#| eval: false
+teenbirths <- read_csv("teenbirths.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+```{r}
+teenbirths %>% 
+  glimpse()  
+```
+
+```{r}
+teenbirths <- teenbirths %>% 
+  mutate(state = as_factor(state)) %>%
+  mutate(county = as_factor(county))
+```
+
+```{r}
+teenbirths %>% 
+  glimpse()  
+```

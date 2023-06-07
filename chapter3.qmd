@@ -27,7 +27,6 @@ library(apaTables)
 
 ## Page 40 Graphing Introduction
 
-
 ### Activate packages
 
 ```{r}
