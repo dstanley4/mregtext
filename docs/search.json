@@ -102,7 +102,7 @@
     "href": "chapter4.html#required-packages",
     "title": "4  Multiple Linear Regression Models",
     "section": "4.1 Required packages",
-    "text": "4.1 Required packages\nThe following CRAN packages must be installed:\n\n\n\nRequired CRAN Packages\n\n\n\n\ntidyverse\n\n\nusethis\n\n\njanitor\n\n\nskimr\n\n\napaTables\n\n\nbroom\n\n\ncorrr\n\n\ntidymodels\n\n\nrelaimpo\n\n\npsych\n\n\n\nREMINDER:\nNever use the command library(psych). Instead use psych:: before each command.\nNever use the command library(relaimpo). Instead use relaimpo:: before each command."
+    "text": "4.1 Required packages\nThe following CRAN packages must be installed:\n\n\n\nRequired CRAN Packages\n\n\n\n\ntidyverse\n\n\nusethis\n\n\njanitor\n\n\nskimr\n\n\napaTables\n\n\nbroom\n\n\ncorrr\n\n\ntidymodels\n\n\nremotes\n\n\nrelaimpo\n\n\npsych\n\n\n\nREMINDER:\nNever use the command library(psych). Instead use psych:: before each command.\nNever use the command library(relaimpo). Instead use relaimpo:: before each command.\nThe following GitHub packages must be installed:\n\n\n\nRequired GitHub Packages\n\n\n\n\ndstanley4/fastInteraction\n\n\n\nAfter the remotes package is installed, it can be used to install a package from GitHub:\n\nremotes::install_github(\"dstanley4/fastInteraction\")"
   },
   {
     "objectID": "chapter4.html#page-66-correlations",

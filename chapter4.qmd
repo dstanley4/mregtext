@@ -14,6 +14,7 @@ The following CRAN packages must be installed:
 | broom                  |
 | corrr                  |
 | tidymodels             |
+|remotes |
 | relaimpo               |
 | psych                  |
 
@@ -22,6 +23,22 @@ REMINDER:
 Never use the command library(psych). Instead use psych:: before each command.
 
 Never use the command library(relaimpo). Instead use relaimpo:: before each command.
+
+
+The following GitHub packages must be installed:
+
+| Required GitHub Packages |
+|--------------------------|
+|dstanley4/fastInteraction |
+
+
+After the remotes package is installed, it can be used to install a package from GitHub:
+
+```{r}
+#| eval: false
+remotes::install_github("dstanley4/fastInteraction")
+```
+
 
 ```{r}
 #| include: false
