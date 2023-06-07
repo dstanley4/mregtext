@@ -14,7 +14,7 @@ The following CRAN packages must be installed:
 | broom                  |
 | corrr                  |
 | tidymodels             |
-|remotes |
+| remotes                |
 | relaimpo               |
 | psych                  |
 
@@ -24,13 +24,11 @@ Never use the command library(psych). Instead use psych:: before each command.
 
 Never use the command library(relaimpo). Instead use relaimpo:: before each command.
 
-
 The following GitHub packages must be installed:
 
-| Required GitHub Packages |
-|--------------------------|
-|dstanley4/fastInteraction |
-
+| Required GitHub Packages  |
+|---------------------------|
+| dstanley4/fastInteraction |
 
 After the remotes package is installed, it can be used to install a package from GitHub:
 
@@ -38,7 +36,6 @@ After the remotes package is installed, it can be used to install a package from
 #| eval: false
 remotes::install_github("dstanley4/fastInteraction")
 ```
-
 
 ```{r}
 #| include: false
@@ -105,14 +102,6 @@ focal_data <- statedata2018 %>%
   select(violent_crime_rate, per_child_poverty, med_hh_income)
 ```
 
-### Select focal variables
-
-```{r}
-library(corrr)
-
-focal_data %>% 
-  correlate()
-```
 
 ### Correlation options
 
@@ -180,7 +169,6 @@ lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
 tidy(lm4_2)
 
 ```
-
 
 ### Two Predictors: Predicted Scores
 
@@ -302,7 +290,6 @@ lm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)
 
 tidy(lm_bweight_demo)
 ```
-
 
 Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2. The diagram beloow illustrate that b-weight in a multiple regression are weights based on residualized verions of a predictor and the criterion.
 

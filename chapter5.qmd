@@ -1,4 +1,86 @@
 # Goodness of Fit
 
+## Page 89 Fit Introduction
 
+### Activate packages
+
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/StateData2018.csv",
+                save_as = "statedata2018.csv")
+
+statedata2018 <- read_csv("statedata2018.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/StateData2018.csv",
+                save_as = "statedata2018.csv")
+```
+
+#### Load data from your computer
+
+Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.
+
+```{r}
+#| eval: false
+statedata2018 <- read_csv("statedata2018.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+There are so many column names in this data set that we do the glimpse a bit differently. That is, we sort the order of the columns alphabetically prior to doing the glimpse(). It affects only the display of the column names - not the structure of the data.
+
+```{r}
+statedata2018 %>% 
+  select(sort(names(statedata2018))) %>%
+  glimpse()  
+```
+
+### Select focal variables
+
+```{r}
+focal_data <- statedata2018 %>%
+  select(violent_crime_rate, per_child_poverty)
+```
+
+### Conduct Regression
+
+```{r}
+lm5_1 <- lm(violent_crime_rate ~ per_child_poverty,
+            data = focal_data)
+```
+
+### Approach 1: Regression fit
+
+```{r}
+summary(lm5_1)
+anova(lm5_1)
+```
+
+### Approach 2: Regression fit (better)
+
+```{r}
+library(tidymodels)
+glance(lm5_1)
+anova(lm5_1)
+```
+
+
+
+## Page 96 Predicted Values
+
+```{r}
+# code here
+
+```
 
