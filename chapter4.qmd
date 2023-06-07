@@ -135,7 +135,7 @@ focal_data %>%
                legend = "full")
 ```
 
-## Page 67
+## Page 67 One Predictor
 
 ```{r}
 #| eval: false
@@ -148,14 +148,104 @@ apa.reg.table(lm4_1)
 
 ```{r}
 #| echo: false
-lm4_1 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+lm4_1 <- lm(violent_crime_rate ~ per_child_poverty,
             data = focal_data)
 
 knitr::kable(apa.reg.table(lm4_1)$latex.body)
 ```
 
+
+
+## Page 68 Two Predictors
+
 ```{r}
-#  select(violent_crime_rate, per_child_poverty, med_hh_income)
+#| eval: false
+lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+apa.reg.table(lm4_2)
+
+```
+
+```{r}
+#| echo: false
+lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+knitr::kable(apa.reg.table(lm4_2)$latex.body)
+```
+
+### Two Predictors: Predicted Scores
+
+
+Two help us interpret the data we will make a graph. But to do so we need to know the range for per_child_poverty. We find it ranges from 9 percent to 28 percent from the skim() output below.
+
+```{r}
+focal_data %>%
+  select(per_child_poverty) %>%
+  skim()
+```
+
+
+Now we want to know the mean of med_hh_income. We find it is 60252.
+
+```{r}
+focal_data %>%
+  select(per_child_poverty) %>%
+  skim()
+```
+
+
+Now we want to HOLD med_hh_income constant at 60252 see how violent_crime_rate changes with  per_child_poverty. We create a dataset where this is the case:
+
+```{r}
+
+predict4values <- data.frame(per_child_poverty = seq(9, 28), 
+                             med_hh_income = 60252)
+
+print(predict4values)
+```
+
+We use our regression model to generate predicted scores:
+
+```{r}
+
+# Create predicted scores use the regression weights created in lm4_2
+predicted_violent_crime_rate <- predict(lm4_2, 
+                                        newdata = predict4values)
+
+# Put the predicted scores back into our data set of possible values
+predict4values <- predict4values %>%
+  mutate(predicted_violent_crime_rate = predicted_violent_crime_rate)
+  
+
+print(predict4values)  
+```
+
+
+Now graph it:
+
+```{r}
+prediction_graph <- ggplot(data = predict4values,
+                           mapping = aes(x = per_child_poverty,
+                                         y = predicted_violent_crime_rate)) +
+  geom_line(linewidth = 2) +
+  coord_cartesian(xlim = c(9, 28), ylim = c(100, 700)) +
+  scale_x_continuous(breaks = seq(10, 25, by = 5)) +
+  scale_y_continuous(breaks = seq(100, 700, by = 100)) +
+  theme_light() +
+  labs(x = "Perecent Child Poverty",
+       y = "Predicted Violent Crime Rate (yhat)")
+
+print(prediction_graph)
+```
+
+
+## Page 71 Scatter plot
+
+```{r}
+#| warning: false
+#| message: false
 
 library(plotly)
 plot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_crime_rate,

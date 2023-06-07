@@ -1,6 +1,4 @@
-# Chapter 5
+# Goodness of Fit
 
 
-$$
-\hat{y}
-$$
+

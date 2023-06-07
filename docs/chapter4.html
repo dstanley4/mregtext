@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./chapter5.html" rel="next">
 <link href="./chapter3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -192,6 +192,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./chapter5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Goodness of Fit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -222,7 +227,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#corrr-package" id="toc-corrr-package" class="nav-link" data-scroll-target="#corrr-package"><span class="toc-section-number">4.2.6.3</span>  corrr package</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#page-67" id="toc-page-67" class="nav-link" data-scroll-target="#page-67"><span class="toc-section-number">4.3</span>  Page 67</a></li>
+  <li><a href="#page-67-one-predictor" id="toc-page-67-one-predictor" class="nav-link" data-scroll-target="#page-67-one-predictor"><span class="toc-section-number">4.3</span>  Page 67 One Predictor</a></li>
+  <li><a href="#page-68-two-predictors" id="toc-page-68-two-predictors" class="nav-link" data-scroll-target="#page-68-two-predictors"><span class="toc-section-number">4.4</span>  Page 68 Two Predictors</a>
+  <ul>
+  <li><a href="#two-predictors-predicted-scores" id="toc-two-predictors-predicted-scores" class="nav-link" data-scroll-target="#two-predictors-predicted-scores"><span class="toc-section-number">4.4.1</span>  Two Predictors: Predicted Scores</a></li>
+  </ul></li>
+  <li><a href="#page-71-scatter-plot" id="toc-page-71-scatter-plot" class="nav-link" data-scroll-target="#page-71-scatter-plot"><span class="toc-section-number">4.5</span>  Page 71 Scatter plot</a></li>
   </ul>
 </nav>
     </div>
@@ -519,13 +529,109 @@ Values in square brackets indicate the 95% confidence interval.
 </section>
 </section>
 </section>
-<section id="page-67" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="page-67"><span class="header-section-number">4.3</span> Page 67</h2>
+<section id="page-67-one-predictor" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="page-67-one-predictor"><span class="header-section-number">4.3</span> Page 67 One Predictor</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lm4_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(violent_crime_rate <span class="sc">~</span> per_child_poverty <span class="sc">+</span> med_hh_income,</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> focal_data)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.reg.table</span>(lm4_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 8%">
+<col style="width: 15%">
+<col style="width: 5%">
+<col style="width: 13%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">predictor</th>
+<th style="text-align: left;">b</th>
+<th style="text-align: left;">b_CI</th>
+<th style="text-align: left;">beta</th>
+<th style="text-align: left;">beta_CI</th>
+<th style="text-align: left;">sr2</th>
+<th style="text-align: left;">sr2_CI</th>
+<th style="text-align: left;">r</th>
+<th style="text-align: left;">summary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: left;">122.24*</td>
+<td style="text-align: left;">[2.50, 241.99]</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">per_child_poverty</td>
+<td style="text-align: left;">13.34**</td>
+<td style="text-align: left;">[6.49, 20.18]</td>
+<td style="text-align: left;">0.49</td>
+<td style="text-align: left;">[0.24, 0.74]</td>
+<td style="text-align: left;">.24**</td>
+<td style="text-align: left;">[.06, .42]</td>
+<td style="text-align: left;">.49**</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(R^2\)</span> = .242**</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">95% CI[.06,.42]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="page-68-two-predictors" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="page-68-two-predictors"><span class="header-section-number">4.4</span> Page 68 Two Predictors</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lm4_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(violent_crime_rate <span class="sc">~</span> per_child_poverty <span class="sc">+</span> med_hh_income,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> focal_data)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.reg.table</span>(lm4_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -625,34 +731,285 @@ Values in square brackets indicate the 95% confidence interval.
 </table>
 </div>
 </div>
+<section id="two-predictors-predicted-scores" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="two-predictors-predicted-scores"><span class="header-section-number">4.4.1</span> Two Predictors: Predicted Scores</h3>
+<p>Two help us interpret the data we will make a graph. But to do so we need to know the range for per_child_poverty. We find it ranges from 9 percent to 28 percent from the skim() output below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(violent_crime_rate, per_child_poverty, med_hh_income)</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'plotly'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:ggplot2':
-
-    last_plot</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:stats':
-
-    filter</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:graphics':
-
-    layout</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(focal_data, <span class="at">x =</span> <span class="sc">~</span>per_child_poverty, <span class="at">y =</span> <span class="sc">~</span>med_hh_income, <span class="at">z =</span> <span class="sc">~</span>violent_crime_rate,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"scatter3d"</span>, <span class="at">mode =</span> <span class="st">"markers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>focal_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(per_child_poverty) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-01f9844263b66b78c912" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-01f9844263b66b78c912">{"x":{"visdat":{"5e406cde2643":["function () ","plotlyVisDat"]},"cur_data":"5e406cde2643","attrs":{"5e406cde2643":{"x":{},"y":{},"z":{},"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"per_child_poverty"},"yaxis":{"title":"med_hh_income"},"zaxis":{"title":"violent_crime_rate"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[24,13,20,24,17,12,14,17,19,20,12,15,16,18,14,15,22,26,12,11,12,19,12,28,18,14,14,17,10,14,27,19,20,9,19,21,15,17,18,22,16,22,21,9,11,13,13,24,14,13],"y":[48486,76715,56213,45726,71228,68811,76106,65627,53267,55679,78084,53089,63575,54325,58580,57422,48948,47942,55425,81868,77378,54938,68411,43567,53560,52559,59116,57598,74057,79363,48059,65323,52413,63473,54533,51424,59393,59445,63296,51015,59499,50972,59570,68374,60076,71564,70116,44921,59209,62268],"z":[427.4,635.8,399.9,480.1,396.1,309.1,236.9,489.1,540.5,377.3,259.2,212.2,370,365.3,273.5,348.6,211.6,514.7,127.8,446.1,391.4,427.3,229.1,278.5,442.9,323.7,280.4,635.6,196.1,261.2,597.4,381.8,329.5,265.1,284.9,406,232.3,314.1,219.2,497.7,326.5,608.4,405.9,215.6,99.3,196.2,285.2,302,290.3,195.5],"mode":"markers","type":"scatter3d","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">per_child_poverty</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16.84</td>
+<td style="text-align: right;">4.75</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">16.5</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">▅▇▇▅▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Now we want to know the mean of med_hh_income. We find it is 60252.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>focal_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(per_child_poverty) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">per_child_poverty</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16.84</td>
+<td style="text-align: right;">4.75</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">16.5</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">▅▇▇▅▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Now we want to HOLD med_hh_income constant at 60252 see how violent_crime_rate changes with per_child_poverty. We create a dataset where this is the case:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>predict4values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">per_child_poverty =</span> <span class="fu">seq</span>(<span class="dv">9</span>, <span class="dv">28</span>), </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">med_hh_income =</span> <span class="dv">60252</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(predict4values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   per_child_poverty med_hh_income
+1                  9         60252
+2                 10         60252
+3                 11         60252
+4                 12         60252
+5                 13         60252
+6                 14         60252
+7                 15         60252
+8                 16         60252
+9                 17         60252
+10                18         60252
+11                19         60252
+12                20         60252
+13                21         60252
+14                22         60252
+15                23         60252
+16                24         60252
+17                25         60252
+18                26         60252
+19                27         60252
+20                28         60252</code></pre>
+</div>
+</div>
+<p>We use our regression model to generate predicted scores:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create predicted scores use the regression weights created in lm4_2</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>predicted_violent_crime_rate <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm4_2, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">newdata =</span> predict4values)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Put the predicted scores back into our data set of possible values</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>predict4values <span class="ot">&lt;-</span> predict4values <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted_violent_crime_rate =</span> predicted_violent_crime_rate)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(predict4values)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   per_child_poverty med_hh_income predicted_violent_crime_rate
+1                  9         60252                     180.7560
+2                 10         60252                     201.9358
+3                 11         60252                     223.1156
+4                 12         60252                     244.2953
+5                 13         60252                     265.4751
+6                 14         60252                     286.6549
+7                 15         60252                     307.8346
+8                 16         60252                     329.0144
+9                 17         60252                     350.1942
+10                18         60252                     371.3739
+11                19         60252                     392.5537
+12                20         60252                     413.7335
+13                21         60252                     434.9132
+14                22         60252                     456.0930
+15                23         60252                     477.2728
+16                24         60252                     498.4525
+17                25         60252                     519.6323
+18                26         60252                     540.8121
+19                27         60252                     561.9918
+20                28         60252                     583.1716</code></pre>
+</div>
+</div>
+<p>Now graph it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>prediction_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> predict4values,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> per_child_poverty,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">y =</span> predicted_violent_crime_rate)) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">28</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">700</span>)) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">25</span>, <span class="at">by =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">700</span>, <span class="at">by =</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Perecent Child Poverty"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Predicted Violent Crime Rate (yhat)"</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(prediction_graph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chapter4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="page-71-scatter-plot" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="page-71-scatter-plot"><span class="header-section-number">4.5</span> Page 71 Scatter plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(focal_data, <span class="at">x =</span> <span class="sc">~</span>per_child_poverty, <span class="at">y =</span> <span class="sc">~</span>med_hh_income, <span class="at">z =</span> <span class="sc">~</span>violent_crime_rate,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"scatter3d"</span>, <span class="at">mode =</span> <span class="st">"markers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cf2d879f6011ab65f68f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-cf2d879f6011ab65f68f">{"x":{"visdat":{"6d2830467fb8":["function () ","plotlyVisDat"]},"cur_data":"6d2830467fb8","attrs":{"6d2830467fb8":{"x":{},"y":{},"z":{},"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"per_child_poverty"},"yaxis":{"title":"med_hh_income"},"zaxis":{"title":"violent_crime_rate"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[24,13,20,24,17,12,14,17,19,20,12,15,16,18,14,15,22,26,12,11,12,19,12,28,18,14,14,17,10,14,27,19,20,9,19,21,15,17,18,22,16,22,21,9,11,13,13,24,14,13],"y":[48486,76715,56213,45726,71228,68811,76106,65627,53267,55679,78084,53089,63575,54325,58580,57422,48948,47942,55425,81868,77378,54938,68411,43567,53560,52559,59116,57598,74057,79363,48059,65323,52413,63473,54533,51424,59393,59445,63296,51015,59499,50972,59570,68374,60076,71564,70116,44921,59209,62268],"z":[427.4,635.8,399.9,480.1,396.1,309.1,236.9,489.1,540.5,377.3,259.2,212.2,370,365.3,273.5,348.6,211.6,514.7,127.8,446.1,391.4,427.3,229.1,278.5,442.9,323.7,280.4,635.6,196.1,261.2,597.4,381.8,329.5,265.1,284.9,406,232.3,314.1,219.2,497.7,326.5,608.4,405.9,215.6,99.3,196.2,285.2,302,290.3,195.5],"mode":"markers","type":"scatter3d","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
@@ -800,8 +1157,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chapter5.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Goodness of Fit</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

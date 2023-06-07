@@ -184,6 +184,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./chapter5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Goodness of Fit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -197,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><span class="toc-section-number">3.1</span>  Required packages</a></li>
-  <li><a href="#page-40-expenditures-graph" id="toc-page-40-expenditures-graph" class="nav-link" data-scroll-target="#page-40-expenditures-graph"><span class="toc-section-number">3.2</span>  Page 40 Expenditures Graph</a>
+  <li><a href="#page-40-graphing-introduction" id="toc-page-40-graphing-introduction" class="nav-link" data-scroll-target="#page-40-graphing-introduction"><span class="toc-section-number">3.2</span>  Page 40 Graphing Introduction</a>
   <ul>
   <li><a href="#activate-packages" id="toc-activate-packages" class="nav-link" data-scroll-target="#activate-packages"><span class="toc-section-number">3.2.1</span>  Activate packages</a></li>
   <li><a href="#obtain-data-and-save-it-to-your-computer" id="toc-obtain-data-and-save-it-to-your-computer" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer"><span class="toc-section-number">3.2.2</span>  Obtain data and save it to your computer</a></li>
@@ -207,7 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#graph" id="toc-graph" class="nav-link" data-scroll-target="#graph"><span class="toc-section-number">3.2.4.1</span>  Graph</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#pages-44-to-46-opioid-analysis" id="toc-pages-44-to-46-opioid-analysis" class="nav-link" data-scroll-target="#pages-44-to-46-opioid-analysis"><span class="toc-section-number">3.3</span>  Pages 44 to 46 Opioid Analysis</a>
+  <li><a href="#pages-44-to-46-analysis-and-graphing" id="toc-pages-44-to-46-analysis-and-graphing" class="nav-link" data-scroll-target="#pages-44-to-46-analysis-and-graphing"><span class="toc-section-number">3.3</span>  Pages 44 to 46 Analysis and Graphing</a>
   <ul>
   <li><a href="#activate-packages-1" id="toc-activate-packages-1" class="nav-link" data-scroll-target="#activate-packages-1"><span class="toc-section-number">3.3.1</span>  Activate packages</a></li>
   <li><a href="#obtain-data-and-save-it-to-your-computer-1" id="toc-obtain-data-and-save-it-to-your-computer-1" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer-1"><span class="toc-section-number">3.3.2</span>  Obtain data and save it to your computer</a></li>
@@ -219,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#analysis-using-summary" id="toc-analysis-using-summary" class="nav-link" data-scroll-target="#analysis-using-summary"><span class="toc-section-number">3.3.5</span>  Analysis using summary()</a></li>
   <li><a href="#analysis-apa.reg.table" id="toc-analysis-apa.reg.table" class="nav-link" data-scroll-target="#analysis-apa.reg.table"><span class="toc-section-number">3.3.6</span>  Analysis apa.reg.table()</a></li>
   </ul></li>
-  <li><a href="#pages-49-to-50-fitted-values" id="toc-pages-49-to-50-fitted-values" class="nav-link" data-scroll-target="#pages-49-to-50-fitted-values"><span class="toc-section-number">3.4</span>  Pages 49 to 50 Fitted values</a>
+  <li><a href="#pages-49-to-50-predictedfitted-values" id="toc-pages-49-to-50-predictedfitted-values" class="nav-link" data-scroll-target="#pages-49-to-50-predictedfitted-values"><span class="toc-section-number">3.4</span>  Pages 49 to 50 Predicted/Fitted Values</a>
   <ul>
   <li><a href="#fitted-values-and-percentiles" id="toc-fitted-values-and-percentiles" class="nav-link" data-scroll-target="#fitted-values-and-percentiles"><span class="toc-section-number">3.4.1</span>  Fitted values and percentiles</a></li>
   <li><a href="#calculate-fitted-values" id="toc-calculate-fitted-values" class="nav-link" data-scroll-target="#calculate-fitted-values"><span class="toc-section-number">3.4.2</span>  Calculate fitted values</a></li>
@@ -290,8 +295,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>REMINDER: Never use the command library(psych).</p>
 </section>
-<section id="page-40-expenditures-graph" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="page-40-expenditures-graph"><span class="header-section-number">3.2</span> Page 40 Expenditures Graph</h2>
+<section id="page-40-graphing-introduction" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="page-40-graphing-introduction"><span class="header-section-number">3.2</span> Page 40 Graphing Introduction</h2>
 <section id="activate-packages" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="activate-packages"><span class="header-section-number">3.2.1</span> Activate packages</h3>
 <div class="cell">
@@ -424,8 +429,8 @@ $ perlabor &lt;dbl&gt; 25.9, 60.3, 8.8, 16.5, 34.4, 17.0, 23.4, 10.1</code></pre
 </section>
 </section>
 </section>
-<section id="pages-44-to-46-opioid-analysis" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="pages-44-to-46-opioid-analysis"><span class="header-section-number">3.3</span> Pages 44 to 46 Opioid Analysis</h2>
+<section id="pages-44-to-46-analysis-and-graphing" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="pages-44-to-46-analysis-and-graphing"><span class="header-section-number">3.3</span> Pages 44 to 46 Analysis and Graphing</h2>
 <section id="activate-packages-1" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="activate-packages-1"><span class="header-section-number">3.3.1</span> Activate packages</h3>
 <div class="cell">
@@ -727,8 +732,8 @@ life_satis  -5.989863  -1.593489</code></pre>
 </div>
 </section>
 </section>
-<section id="pages-49-to-50-fitted-values" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="pages-49-to-50-fitted-values"><span class="header-section-number">3.4</span> Pages 49 to 50 Fitted values</h2>
+<section id="pages-49-to-50-predictedfitted-values" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="pages-49-to-50-predictedfitted-values"><span class="header-section-number">3.4</span> Pages 49 to 50 Predicted/Fitted Values</h2>
 <p>When you look at the graph with life_satis on the x-axis and opioid_od_death_rate on the y-axis you see a regression line. The points that fall on this line are predicted scores for opioid_od_death_rate based on life_satis. Alternatively, we might call these <strong>fitted</strong> values for opioid_od_death_rate based on life_satis. We can obtained a predicted score (i.e., fitted score) for each x-axis value using augment() command fromm the broom package. When you inspect the output below only pay attention to the opioid_od_death_rate, life_satis, and .fitted columns. The column pioid_od_death_rate is the measured opiod overdose death rate, the column life_satis is the measured life satisfaction, the column .fitted is the predicted opiod overdose death rate for a given life_satis value.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lrm3_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(opioid_od_death_rate <span class="sc">~</span> life_satis,</span>
