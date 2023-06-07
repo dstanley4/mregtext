@@ -236,8 +236,7 @@ print(prediction_graph)
 
 ## Page 71 3D plot
 
-When you have two predictors you don't have a regression line - you have a regression surface.
-The code below creates a surface plot that you can interact with/rotate/etc. Note that even though we put med_hh_income in the moderator position in the function there is no moderation here.
+When you have two predictors you don't have a regression line - you have a regression surface. The code below creates a surface plot that you can interact with/rotate/etc. Note that even though we put med_hh_income in the moderator position in the function there is no moderation here.
 
 ```{r}
 #| warning: false
@@ -254,6 +253,14 @@ surface_plot
 ```
 
 ## Page 72 Understanding b-weights
+
+```{r}
+#| echo: false
+#| out.width: 70%
+
+knitr::include_graphics("ch_4/partial-b-weight.png")
+```
+
 
 ## Page 76 Understanding b- vs beta-weights
 
