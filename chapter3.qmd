@@ -11,6 +11,7 @@ The following CRAN packages must be installed:
 | janitor                |
 | skimr                  |
 | apaTables              |
+|tidymodels |
 | broom                  |
 | psych                  |
 
@@ -23,6 +24,7 @@ library(usethis) # use_github_file()
 library(janitor) # clean_names() 
 library(skimr) # skim()
 library(apaTables)
+library(tidymodels)
 ```
 
 ## Page 40 Graphing Introduction
@@ -166,7 +168,7 @@ state_plot <- ggplot(data = statedata2018,
 print(state_plot)
 ```
 
-### Analysis using summary()
+### Old style: Analysis using summary()
 
 ```{r}
 lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
@@ -176,9 +178,22 @@ summary(lrm3_1)
 confint(lrm3_1)
 ```
 
-### Analysis apa.reg.table()
+### Better: Analysis using tidy() and glance() and then apaTables
 
-Using apaTables to display the regression results is probably a better approach. It's one step and combines everything into one table. You can get the extra fit information using summary() or the glance() command from the broom package.
+The tidy() command gives you p-values for each predictor. The glance() command gives you overall fit statistics.
+
+```{r}
+library(tidymodels)
+
+lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
+             data = statedata2018)
+
+tidy(lrm3_1)
+glance(lrm3_1)
+```
+
+
+apa.reg.table() from apaTables package gives you confidence intervals and beta-weights. It's one step and combines everything into one table. 
 
 ```{r}
 #| eval: false
@@ -186,31 +201,12 @@ lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
              data = statedata2018)
 
 library(apaTables)
-apa.reg.table(lrm3_1)
+table1 <- apa.reg.table(lrm3_1)
+
+apa.save("table1.doc", table1)
 
 ```
 
-```{r}
-#| echo: false
-lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
-             data = statedata2018)
-
-library(apaTables)
-knitr::kable(apa.reg.table(lrm3_1)$latex.body)
-```
-
-You can get extra information (e.g., exact $p$-values) about specific predictors using:
-
-```{r}
-library(broom)
-tidy(lrm3_1)
-```
-
-You can get extra overall fit information using:
-
-```{r}
-glance(lrm3_1)
-```
 
 ## Pages 49 to 50 Predicted/Fitted Values
 

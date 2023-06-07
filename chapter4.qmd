@@ -129,7 +129,7 @@ focal_data %>%
   fashion()
 ```
 
-But more importantly the corr package has network_plot() to visual relations among variables. Here we only plot relations where the magnitude of the correlation is greater than .20:
+But more importantly the corrr package has network_plot() to visual relations among variables. Here we only plot relations where the magnitude of the correlation is greater than .20:
 
 ```{r}
 #| message: false
@@ -145,40 +145,25 @@ focal_data %>%
 ## Page 67 One Predictor
 
 ```{r}
-#| eval: false
-lm4_1 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
-            data = focal_data)
-
-apa.reg.table(lm4_1)
-
-```
-
-```{r}
-#| echo: false
+#| eval: true
 lm4_1 <- lm(violent_crime_rate ~ per_child_poverty,
             data = focal_data)
 
-knitr::kable(apa.reg.table(lm4_1)$latex.body)
+tidy(lm4_1)
+
 ```
 
 ## Page 68 Two Predictors
 
 ```{r}
-#| eval: false
+#| eval: true
 lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
             data = focal_data)
 
-apa.reg.table(lm4_2)
+tidy(lm4_2)
 
 ```
 
-```{r}
-#| echo: false
-lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
-            data = focal_data)
-
-knitr::kable(apa.reg.table(lm4_2)$latex.body)
-```
 
 ### Two Predictors: Predicted Scores
 
@@ -190,15 +175,15 @@ focal_data %>%
   skim()
 ```
 
-Now we want to know the mean of med_hh_income. We find it is 60252.
+Now we want to know the mean of med_hh_income below. We find it is 60252.
 
 ```{r}
 focal_data %>%
-  select(per_child_poverty) %>%
+  select(med_hh_income) %>%
   skim()
 ```
 
-Now we want to HOLD med_hh_income constant at 60252 see how violent_crime_rate changes with per_child_poverty. We create a dataset where this is the case:
+Now we want to HOLD med_hh_income constant at 60252 and then see how violent_crime_rate changes with per_child_poverty. We create a dataset where this is the case:
 
 ```{r}
 
@@ -243,7 +228,7 @@ print(prediction_graph)
 
 ## Page 71 3D plot
 
-When you have two predictors you don't have a regression line - you have a regression surface. The code below creates a surface plot that you can interact with/rotate/etc. Note that even though we put med_hh_income in the moderator position in the function there is no moderation here.
+When you have two predictors you don't have a regression line - you have a regression surface. The code below creates a surface plot that you can interact with/rotate/etc. Note that even though we put med_hh_income in the moderator position in the function there is no moderation here. Be sure to click and drag to rotate the graph.
 
 ```{r}
 #| warning: false
@@ -264,7 +249,7 @@ surface_plot
 See the original regression below. Notice the b-weight (the unstandardized regression weight) for per_child_poverty is 21.1797652. We are going to try to recreate this value in another way to make it clear what it means.
 
 ```{r}
-#| eval: false
+#| eval: true
 
 
 # Original regression
@@ -272,18 +257,6 @@ lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
             data = focal_data)
 
 tidy(lm4_2)
-
-```
-
-```{r}
-#| echo: false
-
-
-# Original regression
-lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
-            data = focal_data)
-
-knitr::kable(tidy(lm4_2))
 
 ```
 
@@ -306,20 +279,13 @@ per_child_poverty_residual <- lm_per_child_poverty$residuals
 To get the b-weight or the original regression (lm4_2) for per_child_poverty we conduct a bivariate regression with these two residuals.
 
 ```{r}
-#| eval: false
+#| eval: true
 
 lm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)
 
 tidy(lm_bweight_demo)
 ```
 
-```{r}
-#| echo: false
-
-lm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)
-
-knitr::kable(tidy(lm_bweight_demo))
-```
 
 Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2. The diagram beloow illustrate that b-weight in a multiple regression are weights based on residualized verions of a predictor and the criterion.
 
@@ -413,9 +379,7 @@ focal_data %>%
 
 ```
 
-
 For per_child_poverty: 25th percentile is 13, 75th percentile is 20. We want to look at these with reference to the 50th percentile of med_hh_income which is 59162.
-
 
 ```{r}
 predict4values <- data.frame(per_child_poverty = c(13, 20),
@@ -425,8 +389,6 @@ print(predict4values)
 
 predict(lm4_3, predict4values)
 ```
-
-
 
 For med_hh_income: 25th percentile is 53134, 75th percentile is 67687 We want to look at these with reference to the 50th percentile of per_child_poverty which is 16.5
 
@@ -438,7 +400,6 @@ print(predict4values)
 
 predict(lm4_3, predict4values)
 ```
-
 
 ## Page 86 Chapter Exercises
 

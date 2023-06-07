@@ -221,8 +221,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#inspect-data-1" id="toc-inspect-data-1" class="nav-link" data-scroll-target="#inspect-data-1"><span class="toc-section-number">3.3.3.1</span>  Inspect data</a></li>
   </ul></li>
   <li><a href="#graph-1" id="toc-graph-1" class="nav-link" data-scroll-target="#graph-1"><span class="toc-section-number">3.3.4</span>  Graph</a></li>
-  <li><a href="#analysis-using-summary" id="toc-analysis-using-summary" class="nav-link" data-scroll-target="#analysis-using-summary"><span class="toc-section-number">3.3.5</span>  Analysis using summary()</a></li>
-  <li><a href="#analysis-apa.reg.table" id="toc-analysis-apa.reg.table" class="nav-link" data-scroll-target="#analysis-apa.reg.table"><span class="toc-section-number">3.3.6</span>  Analysis apa.reg.table()</a></li>
+  <li><a href="#old-style-analysis-using-summary" id="toc-old-style-analysis-using-summary" class="nav-link" data-scroll-target="#old-style-analysis-using-summary"><span class="toc-section-number">3.3.5</span>  Old style: Analysis using summary()</a></li>
+  <li><a href="#better-analysis-using-tidy-and-glance-and-then-apatables" id="toc-better-analysis-using-tidy-and-glance-and-then-apatables" class="nav-link" data-scroll-target="#better-analysis-using-tidy-and-glance-and-then-apatables"><span class="toc-section-number">3.3.6</span>  Better: Analysis using tidy() and glance() and then apaTables</a></li>
   </ul></li>
   <li><a href="#pages-49-to-50-predictedfitted-values" id="toc-pages-49-to-50-predictedfitted-values" class="nav-link" data-scroll-target="#pages-49-to-50-predictedfitted-values"><span class="toc-section-number">3.4</span>  Pages 49 to 50 Predicted/Fitted Values</a>
   <ul>
@@ -286,9 +286,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>apaTables</td>
 </tr>
 <tr class="even">
-<td>broom</td>
+<td>tidymodels</td>
 </tr>
 <tr class="odd">
+<td>broom</td>
+</tr>
+<tr class="even">
 <td>psych</td>
 </tr>
 </tbody>
@@ -575,8 +578,8 @@ $ white_voted_percent        &lt;dbl&gt; 52.6, 60.3, 65.3, 44.0, 61.4, 62.6, 57.
 </div>
 </div>
 </section>
-<section id="analysis-using-summary" class="level3" data-number="3.3.5">
-<h3 data-number="3.3.5" class="anchored" data-anchor-id="analysis-using-summary"><span class="header-section-number">3.3.5</span> Analysis using summary()</h3>
+<section id="old-style-analysis-using-summary" class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="old-style-analysis-using-summary"><span class="header-section-number">3.3.5</span> Old style: Analysis using summary()</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lrm3_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(opioid_od_death_rate <span class="sc">~</span> life_satis,</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> statedata2018)</span>
@@ -610,107 +613,16 @@ life_satis  -5.989863  -1.593489</code></pre>
 </div>
 </div>
 </section>
-<section id="analysis-apa.reg.table" class="level3" data-number="3.3.6">
-<h3 data-number="3.3.6" class="anchored" data-anchor-id="analysis-apa.reg.table"><span class="header-section-number">3.3.6</span> Analysis apa.reg.table()</h3>
-<p>Using apaTables to display the regression results is probably a better approach. It’s one step and combines everything into one table. You can get the extra fit information using summary() or the glance() command from the broom package.</p>
+<section id="better-analysis-using-tidy-and-glance-and-then-apatables" class="level3" data-number="3.3.6">
+<h3 data-number="3.3.6" class="anchored" data-anchor-id="better-analysis-using-tidy-and-glance-and-then-apatables"><span class="header-section-number">3.3.6</span> Better: Analysis using tidy() and glance() and then apaTables</h3>
+<p>The tidy() command gives you p-values for each predictor. The glance() command gives you overall fit statistics.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>lrm3_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(opioid_od_death_rate <span class="sc">~</span> life_satis,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> statedata2018)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.reg.table</span>(lrm3_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 9%">
-<col style="width: 16%">
-<col style="width: 6%">
-<col style="width: 15%">
-<col style="width: 6%">
-<col style="width: 11%">
-<col style="width: 7%">
-<col style="width: 17%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">predictor</th>
-<th style="text-align: left;">b</th>
-<th style="text-align: left;">b_CI</th>
-<th style="text-align: left;">beta</th>
-<th style="text-align: left;">beta_CI</th>
-<th style="text-align: left;">sr2</th>
-<th style="text-align: left;">sr2_CI</th>
-<th style="text-align: left;">r</th>
-<th style="text-align: left;">summary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: left;">212.06**</td>
-<td style="text-align: left;">[98.30, 325.81]</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">life_satis</td>
-<td style="text-align: left;">-3.79**</td>
-<td style="text-align: left;">[-5.99, -1.59]</td>
-<td style="text-align: left;">-0.45</td>
-<td style="text-align: left;">[-0.71, -0.19]</td>
-<td style="text-align: left;">.20**</td>
-<td style="text-align: left;">[.04, .38]</td>
-<td style="text-align: left;">-.45**</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><span class="math inline">\(R^2\)</span> = .200**</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">95% CI[.04,.38]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>You can get extra information (e.g., exact <span class="math inline">\(p\)</span>-values) about specific predictors using:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lrm3_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>lrm3_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(opioid_od_death_rate <span class="sc">~</span> life_satis,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> statedata2018)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lrm3_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic  p.value
@@ -718,10 +630,7 @@ life_satis  -5.989863  -1.593489</code></pre>
 1 (Intercept)   212.       56.6       3.75 0.000479
 2 life_satis     -3.79      1.09     -3.47 0.00112 </code></pre>
 </div>
-</div>
-<p>You can get extra overall fit information using:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lrm3_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lrm3_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
@@ -729,6 +638,16 @@ life_satis  -5.989863  -1.593489</code></pre>
 1     0.200         0.184  9.29      12.0 0.00112     1  -181.  369.  375.
 # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
 </div>
+</div>
+<p>apa.reg.table() from apaTables package gives you confidence intervals and beta-weights. It’s one step and combines everything into one table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>lrm3_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(opioid_od_death_rate <span class="sc">~</span> life_satis,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> statedata2018)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> <span class="fu">apa.reg.table</span>(lrm3_1)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.save</span>(<span class="st">"table1.doc"</span>, table1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
