@@ -102,7 +102,7 @@
     "href": "chapter4.html#required-packages",
     "title": "4  Multiple Linear Regression Models",
     "section": "4.1 Required packages",
-    "text": "4.1 Required packages\nThe following CRAN packages must be installed:\n\n\n\nRequired CRAN Packages\n\n\n\n\ntidyverse\n\n\nusethis\n\n\njanitor\n\n\nskimr\n\n\napaTables\n\n\nbroom\n\n\ncorrr\n\n\npsych\n\n\n\nREMINDER: Never use the command library(psych)."
+    "text": "4.1 Required packages\nThe following CRAN packages must be installed:\n\n\n\nRequired CRAN Packages\n\n\n\n\ntidyverse\n\n\nusethis\n\n\njanitor\n\n\nskimr\n\n\napaTables\n\n\nbroom\n\n\ncorrr\n\n\ntidymodels\n\n\npsych\n\n\n\nREMINDER: Never use the command library(psych)."
   },
   {
     "objectID": "chapter4.html#page-66-correlations",
@@ -137,7 +137,7 @@
     "href": "chapter4.html#page-72-understanding-b-weights",
     "title": "4  Multiple Linear Regression Models",
     "section": "4.6 Page 72 Understanding b-weights",
-    "text": "4.6 Page 72 Understanding b-weights"
+    "text": "4.6 Page 72 Understanding b-weights\nSee the original regression below. Notice the b-weight (the unstandardized regression weight) for per_child_poverty is 21.1797652. We are going to try to recreate this value in another way to make it clear what it means.\n\n# Original regression\nlm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,\n            data = focal_data)\n\ntidy(lm4_2)\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-310.5658212\n217.9130166\n-1.425183\n0.1607118\n\n\nper_child_poverty\n21.1797652\n5.0375180\n4.204405\n0.0001164\n\n\nmed_hh_income\n0.0049908\n0.0024233\n2.059517\n0.0450080\n\n\n\n\n\nFirst, we create a residualized version of violent_crime_rate. That is, a version of violent_crime_rate has teh effect of med_hh_income removed from it. We use the residual() command. This is the same as getting the value from the .resid column after using the augment() command.\n\nlibrary(tidymodels)\n\nlm_violent_crime_rate <- lm(violent_crime_rate ~ med_hh_income, data = focal_data)\nviolent_crime_rate_residual <- lm_violent_crime_rate$residuals\n\nSecond, we create a residualized version of per_child_poverty. That is, a version of per_child_poverty has teh effect of med_hh_income removed from it.\n\nlm_per_child_poverty <- lm(per_child_poverty ~  med_hh_income, data = focal_data)\nper_child_poverty_residual <- lm_per_child_poverty$residuals\n\nTo get the b-weight or the original regression (lm4_2) for per_child_poverty we conduct a bivariate regression with these two residuals.\n\nlm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)\n\ntidy(lm_bweight_demo)\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n0.00000\n15.347466\n0.000000\n1.00e+00\n\n\nper_child_poverty_residual\n21.17977\n4.984768\n4.248897\n9.83e-05\n\n\n\n\n\nNotice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2. The diagram beloow illustrate that b-weight are weights based on residualized verions of a predictor and the criterion."
   },
   {
     "objectID": "chapter4.html#page-76-understanding-b--vs-beta-weights",

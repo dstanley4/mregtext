@@ -13,7 +13,9 @@ The following CRAN packages must be installed:
 | apaTables              |
 | broom                  |
 | corrr                  |
+| tidymodels             |
 | psych                  |
+
 
 REMINDER: Never use the command library(psych).
 
@@ -25,6 +27,7 @@ library(janitor) # clean_names()
 library(skimr) # skim()
 library(apaTables)
 library(broom)
+library(tidymodels)
 library(corrr)
 ```
 
@@ -254,13 +257,74 @@ surface_plot
 
 ## Page 72 Understanding b-weights
 
+See the original regression below. Notice the b-weight (the unstandardized regression weight) for per_child_poverty is 21.1797652. We are going to try to recreate this value in another way to make it clear what it means.
+
+```{r}
+#| eval: false
+
+
+# Original regression
+lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+tidy(lm4_2)
+
+```
+
+```{r}
+#| echo: false
+
+
+# Original regression
+lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+knitr::kable(tidy(lm4_2))
+
+```
+
+First, we create a residualized version of violent_crime_rate.  That is, a version of violent_crime_rate has teh effect of med_hh_income removed from it. We use the residual() command. This is the same as getting the value from the .resid column after using the augment() command.
+
+```{r}
+library(tidymodels)
+
+lm_violent_crime_rate <- lm(violent_crime_rate ~ med_hh_income, data = focal_data)
+violent_crime_rate_residual <- lm_violent_crime_rate$residuals
+```
+
+Second, we create a residualized version of per_child_poverty. That is, a version of per_child_poverty has teh effect of med_hh_income removed from it.
+
+```{r}
+lm_per_child_poverty <- lm(per_child_poverty ~  med_hh_income, data = focal_data)
+per_child_poverty_residual <- lm_per_child_poverty$residuals
+```
+
+To get the b-weight or the original regression (lm4_2) for per_child_poverty we conduct a bivariate regression with these two residuals.
+
+```{r}
+#| eval: false
+
+lm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)
+
+tidy(lm_bweight_demo)
+```
+
+```{r}
+#| echo: false
+
+lm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)
+
+knitr::kable(tidy(lm_bweight_demo))
+```
+
+Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2.  The diagram beloow illustrate that b-weight are weights based on residualized verions of a predictor and the criterion.
+
 ```{r}
 #| echo: false
 #| out.width: 70%
 
 knitr::include_graphics("ch_4/partial-b-weight.png")
 ```
-
 
 ## Page 76 Understanding b- vs beta-weights
 
