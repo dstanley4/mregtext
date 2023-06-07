@@ -251,3 +251,19 @@ library(plotly)
 plot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_crime_rate,
         type = "scatter3d", mode = "markers")
 ```
+
+
+## Page 72 Understanding b-weights
+
+## Page 76 Understanding b- vs beta-weights
+
+## Page 77 Relative importance
+
+## Page 79 Predicted Means
+
+## Page 86 Chapter Exercises
+
+
+
+
+

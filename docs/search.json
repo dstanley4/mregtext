@@ -131,5 +131,40 @@
     "title": "4  Multiple Linear Regression Models",
     "section": "4.5 Page 71 Scatter plot",
     "text": "4.5 Page 71 Scatter plot\n\nlibrary(plotly)\nplot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_crime_rate,\n        type = \"scatter3d\", mode = \"markers\")"
+  },
+  {
+    "objectID": "chapter4.html#page-72-understanding-b-weights",
+    "href": "chapter4.html#page-72-understanding-b-weights",
+    "title": "4  Multiple Linear Regression Models",
+    "section": "4.6 Page 72 Understanding b-weights",
+    "text": "4.6 Page 72 Understanding b-weights"
+  },
+  {
+    "objectID": "chapter4.html#page-76-understanding-b--vs-beta-weights",
+    "href": "chapter4.html#page-76-understanding-b--vs-beta-weights",
+    "title": "4  Multiple Linear Regression Models",
+    "section": "4.7 Page 76 Understanding b- vs beta-weights",
+    "text": "4.7 Page 76 Understanding b- vs beta-weights"
+  },
+  {
+    "objectID": "chapter4.html#page-77-relative-importance",
+    "href": "chapter4.html#page-77-relative-importance",
+    "title": "4  Multiple Linear Regression Models",
+    "section": "4.8 Page 77 Relative importance",
+    "text": "4.8 Page 77 Relative importance"
+  },
+  {
+    "objectID": "chapter4.html#page-79-predicted-means",
+    "href": "chapter4.html#page-79-predicted-means",
+    "title": "4  Multiple Linear Regression Models",
+    "section": "4.9 Page 79 Predicted Means",
+    "text": "4.9 Page 79 Predicted Means"
+  },
+  {
+    "objectID": "chapter4.html#page-86-chapter-exercises",
+    "href": "chapter4.html#page-86-chapter-exercises",
+    "title": "4  Multiple Linear Regression Models",
+    "section": "4.10 Page 86 Chapter Exercises",
+    "text": "4.10 Page 86 Chapter Exercises"
   }
 ]
