@@ -234,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#page-71-3d-plot" id="toc-page-71-3d-plot" class="nav-link" data-scroll-target="#page-71-3d-plot"><span class="toc-section-number">4.5</span>  Page 71 3D plot</a></li>
   <li><a href="#page-72-understanding-b-weights" id="toc-page-72-understanding-b-weights" class="nav-link" data-scroll-target="#page-72-understanding-b-weights"><span class="toc-section-number">4.6</span>  Page 72 Understanding b-weights</a></li>
-  <li><a href="#page-76-understanding-b--vs-beta-weights" id="toc-page-76-understanding-b--vs-beta-weights" class="nav-link" data-scroll-target="#page-76-understanding-b--vs-beta-weights"><span class="toc-section-number">4.7</span>  Page 76 Understanding b- vs beta-weights</a></li>
+  <li><a href="#page-76-b--vs-beta-weights" id="toc-page-76-b--vs-beta-weights" class="nav-link" data-scroll-target="#page-76-b--vs-beta-weights"><span class="toc-section-number">4.7</span>  Page 76 b- vs beta-weights</a></li>
   <li><a href="#page-77-relative-importance" id="toc-page-77-relative-importance" class="nav-link" data-scroll-target="#page-77-relative-importance"><span class="toc-section-number">4.8</span>  Page 77 Relative importance</a></li>
   <li><a href="#page-79-predicted-means" id="toc-page-79-predicted-means" class="nav-link" data-scroll-target="#page-79-predicted-means"><span class="toc-section-number">4.9</span>  Page 79 Predicted Means</a></li>
   <li><a href="#page-86-chapter-exercises" id="toc-page-86-chapter-exercises" class="nav-link" data-scroll-target="#page-86-chapter-exercises"><span class="toc-section-number">4.10</span>  Page 86 Chapter Exercises</a>
@@ -302,11 +302,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>tidymodels</td>
 </tr>
 <tr class="odd">
+<td>relaimpo</td>
+</tr>
+<tr class="even">
 <td>psych</td>
 </tr>
 </tbody>
 </table>
-<p>REMINDER: Never use the command library(psych).</p>
+<p>REMINDER:</p>
+<p>Never use the command library(psych). Instead use psych:: before each command.</p>
+<p>Never use the command library(relaimpo). Instead use relaimpo:: before each command.</p>
 </section>
 <section id="page-66-correlations" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="page-66-correlations"><span class="header-section-number">4.2</span> Page 66 Correlations</h2>
@@ -1028,8 +1033,8 @@ Values in square brackets indicate the 95% confidence interval.
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>surface_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-16c00c3d9f15e388f344" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-16c00c3d9f15e388f344">{"x":{"visdat":{"88c4727d8424":["function () ","plotlyVisDat"]},"cur_data":"88c4727d8424","attrs":{"88c4727d8424":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":[[46.8802537383706,96.1865910511244,145.492928363878,194.799265676632,244.105602989386],[147.536789556431,196.843126869185,246.149464181939,295.455801494693,344.762138807447],[248.193325374492,297.499662687246,346.806,396.112337312754,445.418674625508],[348.849861192553,398.156198505307,447.462535818061,496.768873130815,546.075210443568],[449.506397010614,498.812734323368,548.119071636122,597.425408948875,646.731746261629]],"type":"surface","x":[40493.1,50372.6,60252.1,70131.6,80011.1],"y":[7.3,12.1,16.8,21.6,26.3],"opacity":0.9,"colors":["#d1d1d1","#555555"],"inherit":true},"88c4727d8424.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[48486,76715,56213,45726,71228,68811,76106,65627,53267,55679,78084,53089,63575,54325,58580,57422,48948,47942,55425,81868,77378,54938,68411,43567,53560,52559,59116,57598,74057,79363,48059,65323,52413,63473,54533,51424,59393,59445,63296,51015,59499,50972,59570,68374,60076,71564,70116,44921,59209,62268],"y":[24,13,20,24,17,12,14,17,19,20,12,15,16,18,14,15,22,26,12,11,12,19,12,28,18,14,14,17,10,14,27,19,20,9,19,21,15,17,18,22,16,22,21,9,11,13,13,24,14,13],"z":[427.4,635.8,399.9,480.1,396.1,309.1,236.9,489.1,540.5,377.3,259.2,212.2,370,365.3,273.5,348.6,211.6,514.7,127.8,446.1,391.4,427.3,229.1,278.5,442.9,323.7,280.4,635.6,196.1,261.2,597.4,381.8,329.5,265.1,284.9,406,232.3,314.1,219.2,497.7,326.5,608.4,405.9,215.6,99.3,196.2,285.2,302,290.3,195.5],"type":"scatter3d","mode":"markers","color":"black","size":5,"name":"Data points","inherit":true},"88c4727d8424.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[40493.1167010025,50372.6183505012,60252.12,70131.6216494988,80011.1232989976],"y":[12.0875140769299,12.0875140769299,12.0875140769299,12.0875140769299,12.0875140769299],"z":[147.536789556431,196.843126869185,246.149464181939,295.455801494693,344.762138807447],"type":"scatter3d","mode":"lines","line":{"color":"black","width":10,"dash":"dash"},"name":"-1 SD line","inherit":true},"88c4727d8424.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[40493.1167010025,50372.6183505012,60252.12,70131.6216494988,80011.1232989976],"y":[21.5924859230701,21.5924859230701,21.5924859230701,21.5924859230701,21.5924859230701],"z":[348.849861192553,398.156198505307,447.462535818061,496.768873130815,546.075210443568],"type":"scatter3d","mode":"lines","line":{"color":"black","width":10,"dash":"dash"},"name":"+1 SD line","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"med_hh_income","range":[40493.1,80011.1],"ticktype":"array","tickvals":[40493.1,50372.6,60252.1,70131.6,80011.1]},"yaxis":{"title":"per_child_poverty","range":[7.3,26.3],"ticktype":"array","tickvals":[7.3,12.1,16.8,21.6,26.3]},"zaxis":{"title":"violent_crime_rate"},"aspectmode":"cube","aspectratio":{"x":1,"y":1,"z":0.95},"showlegend":true},"hovermode":"closest","showlegend":true,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[["0","rgba(209,209,209,1)"],["0.0416666666666667","rgba(203,203,203,1)"],["0.0833333333333333","rgba(198,198,198,1)"],["0.125","rgba(192,192,192,1)"],["0.166666666666667","rgba(187,187,187,1)"],["0.208333333333333","rgba(182,182,182,1)"],["0.25","rgba(176,176,176,1)"],["0.291666666666667","rgba(171,171,171,1)"],["0.333333333333333","rgba(166,166,166,1)"],["0.375","rgba(160,160,160,1)"],["0.416666666666667","rgba(155,155,155,1)"],["0.458333333333333","rgba(150,150,150,1)"],["0.5","rgba(145,145,145,1)"],["0.541666666666667","rgba(139,139,139,1)"],["0.583333333333333","rgba(134,134,134,1)"],["0.625","rgba(129,129,129,1)"],["0.666666666666667","rgba(124,124,124,1)"],["0.708333333333333","rgba(119,119,119,1)"],["0.75","rgba(114,114,114,1)"],["0.791666666666667","rgba(109,109,109,1)"],["0.833333333333333","rgba(104,104,104,1)"],["0.875","rgba(99,99,99,1)"],["0.916666666666667","rgba(95,95,95,1)"],["0.958333333333333","rgba(90,90,90,1)"],["1","rgba(85,85,85,1)"]],"showscale":true,"z":[[46.8802537383706,96.1865910511244,145.492928363878,194.799265676632,244.105602989386],[147.536789556431,196.843126869185,246.149464181939,295.455801494693,344.762138807447],[248.193325374492,297.499662687246,346.806,396.112337312754,445.418674625508],[348.849861192553,398.156198505307,447.462535818061,496.768873130815,546.075210443568],[449.506397010614,498.812734323368,548.119071636122,597.425408948875,646.731746261629]],"type":"surface","x":[40493.1,50372.6,60252.1,70131.6,80011.1],"y":[7.3,12.1,16.8,21.6,26.3],"opacity":0.9,"frame":null},{"x":[48486,76715,56213,45726,71228,68811,76106,65627,53267,55679,78084,53089,63575,54325,58580,57422,48948,47942,55425,81868,77378,54938,68411,43567,53560,52559,59116,57598,74057,79363,48059,65323,52413,63473,54533,51424,59393,59445,63296,51015,59499,50972,59570,68374,60076,71564,70116,44921,59209,62268],"y":[24,13,20,24,17,12,14,17,19,20,12,15,16,18,14,15,22,26,12,11,12,19,12,28,18,14,14,17,10,14,27,19,20,9,19,21,15,17,18,22,16,22,21,9,11,13,13,24,14,13],"z":[427.4,635.8,399.9,480.1,396.1,309.1,236.9,489.1,540.5,377.3,259.2,212.2,370,365.3,273.5,348.6,211.6,514.7,127.8,446.1,391.4,427.3,229.1,278.5,442.9,323.7,280.4,635.6,196.1,261.2,597.4,381.8,329.5,265.1,284.9,406,232.3,314.1,219.2,497.7,326.5,608.4,405.9,215.6,99.3,196.2,285.2,302,290.3,195.5],"type":"scatter3d","mode":"markers","name":"Data points","marker":{"color":"rgba(145,145,145,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(145,145,145,1)"}},"textfont":{"color":"rgba(145,145,145,1)","size":55},"error_y":{"color":"rgba(145,145,145,1)","width":55},"error_x":{"color":"rgba(145,145,145,1)","width":55},"line":{"color":"rgba(145,145,145,1)","width":55},"frame":null},{"x":[40493.1167010025,50372.6183505012,60252.12,70131.6216494988,80011.1232989976],"y":[12.0875140769299,12.0875140769299,12.0875140769299,12.0875140769299,12.0875140769299],"z":[147.536789556431,196.843126869185,246.149464181939,295.455801494693,344.762138807447],"type":"scatter3d","mode":"lines","line":{"color":"black","width":10,"dash":"dash"},"name":"-1 SD line","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[40493.1167010025,50372.6183505012,60252.12,70131.6216494988,80011.1232989976],"y":[21.5924859230701,21.5924859230701,21.5924859230701,21.5924859230701,21.5924859230701],"z":[348.849861192553,398.156198505307,447.462535818061,496.768873130815,546.075210443568],"type":"scatter3d","mode":"lines","line":{"color":"black","width":10,"dash":"dash"},"name":"+1 SD line","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-391c130f2b07b0ed179f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-391c130f2b07b0ed179f">{"x":{"visdat":{"95b5446304eb":["function () ","plotlyVisDat"]},"cur_data":"95b5446304eb","attrs":{"95b5446304eb":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":[[46.8802537383706,96.1865910511244,145.492928363878,194.799265676632,244.105602989386],[147.536789556431,196.843126869185,246.149464181939,295.455801494693,344.762138807447],[248.193325374492,297.499662687246,346.806,396.112337312754,445.418674625508],[348.849861192553,398.156198505307,447.462535818061,496.768873130815,546.075210443568],[449.506397010614,498.812734323368,548.119071636122,597.425408948875,646.731746261629]],"type":"surface","x":[40493.1,50372.6,60252.1,70131.6,80011.1],"y":[7.3,12.1,16.8,21.6,26.3],"opacity":0.9,"colors":["#d1d1d1","#555555"],"inherit":true},"95b5446304eb.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[48486,76715,56213,45726,71228,68811,76106,65627,53267,55679,78084,53089,63575,54325,58580,57422,48948,47942,55425,81868,77378,54938,68411,43567,53560,52559,59116,57598,74057,79363,48059,65323,52413,63473,54533,51424,59393,59445,63296,51015,59499,50972,59570,68374,60076,71564,70116,44921,59209,62268],"y":[24,13,20,24,17,12,14,17,19,20,12,15,16,18,14,15,22,26,12,11,12,19,12,28,18,14,14,17,10,14,27,19,20,9,19,21,15,17,18,22,16,22,21,9,11,13,13,24,14,13],"z":[427.4,635.8,399.9,480.1,396.1,309.1,236.9,489.1,540.5,377.3,259.2,212.2,370,365.3,273.5,348.6,211.6,514.7,127.8,446.1,391.4,427.3,229.1,278.5,442.9,323.7,280.4,635.6,196.1,261.2,597.4,381.8,329.5,265.1,284.9,406,232.3,314.1,219.2,497.7,326.5,608.4,405.9,215.6,99.3,196.2,285.2,302,290.3,195.5],"type":"scatter3d","mode":"markers","color":"black","size":5,"name":"Data points","inherit":true},"95b5446304eb.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[40493.1167010025,50372.6183505012,60252.12,70131.6216494988,80011.1232989976],"y":[12.0875140769299,12.0875140769299,12.0875140769299,12.0875140769299,12.0875140769299],"z":[147.536789556431,196.843126869185,246.149464181939,295.455801494693,344.762138807447],"type":"scatter3d","mode":"lines","line":{"color":"black","width":10,"dash":"dash"},"name":"-1 SD line","inherit":true},"95b5446304eb.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[40493.1167010025,50372.6183505012,60252.12,70131.6216494988,80011.1232989976],"y":[21.5924859230701,21.5924859230701,21.5924859230701,21.5924859230701,21.5924859230701],"z":[348.849861192553,398.156198505307,447.462535818061,496.768873130815,546.075210443568],"type":"scatter3d","mode":"lines","line":{"color":"black","width":10,"dash":"dash"},"name":"+1 SD line","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"med_hh_income","range":[40493.1,80011.1],"ticktype":"array","tickvals":[40493.1,50372.6,60252.1,70131.6,80011.1]},"yaxis":{"title":"per_child_poverty","range":[7.3,26.3],"ticktype":"array","tickvals":[7.3,12.1,16.8,21.6,26.3]},"zaxis":{"title":"violent_crime_rate"},"aspectmode":"cube","aspectratio":{"x":1,"y":1,"z":0.95},"showlegend":true},"hovermode":"closest","showlegend":true,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[["0","rgba(209,209,209,1)"],["0.0416666666666667","rgba(203,203,203,1)"],["0.0833333333333333","rgba(198,198,198,1)"],["0.125","rgba(192,192,192,1)"],["0.166666666666667","rgba(187,187,187,1)"],["0.208333333333333","rgba(182,182,182,1)"],["0.25","rgba(176,176,176,1)"],["0.291666666666667","rgba(171,171,171,1)"],["0.333333333333333","rgba(166,166,166,1)"],["0.375","rgba(160,160,160,1)"],["0.416666666666667","rgba(155,155,155,1)"],["0.458333333333333","rgba(150,150,150,1)"],["0.5","rgba(145,145,145,1)"],["0.541666666666667","rgba(139,139,139,1)"],["0.583333333333333","rgba(134,134,134,1)"],["0.625","rgba(129,129,129,1)"],["0.666666666666667","rgba(124,124,124,1)"],["0.708333333333333","rgba(119,119,119,1)"],["0.75","rgba(114,114,114,1)"],["0.791666666666667","rgba(109,109,109,1)"],["0.833333333333333","rgba(104,104,104,1)"],["0.875","rgba(99,99,99,1)"],["0.916666666666667","rgba(95,95,95,1)"],["0.958333333333333","rgba(90,90,90,1)"],["1","rgba(85,85,85,1)"]],"showscale":true,"z":[[46.8802537383706,96.1865910511244,145.492928363878,194.799265676632,244.105602989386],[147.536789556431,196.843126869185,246.149464181939,295.455801494693,344.762138807447],[248.193325374492,297.499662687246,346.806,396.112337312754,445.418674625508],[348.849861192553,398.156198505307,447.462535818061,496.768873130815,546.075210443568],[449.506397010614,498.812734323368,548.119071636122,597.425408948875,646.731746261629]],"type":"surface","x":[40493.1,50372.6,60252.1,70131.6,80011.1],"y":[7.3,12.1,16.8,21.6,26.3],"opacity":0.9,"frame":null},{"x":[48486,76715,56213,45726,71228,68811,76106,65627,53267,55679,78084,53089,63575,54325,58580,57422,48948,47942,55425,81868,77378,54938,68411,43567,53560,52559,59116,57598,74057,79363,48059,65323,52413,63473,54533,51424,59393,59445,63296,51015,59499,50972,59570,68374,60076,71564,70116,44921,59209,62268],"y":[24,13,20,24,17,12,14,17,19,20,12,15,16,18,14,15,22,26,12,11,12,19,12,28,18,14,14,17,10,14,27,19,20,9,19,21,15,17,18,22,16,22,21,9,11,13,13,24,14,13],"z":[427.4,635.8,399.9,480.1,396.1,309.1,236.9,489.1,540.5,377.3,259.2,212.2,370,365.3,273.5,348.6,211.6,514.7,127.8,446.1,391.4,427.3,229.1,278.5,442.9,323.7,280.4,635.6,196.1,261.2,597.4,381.8,329.5,265.1,284.9,406,232.3,314.1,219.2,497.7,326.5,608.4,405.9,215.6,99.3,196.2,285.2,302,290.3,195.5],"type":"scatter3d","mode":"markers","name":"Data points","marker":{"color":"rgba(145,145,145,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(145,145,145,1)"}},"textfont":{"color":"rgba(145,145,145,1)","size":55},"error_y":{"color":"rgba(145,145,145,1)","width":55},"error_x":{"color":"rgba(145,145,145,1)","width":55},"line":{"color":"rgba(145,145,145,1)","width":55},"frame":null},{"x":[40493.1167010025,50372.6183505012,60252.12,70131.6216494988,80011.1232989976],"y":[12.0875140769299,12.0875140769299,12.0875140769299,12.0875140769299,12.0875140769299],"z":[147.536789556431,196.843126869185,246.149464181939,295.455801494693,344.762138807447],"type":"scatter3d","mode":"lines","line":{"color":"black","width":10,"dash":"dash"},"name":"-1 SD line","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[40493.1167010025,50372.6183505012,60252.12,70131.6216494988,80011.1232989976],"y":[21.5924859230701,21.5924859230701,21.5924859230701,21.5924859230701,21.5924859230701],"z":[348.849861192553,398.156198505307,447.462535818061,496.768873130815,546.075210443568],"type":"scatter3d","mode":"lines","line":{"color":"black","width":10,"dash":"dash"},"name":"+1 SD line","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -1130,51 +1135,288 @@ Values in square brackets indicate the 95% confidence interval.
 </table>
 </div>
 </div>
-<p>Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2. The diagram beloow illustrate that b-weight are weights based on residualized verions of a predictor and the criterion.</p>
+<p>Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2. The diagram beloow illustrate that b-weight in a multiple regression are weights based on residualized verions of a predictor and the criterion.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ch_4/partial-b-weight.png" class="img-fluid" style="width:70.0%"></p>
 </div>
 </div>
 </section>
-<section id="page-76-understanding-b--vs-beta-weights" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="page-76-understanding-b--vs-beta-weights"><span class="header-section-number">4.7</span> Page 76 Understanding b- vs beta-weights</h2>
+<section id="page-76-b--vs-beta-weights" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="page-76-b--vs-beta-weights"><span class="header-section-number">4.7</span> Page 76 b- vs beta-weights</h2>
+<p>The regression weights that we have looked at so far - are usually referred to as b-weights or unstandardized regression coefficients. The are obtained when we analyze the data in it’s original form. That is, each variable has. a different mean and standard deviation. Sometimes, however, we want to be able to compare the magnitude of regression weights. To do so, we need to set the mean of each variable (predictor or criterion) to zero prior to analysis. As well, we need to set the standard deviation of each variable prior to analysis. That is, we need to standrdized (M=0, SD =1) each variable prior to analysis. The weights we obtain when we do this are referred to as beta-weights or standardized regression cofficients. A better name, not used, would be regression weights for standardized data. We can obtain this weights by analyzing the data as described or by transforming b-weights using the formula in the textboook. Standardized regression weights (beta-weights) can be obtained using the apa.reg.table() command in the apaTables package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>lm4_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(violent_crime_rate <span class="sc">~</span> per_child_poverty <span class="sc">+</span> med_hh_income,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> focal_data)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">=</span> <span class="fu">apa.reg.table</span>(lm4_3, <span class="at">table.number =</span> <span class="dv">1</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.save</span>(<span class="st">"table1.doc"</span>, table1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="page-77-relative-importance" class="level2" data-number="4.8">
 <h2 data-number="4.8" class="anchored" data-anchor-id="page-77-relative-importance"><span class="header-section-number">4.8</span> Page 77 Relative importance</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># It's always a good idea to get the set of focal variables </span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in a separate data set.  Once you have missing data,</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this approach is critical.</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>focal_data <span class="ot">&lt;-</span> statedata2018 <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(violent_crime_rate, </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>         per_child_poverty, </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>         med_hh_income, </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>         unemploy_rate,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>         percent_uninsured)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>lm4_4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(violent_crime_rate <span class="sc">~</span> per_child_poverty <span class="sc">+</span> </span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>              med_hh_income <span class="sc">+</span> unemploy_rate <span class="sc">+</span> percent_uninsured,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> focal_data)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm4_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  term                estimate std.error statistic p.value
+  &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 (Intercept)       -398.      219.          -1.82  0.0755
+2 per_child_poverty   15.4       5.91         2.61  0.0123
+3 med_hh_income        0.00469   0.00258      1.82  0.0758
+4 unemploy_rate       27.6      23.2          1.19  0.239 
+5 percent_uninsured   10.3       4.72         2.18  0.0342</code></pre>
+</div>
+</div>
+<p>Then you can obtain relative importance information:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x_compare <span class="ot">&lt;-</span> relaimpo<span class="sc">::</span><span class="fu">calc.relimp</span>(lm4_4, </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"lmg"</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"first"</span>, </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"last"</span>, </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"betasq"</span>, </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"pratt"</span>))</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x_compare)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response variable: violent_crime_rate 
+Total response variance: 16594.39 
+Analysis based on 50 observations 
+
+4 Regressors: 
+per_child_poverty med_hh_income unemploy_rate percent_uninsured 
+Proportion of variance explained by model: 39.44%
+Metrics are not normalized (rela=FALSE). 
+
+Relative importance metrics: 
+
+                         lmg       last      first     betasq       pratt
+per_child_poverty 0.15529495 0.09150503 0.24202970 0.32354317  0.27983398
+med_hh_income     0.03895609 0.04446327 0.04329193 0.12924768 -0.07480229
+unemploy_rate     0.10605740 0.01917314 0.20001828 0.02941550  0.07670488
+percent_uninsured 0.09410481 0.06418303 0.15848929 0.08010657  0.11267667
+
+Average coefficients for different model sizes: 
+
+                            1X          2Xs          3Xs          4Xs
+per_child_poverty 13.335033251 1.390782e+01 14.375405724 15.417923450
+med_hh_income     -0.002712995 7.508337e-04  0.003029558  0.004687669
+unemploy_rate     72.055866278 5.874625e+01 46.216351078 27.632656766
+percent_uninsured 14.506471774 1.140058e+01 10.243657931 10.313258363</code></pre>
+</div>
+</div>
+<p>Then make the plots:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_compare)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chapter4_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 <section id="page-79-predicted-means" class="level2" data-number="4.9">
 <h2 data-number="4.9" class="anchored" data-anchor-id="page-79-predicted-means"><span class="header-section-number">4.9</span> Page 79 Predicted Means</h2>
+<p>Recall the regression:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>focal_data <span class="ot">&lt;-</span> statedata2018 <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(violent_crime_rate, </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>         per_child_poverty, </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>         med_hh_income)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>lm4_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(violent_crime_rate <span class="sc">~</span> per_child_poverty <span class="sc">+</span> med_hh_income,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> focal_data)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm4_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term                estimate std.error statistic  p.value
+  &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)       -311.      218.          -1.43 0.161   
+2 per_child_poverty   21.2       5.04         4.20 0.000116
+3 med_hh_income        0.00499   0.00242      2.06 0.0450  </code></pre>
+</div>
+</div>
+<p>We need the percentiles for per_child_poverty and med_hh_income.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>focal_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(per_child_poverty, med_hh_income) <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">per_child_poverty</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16.84</td>
+<td style="text-align: right;">4.75</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">16.5</td>
+<td style="text-align: right;">20.00</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">▅▇▇▅▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">med_hh_income</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60252.12</td>
+<td style="text-align: right;">9879.50</td>
+<td style="text-align: right;">43567</td>
+<td style="text-align: right;">53133.5</td>
+<td style="text-align: right;">59162.5</td>
+<td style="text-align: right;">67687.25</td>
+<td style="text-align: right;">81868</td>
+<td style="text-align: left;">▅▇▇▃▃</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>For per_child_poverty: 25th percentile is 13, 75th percentile is 20. We want to look at these with reference to the 50th percentile of med_hh_income which is 59162.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>predict4values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">per_child_poverty =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">20</span>),</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">med_hh_income =</span> <span class="fl">59162.</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(predict4values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  per_child_poverty med_hh_income
+1                13         59162
+2                20         59162</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm4_3, predict4values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2 
+260.0352 408.2935 </code></pre>
+</div>
+</div>
+<p>For med_hh_income: 25th percentile is 53134, 75th percentile is 67687 We want to look at these with reference to the 50th percentile of per_child_poverty which is 16.5</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>predict4values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">per_child_poverty =</span> <span class="fl">16.5</span>,</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">med_hh_income =</span> <span class="fu">c</span>(<span class="dv">53134</span>, <span class="dv">67687</span>))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(predict4values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  per_child_poverty med_hh_income
+1              16.5         53134
+2              16.5         67687</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm4_3, predict4values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1        2 
+304.0800 376.7107 </code></pre>
+</div>
+</div>
 </section>
 <section id="page-86-chapter-exercises" class="level2" data-number="4.10">
 <h2 data-number="4.10" class="anchored" data-anchor-id="page-86-chapter-exercises"><span class="header-section-number">4.10</span> Page 86 Chapter Exercises</h2>
 <section id="activate-packages-1" class="level3" data-number="4.10.1">
 <h3 data-number="4.10.1" class="anchored" data-anchor-id="activate-packages-1"><span class="header-section-number">4.10.1</span> Activate packages</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis) <span class="co"># use_github_file()</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># read_csv() </span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># clean_names() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis) <span class="co"># use_github_file()</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># read_csv() </span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># clean_names() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="obtain-data-and-save-it-to-your-computer-1" class="level3" data-number="4.10.2">
 <h3 data-number="4.10.2" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer-1"><span class="header-section-number">4.10.2</span> Obtain data and save it to your computer</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/TeenBirths.csv"</span>,</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"teenbirths.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/TeenBirths.csv"</span>,</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"teenbirths.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="load-data-from-your-computer-1" class="level3" data-number="4.10.3">
 <h3 data-number="4.10.3" class="anchored" data-anchor-id="load-data-from-your-computer-1"><span class="header-section-number">4.10.3</span> Load data from your computer</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"teenbirths.csv"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"teenbirths.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="inspect-data-1" class="level3" data-number="4.10.4">
 <h3 data-number="4.10.4" class="anchored" data-anchor-id="inspect-data-1"><span class="header-section-number">4.10.4</span> Inspect data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="sc">%&gt;%</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2,946
 Columns: 7
@@ -1188,13 +1430,13 @@ $ per_singleparent  &lt;dbl&gt; 30, 29, 52, 35, 25, 64, 50, 39, 46, 26, 30, 37, 
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="ot">&lt;-</span> teenbirths <span class="sc">%&gt;%</span> </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="fu">as_factor</span>(state)) <span class="sc">%&gt;%</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">county =</span> <span class="fu">as_factor</span>(county))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="ot">&lt;-</span> teenbirths <span class="sc">%&gt;%</span> </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="fu">as_factor</span>(state)) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">county =</span> <span class="fu">as_factor</span>(county))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="sc">%&gt;%</span> </span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2,946
 Columns: 7
@@ -1208,8 +1450,8 @@ $ per_singleparent  &lt;dbl&gt; 30, 29, 52, 35, 25, 64, 50, 39, 46, 26, 30, 37, 
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="sc">%&gt;%</span> </span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>teenbirths <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <caption>Data summary</caption>

@@ -14,10 +14,14 @@ The following CRAN packages must be installed:
 | broom                  |
 | corrr                  |
 | tidymodels             |
+| relaimpo               |
 | psych                  |
 
+REMINDER:
 
-REMINDER: Never use the command library(psych).
+Never use the command library(psych). Instead use psych:: before each command.
+
+Never use the command library(relaimpo). Instead use relaimpo:: before each command.
 
 ```{r}
 #| include: false
@@ -283,7 +287,7 @@ knitr::kable(tidy(lm4_2))
 
 ```
 
-First, we create a residualized version of violent_crime_rate.  That is, a version of violent_crime_rate has teh effect of med_hh_income removed from it. We use the residual() command. This is the same as getting the value from the .resid column after using the augment() command.
+First, we create a residualized version of violent_crime_rate. That is, a version of violent_crime_rate has teh effect of med_hh_income removed from it. We use the residual() command. This is the same as getting the value from the .resid column after using the augment() command.
 
 ```{r}
 library(tidymodels)
@@ -317,7 +321,7 @@ lm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)
 knitr::kable(tidy(lm_bweight_demo))
 ```
 
-Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2.  The diagram beloow illustrate that b-weight are weights based on residualized verions of a predictor and the criterion.
+Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2. The diagram beloow illustrate that b-weight in a multiple regression are weights based on residualized verions of a predictor and the criterion.
 
 ```{r}
 #| echo: false
@@ -326,11 +330,115 @@ Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual her
 knitr::include_graphics("ch_4/partial-b-weight.png")
 ```
 
-## Page 76 Understanding b- vs beta-weights
+## Page 76 b- vs beta-weights
+
+The regression weights that we have looked at so far - are usually referred to as b-weights or unstandardized regression coefficients. The are obtained when we analyze the data in it's original form. That is, each variable has. a different mean and standard deviation. Sometimes, however, we want to be able to compare the magnitude of regression weights. To do so, we need to set the mean of each variable (predictor or criterion) to zero prior to analysis. As well, we need to set the standard deviation of each variable prior to analysis. That is, we need to standrdized (M=0, SD =1) each variable prior to analysis. The weights we obtain when we do this are referred to as beta-weights or standardized regression cofficients. A better name, not used, would be regression weights for standardized data. We can obtain this weights by analyzing the data as described or by transforming b-weights using the formula in the textboook. Standardized regression weights (beta-weights) can be obtained using the apa.reg.table() command in the apaTables package.
+
+```{r}
+#| eval: false
+
+lm4_3 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+table1 = apa.reg.table(lm4_3, table.number = 1)
+
+apa.save("table1.doc", table1)
+
+```
 
 ## Page 77 Relative importance
 
+```{r}
+#| eval: true
+
+# It's always a good idea to get the set of focal variables 
+# in a separate data set.  Once you have missing data,
+# this approach is critical.
+focal_data <- statedata2018 %>%
+  select(violent_crime_rate, 
+         per_child_poverty, 
+         med_hh_income, 
+         unemploy_rate,
+         percent_uninsured)
+
+lm4_4 <- lm(violent_crime_rate ~ per_child_poverty + 
+              med_hh_income + unemploy_rate + percent_uninsured,
+            data = focal_data)
+
+tidy(lm4_4)
+```
+
+Then you can obtain relative importance information:
+
+```{r}
+
+x_compare <- relaimpo::calc.relimp(lm4_4, 
+                         type = c("lmg",
+                                  "first", 
+                                  "last", 
+                                  "betasq", 
+                                  "pratt"))
+print(x_compare)
+```
+
+Then make the plots:
+
+```{r}
+plot(x_compare)
+```
+
 ## Page 79 Predicted Means
+
+Recall the regression:
+
+```{r}
+focal_data <- statedata2018 %>%
+  select(violent_crime_rate, 
+         per_child_poverty, 
+         med_hh_income)
+
+lm4_3 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+tidy(lm4_3)
+
+```
+
+We need the percentiles for per_child_poverty and med_hh_income.
+
+```{r}
+focal_data %>%
+  select(per_child_poverty, med_hh_income) %>%
+  skim()
+
+```
+
+
+For per_child_poverty: 25th percentile is 13, 75th percentile is 20. We want to look at these with reference to the 50th percentile of med_hh_income which is 59162.
+
+
+```{r}
+predict4values <- data.frame(per_child_poverty = c(13, 20),
+                             med_hh_income = 59162.)
+
+print(predict4values)
+
+predict(lm4_3, predict4values)
+```
+
+
+
+For med_hh_income: 25th percentile is 53134, 75th percentile is 67687 We want to look at these with reference to the 50th percentile of per_child_poverty which is 16.5
+
+```{r}
+predict4values <- data.frame(per_child_poverty = 16.5,
+                             med_hh_income = c(53134, 67687))
+
+print(predict4values)
+
+predict(lm4_3, predict4values)
+```
+
 
 ## Page 86 Chapter Exercises
 
