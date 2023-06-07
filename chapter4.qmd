@@ -234,15 +234,23 @@ prediction_graph <- ggplot(data = predict4values,
 print(prediction_graph)
 ```
 
-## Page 71 Scatter plot
+## Page 71 3D plot
+
+When you have two predictors you don't have a regression line - you have a regression surface.
+The code below creates a surface plot that you can interact with/rotate/etc. Note that even though we put med_hh_income in the moderator position in the function there is no moderation here.
 
 ```{r}
 #| warning: false
 #| message: false
 
-library(plotly)
-plot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_crime_rate,
-        type = "scatter3d", mode = "markers")
+library(fastInteraction)
+
+surface_plot <- fast.plot(lm4_2,
+                          criterion = violent_crime_rate,
+                          predictor = med_hh_income,
+                          moderator = per_child_poverty)
+
+surface_plot
 ```
 
 ## Page 72 Understanding b-weights
@@ -254,7 +262,6 @@ plot_ly(focal_data, x = ~per_child_poverty, y = ~med_hh_income, z = ~violent_cri
 ## Page 79 Predicted Means
 
 ## Page 86 Chapter Exercises
-
 
 ### Activate packages
 
