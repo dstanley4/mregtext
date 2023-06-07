@@ -11,7 +11,7 @@ The following CRAN packages must be installed:
 | janitor                |
 | skimr                  |
 | apaTables              |
-|tidymodels |
+| tidymodels             |
 | broom                  |
 | psych                  |
 
@@ -192,8 +192,7 @@ tidy(lrm3_1)
 glance(lrm3_1)
 ```
 
-
-apa.reg.table() from apaTables package gives you confidence intervals and beta-weights. It's one step and combines everything into one table. 
+apa.reg.table() from apaTables package gives you confidence intervals and beta-weights. It's one step and combines everything into one table.
 
 ```{r}
 #| eval: false
@@ -206,7 +205,6 @@ table1 <- apa.reg.table(lrm3_1)
 apa.save("table1.doc", table1)
 
 ```
-
 
 ## Pages 49 to 50 Predicted/Fitted Values
 

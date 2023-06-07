@@ -102,7 +102,6 @@ focal_data <- statedata2018 %>%
   select(violent_crime_rate, per_child_poverty, med_hh_income)
 ```
 
-
 ### Correlation options
 
 #### psych package
@@ -225,7 +224,7 @@ prediction_graph <- ggplot(data = predict4values,
   scale_x_continuous(breaks = seq(10, 25, by = 5)) +
   scale_y_continuous(breaks = seq(100, 700, by = 100)) +
   theme_light() +
-  labs(x = "Perecent Child Poverty",
+  labs(x = "Percent Child Poverty",
        y = "Predicted Violent Crime Rate (yhat)")
 
 print(prediction_graph)
