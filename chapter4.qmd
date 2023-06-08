@@ -202,7 +202,7 @@ We use our regression model to generate predicted scores:
 ```{r}
 
 # Create predicted scores use the regression weights created in lm4_2
-predicted_violent_crime_rate <- predict(lm4_2, 
+predicted_violent_crime_rate <- stats::predict(lm4_2, 
                                         newdata = predict4values)
 
 # Put the predicted scores back into our data set of possible values
@@ -390,7 +390,7 @@ predict4values <- data.frame(per_child_poverty = c(13, 20),
 
 print(predict4values)
 
-predict(lm4_3, predict4values)
+stats::predict(lm4_3, predict4values)
 ```
 
 For med_hh_income: 25th percentile is 53134, 75th percentile is 67687 We want to look at these with reference to the 50th percentile of per_child_poverty which is 16.5
@@ -401,7 +401,7 @@ predict4values <- data.frame(per_child_poverty = 16.5,
 
 print(predict4values)
 
-predict(lm4_3, predict4values)
+stats::predict(lm4_3, predict4values)
 ```
 
 ## Page 86 Chapter Exercises
