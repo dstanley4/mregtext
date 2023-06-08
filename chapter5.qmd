@@ -1,5 +1,19 @@
 # Goodness of Fit
 
+## Required packages
+
+The following CRAN packages must be installed:
+
+| Required CRAN Packages |
+|------------------------|
+| tidyverse              |
+| usethis                |
+| janitor                |
+| skimr                  |
+| tidymodels             |
+
+
+
 ## Page 89 Fit Introduction
 
 ### Activate packages
@@ -70,9 +84,9 @@ anova(lm5_1)
 ### Approach 2: Regression fit (better)
 
 ```{r}
-##library(tidymodels)
-#glance(lm5_1)
-#anova(lm5_1)
+library(tidymodels)
+glance(lm5_1)
+anova(lm5_1)
 ```
 
 ## Page 96 Single Value Prediction Interval
@@ -91,8 +105,6 @@ lm5_2 <- lm(violent_crime_rate ~ per_child_poverty,
             data = focal_data)
 ```
 
-
-
 ```{r}
 # Specify values for which you want predictions
 predict4value = data.frame(per_child_poverty = 16.5)
@@ -105,10 +117,9 @@ stats::predict(lm5_2,
 
 ```
 
-
 ### Graph Single Value PI
 
-The plot below illustrates the prediction interval. 
+The plot below illustrates the prediction interval.
 
 ```{r}
 ggplot(data = focal_data,
@@ -126,6 +137,81 @@ ggplot(data = focal_data,
 
 ```
 
-Recall that we have a sample. The sample is a subset of the population of values. The red line in the plot indicates a range that will capture 95% of population values when x = 16.5. 
+Recall that we have a sample. The sample is a subset of the population of values. The red line in the plot indicates a range that will capture 95% of population values when x = 16.5.
 
+## Pages 97-98 x-axis Prediction Interval
 
+Create a prediction inteval for all values on the x-axis.
+
+### Recall Regression
+
+```{r}
+lm5_2 <- lm(violent_crime_rate ~ per_child_poverty, 
+            data = focal_data)
+```
+
+## Determine x-axis range
+
+```{r}
+library(skimr)
+
+focal_data %>%
+  select(per_child_poverty) %>%
+  skim()
+
+```
+
+We find x-axis values (per_child_poverty) range from 9 to 28.
+
+## Specify values for prediction interval
+
+```{r}
+# Specify values for which you want predictions
+predict4value = data.frame(per_child_poverty = seq(9, 28))
+print(predict4value)
+
+# Create prediction interval
+prediction_interval_values<- stats::predict(lm5_2, 
+                                            newdata = predict4value,
+                                            interval = "prediction")
+
+# make this a data set not an array of numbers
+prediction_interval_values <- as_tibble(prediction_interval_values)
+
+print(prediction_interval_values)
+```
+
+## Add x-values to prediction_interval_values
+
+```{r}
+prediction_interval_values <- prediction_interval_values %>%
+  mutate(per_child_poverty = seq(9, 28))
+
+print(prediction_interval_values)
+```
+
+We will use the above data set to plot the prediction interval.
+
+### Graph x-axis PI
+
+The plot below illustrates the prediction interval using the geom_ribbon() command and the prediction_intevals_values data. The alpha argument geom_ribbon() indicates that the red fill will be 20% nontransparent or 80% transparent.
+
+Also notice this is pretty fancy ggplot() code. We are actually using two data sets in our plot. For most of the plot commands the focal_data is used. However, for the geom_ribbon() command we indicate that the prediction_intevals_values data set should be used.
+
+```{r}
+ggplot(data = focal_data,
+       mapping = aes(x = per_child_poverty,
+                     y = violent_crime_rate)) +
+  geom_ribbon(data = prediction_interval_values,
+              mapping = aes(x = per_child_poverty,
+                            y = fit,
+                            ymin = lwr,
+                            ymax = upr),
+              fill = "red",
+              alpha= .2) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_x_continuous(breaks = seq(9, 30, by = 1)) +
+  scale_y_continuous(breaks = seq(100, 700, by = 100))
+
+```
