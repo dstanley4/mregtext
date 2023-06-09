@@ -29,6 +29,7 @@ library(usethis) # use_github_file()
 library(tidyverse) # read_csv() 
 library(janitor) # clean_names() 
 library(tidymodels) # clean_names() 
+library(car)
 ```
 
 ### Obtain data and save it to your computer
@@ -102,7 +103,6 @@ library(tidymodels)
 knitr::kable(tidy(lm5_1))
 ```
 
-
 ```{r}
 #| eval: false
 glance(lm5_1)
@@ -112,7 +112,6 @@ glance(lm5_1)
 #| echo: false
 knitr::kable(glance(lm5_1))
 ```
-
 
 ```{r}
 anova(lm5_1)
@@ -307,7 +306,7 @@ gpa %>%
 gpa %>% skim()
 ```
 
-### Old Style: Regression
+### Textbook Approach: Regression
 
 ```{r}
 lm5_3 <- lm(gpa ~ sat_math + sat_read_write + hs_math, data = gpa)
@@ -316,34 +315,67 @@ confint(lm5_3)
 anova(lm5_3)
 ```
 
-### Modern: Regression
+### Recommended Approach: Regression
 
 ```{r}
 lm5_3 <- lm(gpa ~ sat_math + sat_read_write + hs_math, data = gpa)
-
-library(tidymodels)
-tidy(lm5_3)
-glance(lm5_3)
 ```
 
 ```{r}
 #| eval: false
-library(apaTables)
-apa.reg.table(lm5_3)
+library(tidymodels)
+tidy(lm5_3)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm5_3))
 
 ```
+
 ```{r}
+#| eval: false
+glance(lm5_3)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm5_3))
+
+```
+
+
+```{r}
+#| eval: false
+library(apaTables)
+table1 <- apa.reg.table(lm5_3)
+
+apa.save("table1.doc", table1)
+
+```
+
+```{r}
+#| eval: true
 #| echo: false
 library(apaTables)
-knitr::kable(apa.reg.table(lm5_3)$latex.body)
+table1 <- apa.reg.table(lm5_3)
+
+knitr::kable(table1$latex.body)
 ```
 
 ## Pages 100-101 Comparing b-weights
 
+```{r}
+library(car)
+
+linearHypothesis(lm5_3, "sat_math = sat_read_write")
+```
 
 
 ## Chapter Exercises
-
 
 ### Activate packages
 
@@ -387,6 +419,3 @@ There are so many column names in this data set that we do the glimpse a bit dif
 qbpassers %>% 
   glimpse()  
 ```
-
-
-

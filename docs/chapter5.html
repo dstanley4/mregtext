@@ -225,8 +225,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#inspect-data-1" id="toc-inspect-data-1" class="nav-link" data-scroll-target="#inspect-data-1"><span class="header-section-number">5.8.3</span> Inspect data</a></li>
   <li><a href="#rescale-data" id="toc-rescale-data" class="nav-link" data-scroll-target="#rescale-data"><span class="header-section-number">5.8.4</span> Rescale data</a></li>
-  <li><a href="#old-style-regression" id="toc-old-style-regression" class="nav-link" data-scroll-target="#old-style-regression"><span class="header-section-number">5.8.5</span> Old Style: Regression</a></li>
-  <li><a href="#modern-regression" id="toc-modern-regression" class="nav-link" data-scroll-target="#modern-regression"><span class="header-section-number">5.8.6</span> Modern: Regression</a></li>
+  <li><a href="#textbook-approach-regression" id="toc-textbook-approach-regression" class="nav-link" data-scroll-target="#textbook-approach-regression"><span class="header-section-number">5.8.5</span> Textbook Approach: Regression</a></li>
+  <li><a href="#recommended-approach-regression" id="toc-recommended-approach-regression" class="nav-link" data-scroll-target="#recommended-approach-regression"><span class="header-section-number">5.8.6</span> Recommended Approach: Regression</a></li>
   </ul></li>
   <li><a href="#pages-100-101-comparing-b-weights" id="toc-pages-100-101-comparing-b-weights" class="nav-link" data-scroll-target="#pages-100-101-comparing-b-weights"><span class="header-section-number">5.9</span> Pages 100-101 Comparing b-weights</a></li>
   <li><a href="#chapter-exercises" id="toc-chapter-exercises" class="nav-link" data-scroll-target="#chapter-exercises"><span class="header-section-number">5.10</span> Chapter Exercises</a>
@@ -1211,8 +1211,8 @@ $ sat_read_write &lt;dbl&gt; 247, 436, 578, 447, 563, 342, 472, 356, 327, 385, 6
 </div>
 </div>
 </section>
-<section id="old-style-regression" class="level3" data-number="5.8.5">
-<h3 data-number="5.8.5" class="anchored" data-anchor-id="old-style-regression"><span class="header-section-number">5.8.5</span> Old Style: Regression</h3>
+<section id="textbook-approach-regression" class="level3" data-number="5.8.5">
+<h3 data-number="5.8.5" class="anchored" data-anchor-id="textbook-approach-regression"><span class="header-section-number">5.8.5</span> Textbook Approach: Regression</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>lm5_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(gpa <span class="sc">~</span> sat_math <span class="sc">+</span> sat_read_write <span class="sc">+</span> hs_math, <span class="at">data =</span> gpa)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm5_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1261,34 +1261,120 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="modern-regression" class="level3" data-number="5.8.6">
-<h3 data-number="5.8.6" class="anchored" data-anchor-id="modern-regression"><span class="header-section-number">5.8.6</span> Modern: Regression</h3>
+<section id="recommended-approach-regression" class="level3" data-number="5.8.6">
+<h3 data-number="5.8.6" class="anchored" data-anchor-id="recommended-approach-regression"><span class="header-section-number">5.8.6</span> Recommended Approach: Regression</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>lm5_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(gpa <span class="sc">~</span> sat_math <span class="sc">+</span> sat_read_write <span class="sc">+</span> hs_math, <span class="at">data =</span> gpa)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm5_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 5
-  term           estimate std.error statistic  p.value
-  &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)     0.298    0.265         1.13 0.277   
-2 sat_math        0.00218  0.000455      4.80 0.000197
-3 sat_read_write  0.00131  0.000525      2.50 0.0237  
-4 hs_math         0.180    0.0877        2.05 0.0570  </code></pre>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>lm5_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(gpa <span class="sc">~</span> sat_math <span class="sc">+</span> sat_read_write <span class="sc">+</span> hs_math, <span class="at">data =</span> gpa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm5_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.2982757</td>
+<td style="text-align: right;">0.2649782</td>
+<td style="text-align: right;">1.125662</td>
+<td style="text-align: right;">0.2769110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sat_math</td>
+<td style="text-align: right;">0.0021849</td>
+<td style="text-align: right;">0.0004553</td>
+<td style="text-align: right;">4.798517</td>
+<td style="text-align: right;">0.0001969</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sat_read_write</td>
+<td style="text-align: right;">0.0013123</td>
+<td style="text-align: right;">0.0005252</td>
+<td style="text-align: right;">2.498664</td>
+<td style="text-align: right;">0.0237379</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hs_math</td>
+<td style="text-align: right;">0.1798702</td>
+<td style="text-align: right;">0.0876786</td>
+<td style="text-align: right;">2.051473</td>
+<td style="text-align: right;">0.0569637</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm5_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic     p.value    df logLik   AIC   BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1     0.850         0.822 0.262      30.3 0.000000782     3  0.632  8.74  13.7
-# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.8503577</td>
+<td style="text-align: right;">0.8222998</td>
+<td style="text-align: right;">0.2621122</td>
+<td style="text-align: right;">30.30722</td>
+<td style="text-align: right;">8e-07</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.6323138</td>
+<td style="text-align: right;">8.735373</td>
+<td style="text-align: right;">13.71403</td>
+<td style="text-align: right;">1.099245</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">20</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.reg.table</span>(lm5_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> <span class="fu">apa.reg.table</span>(lm5_3)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.save</span>(<span class="st">"table1.doc"</span>, table1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -1403,29 +1489,47 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="pages-100-101-comparing-b-weights" class="level2" data-number="5.9">
 <h2 data-number="5.9" class="anchored" data-anchor-id="pages-100-101-comparing-b-weights"><span class="header-section-number">5.9</span> Pages 100-101 Comparing b-weights</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(lm5_3, <span class="st">"sat_math = sat_read_write"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear hypothesis test
+
+Hypothesis:
+sat_math - sat_read_write = 0
+
+Model 1: restricted model
+Model 2: gpa ~ sat_math + sat_read_write + hs_math
+
+  Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+1     17 1.1837                           
+2     16 1.0993  1  0.084409 1.2286 0.2841</code></pre>
+</div>
+</div>
 </section>
 <section id="chapter-exercises" class="level2" data-number="5.10">
 <h2 data-number="5.10" class="anchored" data-anchor-id="chapter-exercises"><span class="header-section-number">5.10</span> Chapter Exercises</h2>
 <section id="activate-packages-2" class="level3" data-number="5.10.1">
 <h3 data-number="5.10.1" class="anchored" data-anchor-id="activate-packages-2"><span class="header-section-number">5.10.1</span> Activate packages</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis) <span class="co"># use_github_file()</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># read_csv() </span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># clean_names() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis) <span class="co"># use_github_file()</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># read_csv() </span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># clean_names() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="obtain-data-and-save-it-to-your-computer-2" class="level3" data-number="5.10.2">
 <h3 data-number="5.10.2" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer-2"><span class="header-section-number">5.10.2</span> Obtain data and save it to your computer</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/QBPassers2019.csv"</span>,</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"qbpassers2019.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/QBPassers2019.csv"</span>,</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"qbpassers2019.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="load-data-from-your-computer-2" class="level4" data-number="5.10.2.1">
 <h4 data-number="5.10.2.1" class="anchored" data-anchor-id="load-data-from-your-computer-2"><span class="header-section-number">5.10.2.1</span> Load data from your computer</h4>
 <p>Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>qbpassers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"qbpassers2019.csv"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>qbpassers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"qbpassers2019.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -1433,8 +1537,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 data-number="5.10.3" class="anchored" data-anchor-id="inspect-data-2"><span class="header-section-number">5.10.3</span> Inspect data</h3>
 <p>There are so many column names in this data set that we do the glimpse a bit differently. That is, we sort the order of the columns alphabetically prior to doing the glimpse(). It affects only the display of the column names - not the structure of the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>qbpassers <span class="sc">%&gt;%</span> </span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>qbpassers <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 50
 Columns: 15
