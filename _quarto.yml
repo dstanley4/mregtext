@@ -13,6 +13,9 @@ book:
     - chapter3.qmd
     - chapter4.qmd
     - chapter5.qmd
+    - chapter6.qmd
+    - chapter7.qmd
+    - chapter8.qmd
     - references.qmd
 
 bibliography: references.bib

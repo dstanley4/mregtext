@@ -236,5 +236,26 @@
     "title": "5  Goodness of Fit",
     "section": "5.10 Chapter Exercises",
     "text": "5.10 Chapter Exercises\n\n5.10.1 Activate packages\n\nlibrary(usethis) # use_github_file()\nlibrary(tidyverse) # read_csv() \nlibrary(janitor) # clean_names() \n\n\n\n5.10.2 Obtain data and save it to your computer\n\nuse_github_file(repo_spec = \"https://github.com/johnhoffmannVA/LinearRegression/blob/main/QBPassers2019.csv\",\n                save_as = \"qbpassers2019.csv\")\n\n\n5.10.2.1 Load data from your computer\nClean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.\n\nqbpassers &lt;- read_csv(\"qbpassers2019.csv\") %&gt;% \n  clean_names()\n\n\n\n\n5.10.3 Inspect data\nThere are so many column names in this data set that we do the glimpse a bit differently. That is, we sort the order of the columns alphabetically prior to doing the glimpse(). It affects only the display of the column names - not the structure of the data.\n\nqbpassers %&gt;% \n  glimpse()  \n\nRows: 50\nColumns: 15\n$ name          &lt;chr&gt; \"Aaron Rodgers\", \"Russell Wilson\", \"Drew Brees\", \"Tony R…\n$ firstyear     &lt;dbl&gt; 2005, 2012, 2001, 2004, 2000, 2016, 2012, 1985, 1998, 20…\n$ lastyear      &lt;dbl&gt; NA, NA, NA, 2017, NA, NA, NA, 1999, 2015, NA, NA, NA, 20…\n$ games         &lt;dbl&gt; 181, 128, 275, 150, 285, 64, 93, 169, 266, 228, 189, 218…\n$ attempts      &lt;dbl&gt; 6061, 3777, 10161, 4335, 9988, 2071, 3146, 4149, 9380, 7…\n$ completions   &lt;dbl&gt; 3913, 2436, 6867, 2829, 6377, 1363, 2104, 2667, 6125, 49…\n$ compperc      &lt;dbl&gt; 64.6, 64.5, 67.6, 65.3, 63.8, 65.8, 66.9, 64.3, 65.3, 64…\n$ avercomp      &lt;dbl&gt; 12.0, 12.2, 11.3, 12.1, 11.7, 11.6, 11.5, 12.4, 11.7, 12…\n$ yards         &lt;dbl&gt; 46946, 29734, 77416, 34183, 74571, 15778, 24107, 33124, …\n$ interceptions &lt;dbl&gt; 84, 68, 237, 117, 179, 36, 71, 107, 251, 198, 147, 191, …\n$ interatt      &lt;dbl&gt; 1.39, 1.80, 2.33, 2.70, 1.79, 1.74, 2.26, 2.58, 2.68, 2.…\n$ touchdowns    &lt;dbl&gt; 364, 227, 547, 248, 541, 97, 155, 232, 539, 397, 321, 36…\n$ tdsatt        &lt;dbl&gt; 6.01, 6.01, 5.38, 5.72, 5.42, 4.68, 4.93, 5.59, 5.75, 5.…\n$ longest_pass  &lt;dbl&gt; 93, 80, 98, 85, 99, 90, 81, 97, 86, 84, 93, 97, 85, 73, …\n$ rating        &lt;dbl&gt; 102.4, 101.2, 98.4, 97.1, 97.0, 97.0, 96.8, 96.8, 96.5, …"
+  },
+  {
+    "objectID": "chapter6.html#required-packages",
+    "href": "chapter6.html#required-packages",
+    "title": "6  Comparing Models",
+    "section": "6.1 Required packages",
+    "text": "6.1 Required packages\nThe following CRAN packages must be installed:\n\n\n\nRequired CRAN Packages\n\n\n\n\ntidyverse\n\n\nusethis\n\n\njanitor\n\n\nskimr\n\n\ntidymodels"
+  },
+  {
+    "objectID": "chapter7.html#required-packages",
+    "href": "chapter7.html#required-packages",
+    "title": "7  Indicator Variables",
+    "section": "7.1 Required packages",
+    "text": "7.1 Required packages\nThe following CRAN packages must be installed:\n\n\n\nRequired CRAN Packages\n\n\n\n\ntidyverse\n\n\nusethis\n\n\njanitor\n\n\nskimr\n\n\ntidymodels"
+  },
+  {
+    "objectID": "chapter8.html#required-packages",
+    "href": "chapter8.html#required-packages",
+    "title": "8  Independence",
+    "section": "8.1 Required packages",
+    "text": "8.1 Required packages\nThe following CRAN packages must be installed:\n\n\n\nRequired CRAN Packages\n\n\n\n\ntidyverse\n\n\nusethis\n\n\njanitor\n\n\nskimr\n\n\ntidymodels"
   }
 ]

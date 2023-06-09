@@ -1,0 +1,13 @@
+# Independence
+
+## Required packages
+
+The following CRAN packages must be installed:
+
+| Required CRAN Packages |
+|------------------------|
+| tidyverse              |
+| usethis                |
+| janitor                |
+| skimr                  |
+| tidymodels             |
