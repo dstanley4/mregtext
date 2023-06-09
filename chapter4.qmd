@@ -150,7 +150,7 @@ focal_data %>%
 ## Page 67 One Predictor
 
 ```{r}
-#| eval: true
+#| eval: false
 lm4_1 <- lm(violent_crime_rate ~ per_child_poverty,
             data = focal_data)
 
@@ -158,16 +158,102 @@ tidy(lm4_1)
 
 ```
 
-## Page 68 Two Predictors
+```{r}
+#| eval: true
+#| echo: false
+lm4_1 <- lm(violent_crime_rate ~ per_child_poverty,
+            data = focal_data)
+
+knitr::kable(tidy(lm4_1))
+
+```
+
+```{r}
+#| eval: false
+glance(lm4_1)
+
+```
 
 ```{r}
 #| eval: true
+#| echo: true
+knitr::kable(glance(lm4_1))
+
+```
+
+
+```{r}
+#| eval: false
+library(apaTables)
+table1 <- apa.reg.table(lm4_1)
+
+apa.save("table1.doc", table1)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+library(apaTables)
+table1 <- apa.reg.table(lm4_1)
+
+knitr::kable(table1$latex.body)
+```
+
+
+## Page 68 Two Predictors
+
+```{r}
+#| eval: false
 lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
             data = focal_data)
 
 tidy(lm4_2)
 
 ```
+
+```{r}
+#| eval: true
+#| echo: false
+lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+knitr::kable(tidy(lm4_2))
+
+```
+
+```{r}
+#| eval: false
+glance(lm4_2)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm4_2))
+
+```
+
+
+```{r}
+#| eval: false
+library(apaTables)
+table1 <- apa.reg.table(lm4_2)
+
+apa.save("table1.doc", table1)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+library(apaTables)
+table1 <- apa.reg.table(lm4_2)
+
+knitr::kable(table1$latex.body)
+```
+
 
 ### Two Predictors: Predicted Scores
 
@@ -234,7 +320,6 @@ print(prediction_graph)
 
 When you have two predictors you don't have a regression line - you have a regression surface. The code below creates a surface plot that you can interact with/rotate/etc. Note that even though we put med_hh_income in the moderator position in the function there is no moderation here. Be sure to click and drag to rotate the graph.
 
-
 ```{r}
 library(fastInteraction)
 
@@ -258,7 +343,7 @@ surface_plot
 See the original regression below. Notice the b-weight (the unstandardized regression weight) for per_child_poverty is 21.1797652. We are going to try to recreate this value in another way to make it clear what it means.
 
 ```{r}
-#| eval: true
+#| eval: false
 
 
 # Original regression
@@ -268,6 +353,23 @@ lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
 tidy(lm4_2)
 
 ```
+
+
+```{r}
+#| eval: true
+#| echo: true
+
+
+# Original regression
+lm4_2 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
+            data = focal_data)
+
+knitr::kable(tidy(lm4_2))
+```
+
+
+
+
 
 First, we create a residualized version of violent_crime_rate. That is, a version of violent_crime_rate has teh effect of med_hh_income removed from it. We use the residual() command. This is the same as getting the value from the .resid column after using the augment() command.
 
@@ -288,11 +390,21 @@ per_child_poverty_residual <- lm_per_child_poverty$residuals
 To get the b-weight or the original regression (lm4_2) for per_child_poverty we conduct a bivariate regression with these two residuals.
 
 ```{r}
-#| eval: true
+#| eval: false
 
 lm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)
 
 tidy(lm_bweight_demo)
+```
+
+
+```{r}
+#| eval: true
+#| echo: true
+
+lm_bweight_demo <- lm(violent_crime_rate_residual ~ per_child_poverty_residual)
+
+knitr::kable(tidy(lm_bweight_demo))
 ```
 
 Notice that we get 21.1797652 as the b-weight for per_child_poverty_residual here. This is the same as the b-weight for per_child_poverty (no residual suffix) in the original regression lm4_2. The diagram beloow illustrate that b-weight in a multiple regression are weights based on residualized verions of a predictor and the criterion.
@@ -338,9 +450,21 @@ focal_data <- statedata2018 %>%
 lm4_4 <- lm(violent_crime_rate ~ per_child_poverty + 
               med_hh_income + unemploy_rate + percent_uninsured,
             data = focal_data)
+```
+
+```{r}
+#| eval: false
 
 tidy(lm4_4)
 ```
+
+```{r}
+#| eval: true
+#| echo: false
+
+knitr::kable(tidy(lm4_4))
+```
+
 
 Then you can obtain relative importance information:
 
@@ -373,10 +497,24 @@ focal_data <- statedata2018 %>%
 
 lm4_3 <- lm(violent_crime_rate ~ per_child_poverty + med_hh_income,
             data = focal_data)
+```
+
+
+
+```{r}
+#| eval: false
 
 tidy(lm4_3)
-
 ```
+
+```{r}
+#| eval: true
+#| echo: false
+
+knitr::kable(tidy(lm4_3))
+```
+
+
 
 We need the percentiles for per_child_poverty and med_hh_income.
 
@@ -395,7 +533,7 @@ predict4values <- data.frame(per_child_poverty = c(13, 20),
 
 print(predict4values)
 
-stats::predict(lm4_3, predict4values)
+stats::predict(lm4_3, newdata = predict4values)
 ```
 
 For med_hh_income: 25th percentile is 53134, 75th percentile is 67687 We want to look at these with reference to the 50th percentile of per_child_poverty which is 16.5
@@ -406,7 +544,7 @@ predict4values <- data.frame(per_child_poverty = 16.5,
 
 print(predict4values)
 
-stats::predict(lm4_3, predict4values)
+stats::predict(lm4_3, newdata = predict4values)
 ```
 
 ## Page 86 Chapter Exercises

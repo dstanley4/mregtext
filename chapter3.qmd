@@ -168,7 +168,7 @@ state_plot <- ggplot(data = statedata2018,
 print(state_plot)
 ```
 
-### Old style: Analysis using summary()
+### Textbook Approach: Analysis
 
 ```{r}
 lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
@@ -178,7 +178,7 @@ summary(lrm3_1)
 confint(lrm3_1)
 ```
 
-### Better: Analysis using tidy() and glance() and then apaTables
+### Recommended Approach: Analysis
 
 The tidy() command gives you p-values for each predictor. The glance() command gives you overall fit statistics.
 
@@ -187,9 +187,30 @@ library(tidymodels)
 
 lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
              data = statedata2018)
+```
 
+```{r}
+#| eval: false
 tidy(lrm3_1)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lrm3_1))
+```
+
+```{r}
+#| eval: false
 glance(lrm3_1)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lrm3_1))
+
 ```
 
 apa.reg.table() from apaTables package gives you confidence intervals and beta-weights. It's one step and combines everything into one table.
@@ -204,6 +225,18 @@ table1 <- apa.reg.table(lrm3_1)
 
 apa.save("table1.doc", table1)
 
+```
+
+```{r}
+#| eval: true
+#| echo: false
+lrm3_1 <- lm(opioid_od_death_rate ~ life_satis,
+             data = statedata2018)
+
+library(apaTables)
+table1 <- apa.reg.table(lrm3_1)
+
+knitr::kable(table1$latex.body)
 ```
 
 ## Pages 49 to 50 Predicted/Fitted Values
