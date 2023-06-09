@@ -234,16 +234,21 @@ print(prediction_graph)
 
 When you have two predictors you don't have a regression line - you have a regression surface. The code below creates a surface plot that you can interact with/rotate/etc. Note that even though we put med_hh_income in the moderator position in the function there is no moderation here. Be sure to click and drag to rotate the graph.
 
-```{r}
-#| warning: false
-#| message: false
 
+```{r}
 library(fastInteraction)
 
 surface_plot <- fast.plot(lm4_2,
                           criterion = violent_crime_rate,
                           predictor = med_hh_income,
                           moderator = per_child_poverty)
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| eval: false
 
 surface_plot
 ```

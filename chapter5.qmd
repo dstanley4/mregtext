@@ -12,8 +12,6 @@ The following CRAN packages must be installed:
 | skimr                  |
 | tidymodels             |
 
-
-
 ## Page 89 Fit Introduction
 
 ### Activate packages
@@ -215,3 +213,149 @@ ggplot(data = focal_data,
   scale_y_continuous(breaks = seq(100, 700, by = 100))
 
 ```
+
+## Pages 98-99
+
+### Activate packages
+
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/GPA.csv",
+                save_as = "gpa.csv")
+
+gpa <- read_csv("gpa.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/GPA.csv",
+                save_as = "gpa.csv")
+```
+
+#### Load data from your computer
+
+Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.
+
+```{r}
+#| eval: false
+
+library(tidyverse)
+
+gpa <- read_csv("gpa.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+```{r}
+gpa %>% glimpse()
+```
+
+```{r}
+library(skimr)
+gpa %>% skim()
+```
+
+### Rescale data
+
+```{r}
+gpa %>%
+  mutate(sat_math = sat_math/100) %>%
+  mutate(sat_read_write = sat_read_write/100)
+```
+
+```{r}
+gpa %>% skim()
+```
+
+### Old Style: Regression
+
+```{r}
+lm5_3 <- lm(gpa ~ sat_math + sat_read_write + hs_math, data = gpa)
+summary(lm5_3)
+confint(lm5_3)
+anova(lm5_3)
+```
+
+### Modern: Regression
+
+```{r}
+lm5_3 <- lm(gpa ~ sat_math + sat_read_write + hs_math, data = gpa)
+
+library(tidymodels)
+tidy(lm5_3)
+glance(lm5_3)
+```
+
+```{r}
+#| eval: false
+library(apaTables)
+apa.reg.table(lm5_3)
+
+```
+```{r}
+#| echo: false
+library(apaTables)
+knitr::kable(apa.reg.table(lm5_3)$latex.body)
+```
+
+## Pages 100-101 Comparing b-weights
+
+
+
+## Chapter Exercises
+
+
+### Activate packages
+
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/QBPassers2019.csv",
+                save_as = "qbpassers2019.csv")
+
+qbpassers <- read_csv("qbpassers2019.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/QBPassers2019.csv",
+                save_as = "qbpassers2019.csv")
+```
+
+#### Load data from your computer
+
+Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.
+
+```{r}
+#| eval: false
+qbpassers <- read_csv("qbpassers2019.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+There are so many column names in this data set that we do the glimpse a bit differently. That is, we sort the order of the columns alphabetically prior to doing the glimpse(). It affects only the display of the column names - not the structure of the data.
+
+```{r}
+qbpassers %>% 
+  glimpse()  
+```
+
+
+
