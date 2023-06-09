@@ -20,7 +20,7 @@ bibliography: references.bib
 format:
   html: 
     grid:
-      body-width: 1200px
+      body-width: 1000px
     theme: cosmo
     toc-depth: 5
   pdf:

@@ -17,9 +17,18 @@ The following CRAN packages must be installed:
 ### Activate packages
 
 ```{r}
+#| eval: false
 library(usethis) # use_github_file()
 library(tidyverse) # read_csv() 
 library(janitor) # clean_names() 
+```
+
+```{r}
+#| include: false
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+library(tidymodels) # clean_names() 
 ```
 
 ### Obtain data and save it to your computer
@@ -82,8 +91,30 @@ anova(lm5_1)
 ### Approach 2: Regression fit (better)
 
 ```{r}
+#| eval: false
 library(tidymodels)
+tidy(lm5_1)
+```
+
+```{r}
+#| echo: false
+library(tidymodels)
+knitr::kable(tidy(lm5_1))
+```
+
+
+```{r}
+#| eval: false
 glance(lm5_1)
+```
+
+```{r}
+#| echo: false
+knitr::kable(glance(lm5_1))
+```
+
+
+```{r}
 anova(lm5_1)
 ```
 
