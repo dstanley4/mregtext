@@ -11,3 +11,271 @@ The following CRAN packages must be installed:
 | janitor                |
 | skimr                  |
 | tidymodels             |
+
+
+## Page 107 Create Models to Compare
+
+
+### Activate packages
+
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+library(tidymodels) # clean_names() 
+
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/StateData2018.csv",
+                save_as = "statedata2018.csv")
+
+statedata2018 <- read_csv("statedata2018.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/StateData2018.csv",
+                save_as = "statedata2018.csv")
+```
+
+### Load data from your computer
+
+Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.
+
+```{r}
+#| eval: false
+statedata2018 <- read_csv("statedata2018.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+There are so many column names in this data set that we do the glimpse a bit differently. That is, we sort the order of the columns alphabetically prior to doing the glimpse(). It affects only the display of the column names - not the structure of the data.
+
+```{r}
+statedata2018 %>% 
+  select(sort(names(statedata2018))) %>%
+  glimpse()  
+```
+
+
+### Both regression models
+
+```{r}
+# Block 1: Nested Model
+lm6_1  <- lm(opioid_od_death_rate ~ life_satis + per_age0_18,
+             data = statedata2018)
+
+# Block 2: Full Model
+lm6_2  <- lm(opioid_od_death_rate ~ life_satis + per_age0_18 + per_white + unemploy_rate,
+             data = statedata2018)
+
+```
+
+
+### Nested Model Output (Block 1)
+
+```{r}
+#| eval: false
+tidy(lm6_1)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm6_1))
+```
+
+
+```{r}
+#| eval: false
+glance(lm6_1)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm6_1))
+
+```
+
+
+
+```{r}
+#| eval: false
+library(apaTables)
+table6_1 <- apa.reg.table(lm6_1)
+print(table6_1)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+library(apaTables)
+table6_1 <- apa.reg.table(lm6_1)
+knitr::kable(table6_1$latex.body)
+```
+
+
+### Full Model Output (Block 2)
+
+
+
+```{r}
+#| eval: false
+tidy(lm6_2)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm6_2))
+```
+
+
+```{r}
+#| eval: false
+glance(lm6_2)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm6_2))
+
+```
+
+
+
+```{r}
+#| eval: false
+library(apaTables)
+table6_1 <- apa.reg.table(lm6_2)
+print(table6_2)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+library(apaTables)
+table6_2 <- apa.reg.table(lm6_2)
+knitr::kable(table6_2$latex.body)
+```
+
+## Page 110 Comparing the Models
+
+### Textbook Approach: Comparison
+
+```{r}
+anova(lm6_1, lm6_2)
+```
+
+
+### Recommended Approach: Comparison
+
+
+```{r}
+#| eval: false
+library(apaTables)
+table_compare <- apa.reg.table(lm6_1, lm6_2)
+print(table_compare)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+library(apaTables)
+table_compare <- apa.reg.table(lm6_1, lm6_2)
+knitr::kable(table_compare$latex.body) 
+```
+
+The two comparisons (Textbook and Recommended) have the same math "under the hood" but the reporting is different. You could use the F-value and p-value from the Textbook Approach along with the CI's from the Recommended Approach.
+
+
+
+## Page 112 AIC and BIC
+
+### Nested Model (Block 1)
+
+
+```{r}
+#| eval: false
+glance(lm6_1)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm6_1))
+
+```
+
+### Full Model (Block 1)
+
+
+```{r}
+#| eval: false
+glance(lm6_2)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm6_2))
+
+```
+
+
+
+## Chapter Exercises
+
+### Activate packages
+
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/QBPassers2019.csv",
+                save_as = "qbpassers2019.csv")
+
+qbpassers <- read_csv("qbpassers2019.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/QBPassers2019.csv",
+                save_as = "qbpassers2019.csv")
+```
+
+#### Load data from your computer
+
+Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.
+
+```{r}
+#| eval: false
+qbpassers <- read_csv("qbpassers2019.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+There are so many column names in this data set that we do the glimpse a bit differently. That is, we sort the order of the columns alphabetically prior to doing the glimpse(). It affects only the display of the column names - not the structure of the data.
+
+```{r}
+qbpassers %>% 
+  glimpse()  
+```

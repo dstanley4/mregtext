@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -169,6 +203,13 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><span class="header-section-number">7.1</span> Required packages</a></li>
+  <li><a href="#page-34-gss-t-test" id="toc-page-34-gss-t-test" class="nav-link" data-scroll-target="#page-34-gss-t-test"><span class="header-section-number">7.2</span> Page 34 GSS t-test</a>
+  <ul>
+  <li><a href="#obtain-data-and-save-it-to-your-computer" id="toc-obtain-data-and-save-it-to-your-computer" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer"><span class="header-section-number">7.2.0.1</span> Obtain data and save it to your computer</a></li>
+  <li><a href="#load-data-from-your-computer" id="toc-load-data-from-your-computer" class="nav-link" data-scroll-target="#load-data-from-your-computer"><span class="header-section-number">7.2.0.2</span> Load data from your computer</a></li>
+  <li><a href="#inspect-data" id="toc-inspect-data" class="nav-link" data-scroll-target="#inspect-data"><span class="header-section-number">7.2.0.3</span> Inspect data</a></li>
+  <li><a href="#skimr-describe-focal-variables" id="toc-skimr-describe-focal-variables" class="nav-link" data-scroll-target="#skimr-describe-focal-variables"><span class="header-section-number">7.2.0.4</span> skimr(): Describe focal variables</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -219,8 +260,226 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+</section>
+<section id="page-34-gss-t-test" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="page-34-gss-t-test"><span class="header-section-number">7.2</span> Page 34 GSS t-test</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis) <span class="co"># use_github_file </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># read_csv </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># clean_names() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'
+
+The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr) <span class="co"># skim</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="obtain-data-and-save-it-to-your-computer" class="level4" data-number="7.2.0.1">
+<h4 data-number="7.2.0.1" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer"><span class="header-section-number">7.2.0.1</span> Obtain data and save it to your computer</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/GSS2018.csv"</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"gss2018.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-data-from-your-computer" class="level4" data-number="7.2.0.2">
+<h4 data-number="7.2.0.2" class="anchored" data-anchor-id="load-data-from-your-computer"><span class="header-section-number">7.2.0.2</span> Load data from your computer</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"gss2018.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="inspect-data" class="level4" data-number="7.2.0.3">
+<h4 data-number="7.2.0.3" class="anchored" data-anchor-id="inspect-data"><span class="header-section-number">7.2.0.3</span> Inspect data</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,315
+Columns: 28
+$ id         &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …
+$ female     &lt;chr&gt; "male", "female", "male", "female", "male", "female", "fema…
+$ age        &lt;dbl&gt; 43, 74, 42, 63, 71, 67, 59, 43, 62, 55, 59, 34, 61, 44, 41,…
+$ cohort     &lt;dbl&gt; 1975, 1944, 1976, 1955, 1947, 1951, 1959, 1975, 1956, 1963,…
+$ race       &lt;chr&gt; "White", "White", "White", "White", "AfricanAmerican", "Whi…
+$ latinx     &lt;chr&gt; "no", "no", "yes", "no", "no", "no", "no", "no", "no", "no"…
+$ ethnic     &lt;chr&gt; "White", "White", "Latinx", "White", "AfricanAmerican", "Wh…
+$ educate    &lt;dbl&gt; 14, 10, 16, 16, 18, 16, 13, 12, 8, 12, 19, 14, 13, 16, 12, …
+$ childs     &lt;dbl&gt; 0, 3, 2, 2, 0, 2, 6, 0, 4, 2, 2, 3, 2, 2, 2, 4, 0, 2, 2, 0,…
+$ marital    &lt;dbl&gt; 4, 3, 1, 1, 3, 2, 3, 4, 2, 1, 3, 3, 3, 1, 4, 2, 1, 1, 3, 4,…
+$ fincome    &lt;dbl&gt; 11, 12, 12, 13, 10, 10, 10, 12, 5, 12, 12, 11, 11, 12, 2, 1…
+$ pincome    &lt;dbl&gt; 11, 0, 22, 23, 0, 0, 12, 17, 2, 22, 23, 12, 0, 22, 0, 9, 20…
+$ sei        &lt;dbl&gt; 65.30, 14.80, 83.40, 69.30, 68.60, 69.30, 24.20, 23.70, 21.…
+$ occprest   &lt;dbl&gt; 47, 22, 61, 59, 53, 53, 48, 35, 35, 39, 72, 35, 45, 72, 28,…
+$ attend     &lt;dbl&gt; 5, 2, 2, 6, 8, 4, 7, 7, 0, 2, 4, 5, 0, 3, 0, 7, 1, 0, 4, 5,…
+$ relig      &lt;dbl&gt; 1, 2, 6, 1, 2, 2, 1, 2, 6, 1, 2, 1, 2, 2, 6, 2, 6, 4, 1, 2,…
+$ fund       &lt;chr&gt; "moderate", "moderate", "liberal", "liberal", "moderate", "…
+$ owngun     &lt;chr&gt; "no", "no", "no", "no", "yes", "yes", "no", "no", "no", "no…
+$ legalmarij &lt;chr&gt; NA, "no", "yes", "no", "no", NA, "yes", "yes", "yes", "yes"…
+$ cappunish  &lt;chr&gt; "yes", "no", "yes", "no", "no", "yes", "yes", "yes", "yes",…
+$ partyaff   &lt;dbl&gt; 6, 3, 5, 3, 7, 3, 1, 6, 4, 2, 7, 2, 2, 1, 5, 4, 3, 4, 2, 5,…
+$ polviews   &lt;dbl&gt; 6, 4, 5, 4, 7, 3, 4, 5, 4, 4, 6, 4, 4, 3, 2, 5, 2, 6, 2, 4,…
+$ spanking   &lt;dbl&gt; 2, NA, 2, 3, NA, 3, NA, NA, 1, 2, 3, NA, 3, NA, 3, 2, 3, 3,…
+$ lifesatis  &lt;dbl&gt; NA, 87.91, NA, 78.23, 77.39, NA, 72.31, 80.96, NA, 71.21, N…
+$ volunteer  &lt;dbl&gt; 1, 1, 1, 3, 3, 1, 3, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 5, 1,…
+$ confidence &lt;dbl&gt; 0, 10, 3, 3, 7, 1, 4, 2, 1, 4, 4, 1, 1, 3, 3, 1, 0, 3, 2, 3…
+$ civliberty &lt;dbl&gt; 12, 11, 0, 0, 12, 12, 10, 6, 0, 0, 12, 0, 5, 4, 0, 9, 0, 3,…
+$ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3, 1, …</code></pre>
+</div>
+</div>
+</section>
+<section id="skimr-describe-focal-variables" class="level4" data-number="7.2.0.4">
+<h4 data-number="7.2.0.4" class="anchored" data-anchor-id="skimr-describe-focal-variables"><span class="header-section-number">7.2.0.4</span> skimr(): Describe focal variables</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pincome, female) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">2315</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">pincome</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9.42</td>
+<td style="text-align: right;">8.95</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: left;">▇▂▂▅▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

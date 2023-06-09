@@ -11,3 +11,55 @@ The following CRAN packages must be installed:
 | janitor                |
 | skimr                  |
 | tidymodels             |
+
+
+
+## Page 34 GSS t-test
+
+```{r}
+library(usethis) # use_github_file 
+library(tidyverse) # read_csv 
+library(janitor) # clean_names() 
+library(skimr) # skim
+```
+
+#### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/GSS2018.csv",
+                save_as = "gss2018.csv")
+
+gss2018 <- read_csv("gss2018.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/GSS2018.csv",
+                save_as = "gss2018.csv")
+```
+
+#### Load data from your computer
+
+```{r}
+#| eval: false
+gss2018 <- read_csv("gss2018.csv") %>% 
+  clean_names()
+```
+
+#### Inspect data
+
+```{r}
+gss2018 %>% 
+  glimpse()  
+```
+
+#### skimr(): Describe focal variables
+
+```{r}
+library(skimr)
+
+gss2018 %>% 
+  select(pincome, female) %>%
+  skim()  
+```
