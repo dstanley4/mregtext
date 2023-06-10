@@ -208,10 +208,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#obtain-data-and-save-it-to-your-computer" id="toc-obtain-data-and-save-it-to-your-computer" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer"><span class="header-section-number">7.2.1</span> Obtain data and save it to your computer</a></li>
   <li><a href="#load-data-from-your-computer" id="toc-load-data-from-your-computer" class="nav-link" data-scroll-target="#load-data-from-your-computer"><span class="header-section-number">7.2.2</span> Load data from your computer</a></li>
   <li><a href="#inspect-data" id="toc-inspect-data" class="nav-link" data-scroll-target="#inspect-data"><span class="header-section-number">7.2.3</span> Inspect data</a></li>
-  <li><a href="#regression-as-per-textbook" id="toc-regression-as-per-textbook" class="nav-link" data-scroll-target="#regression-as-per-textbook"><span class="header-section-number">7.2.4</span> Regression (as per textbook)</a></li>
-  <li><a href="#explanation-part-1-fewer-cases" id="toc-explanation-part-1-fewer-cases" class="nav-link" data-scroll-target="#explanation-part-1-fewer-cases"><span class="header-section-number">7.2.5</span> Explanation Part 1: Fewer Cases</a></li>
-  <li><a href="#explanation-part-2-numeric-coding" id="toc-explanation-part-2-numeric-coding" class="nav-link" data-scroll-target="#explanation-part-2-numeric-coding"><span class="header-section-number">7.2.6</span> Explanation Part 2: Numeric Coding</a></li>
-  <li><a href="#explanation-part-3-the-right-way" id="toc-explanation-part-3-the-right-way" class="nav-link" data-scroll-target="#explanation-part-3-the-right-way"><span class="header-section-number">7.2.7</span> Explanation Part 3: The Right Way</a></li>
+  <li><a href="#making-female-a-factor-dont-skip-this-step" id="toc-making-female-a-factor-dont-skip-this-step" class="nav-link" data-scroll-target="#making-female-a-factor-dont-skip-this-step"><span class="header-section-number">7.2.4</span> Making female a factor (don’t skip this step)</a></li>
+  <li><a href="#regression-as-per-textbook" id="toc-regression-as-per-textbook" class="nav-link" data-scroll-target="#regression-as-per-textbook"><span class="header-section-number">7.2.5</span> Regression (as per textbook)</a></li>
+  <li><a href="#explanation-part-1-fewer-cases" id="toc-explanation-part-1-fewer-cases" class="nav-link" data-scroll-target="#explanation-part-1-fewer-cases"><span class="header-section-number">7.2.6</span> Explanation Part 1: Fewer Cases</a></li>
+  <li><a href="#explanation-part-2-numeric-coding" id="toc-explanation-part-2-numeric-coding" class="nav-link" data-scroll-target="#explanation-part-2-numeric-coding"><span class="header-section-number">7.2.7</span> Explanation Part 2: Numeric Coding</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -327,14 +327,60 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 </div>
 <p>Notice female is a chr variable.</p>
 </section>
-<section id="regression-as-per-textbook" class="level3" data-number="7.2.4">
-<h3 data-number="7.2.4" class="anchored" data-anchor-id="regression-as-per-textbook"><span class="header-section-number">7.2.4</span> Regression (as per textbook)</h3>
+<section id="making-female-a-factor-dont-skip-this-step" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="making-female-a-factor-dont-skip-this-step"><span class="header-section-number">7.2.4</span> Making female a factor (don’t skip this step)</h3>
+<p>We need to make female a factor variable. Then indicate that female is the reference. That is female = 0 and male = 1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lm7_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">as_factor</span>(female)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">relevel</span>(female, <span class="at">ref =</span> <span class="st">"female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>See how female is now a factor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,315
+Columns: 28
+$ id         &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …
+$ female     &lt;fct&gt; male, female, male, female, male, female, female, male, fem…
+$ age        &lt;dbl&gt; 43, 74, 42, 63, 71, 67, 59, 43, 62, 55, 59, 34, 61, 44, 41,…
+$ cohort     &lt;dbl&gt; 1975, 1944, 1976, 1955, 1947, 1951, 1959, 1975, 1956, 1963,…
+$ race       &lt;chr&gt; "White", "White", "White", "White", "AfricanAmerican", "Whi…
+$ latinx     &lt;chr&gt; "no", "no", "yes", "no", "no", "no", "no", "no", "no", "no"…
+$ ethnic     &lt;chr&gt; "White", "White", "Latinx", "White", "AfricanAmerican", "Wh…
+$ educate    &lt;dbl&gt; 14, 10, 16, 16, 18, 16, 13, 12, 8, 12, 19, 14, 13, 16, 12, …
+$ childs     &lt;dbl&gt; 0, 3, 2, 2, 0, 2, 6, 0, 4, 2, 2, 3, 2, 2, 2, 4, 0, 2, 2, 0,…
+$ marital    &lt;dbl&gt; 4, 3, 1, 1, 3, 2, 3, 4, 2, 1, 3, 3, 3, 1, 4, 2, 1, 1, 3, 4,…
+$ fincome    &lt;dbl&gt; 11, 12, 12, 13, 10, 10, 10, 12, 5, 12, 12, 11, 11, 12, 2, 1…
+$ pincome    &lt;dbl&gt; 11, 0, 22, 23, 0, 0, 12, 17, 2, 22, 23, 12, 0, 22, 0, 9, 20…
+$ sei        &lt;dbl&gt; 65.30, 14.80, 83.40, 69.30, 68.60, 69.30, 24.20, 23.70, 21.…
+$ occprest   &lt;dbl&gt; 47, 22, 61, 59, 53, 53, 48, 35, 35, 39, 72, 35, 45, 72, 28,…
+$ attend     &lt;dbl&gt; 5, 2, 2, 6, 8, 4, 7, 7, 0, 2, 4, 5, 0, 3, 0, 7, 1, 0, 4, 5,…
+$ relig      &lt;dbl&gt; 1, 2, 6, 1, 2, 2, 1, 2, 6, 1, 2, 1, 2, 2, 6, 2, 6, 4, 1, 2,…
+$ fund       &lt;chr&gt; "moderate", "moderate", "liberal", "liberal", "moderate", "…
+$ owngun     &lt;chr&gt; "no", "no", "no", "no", "yes", "yes", "no", "no", "no", "no…
+$ legalmarij &lt;chr&gt; NA, "no", "yes", "no", "no", NA, "yes", "yes", "yes", "yes"…
+$ cappunish  &lt;chr&gt; "yes", "no", "yes", "no", "no", "yes", "yes", "yes", "yes",…
+$ partyaff   &lt;dbl&gt; 6, 3, 5, 3, 7, 3, 1, 6, 4, 2, 7, 2, 2, 1, 5, 4, 3, 4, 2, 5,…
+$ polviews   &lt;dbl&gt; 6, 4, 5, 4, 7, 3, 4, 5, 4, 4, 6, 4, 4, 3, 2, 5, 2, 6, 2, 4,…
+$ spanking   &lt;dbl&gt; 2, NA, 2, 3, NA, 3, NA, NA, 1, 2, 3, NA, 3, NA, 3, 2, 3, 3,…
+$ lifesatis  &lt;dbl&gt; NA, 87.91, NA, 78.23, 77.39, NA, 72.31, 80.96, NA, 71.21, N…
+$ volunteer  &lt;dbl&gt; 1, 1, 1, 3, 3, 1, 3, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 5, 1,…
+$ confidence &lt;dbl&gt; 0, 10, 3, 3, 7, 1, 4, 2, 1, 4, 4, 1, 1, 3, 3, 1, 0, 3, 2, 3…
+$ civliberty &lt;dbl&gt; 12, 11, 0, 0, 12, 12, 10, 6, 0, 0, 12, 0, 5, 4, 0, 9, 0, 3,…
+$ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3, 1, …</code></pre>
+</div>
+</div>
+</section>
+<section id="regression-as-per-textbook" class="level3" data-number="7.2.5">
+<h3 data-number="7.2.5" class="anchored" data-anchor-id="regression-as-per-textbook"><span class="header-section-number">7.2.5</span> Regression (as per textbook)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lm7_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -368,91 +414,34 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gss2018,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> female,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> pincome)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom=</span><span class="st">"bar"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 9%">
-<col style="width: 13%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 7%">
-<col style="width: 2%">
-<col style="width: 9%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 4%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">r.squared</th>
-<th style="text-align: right;">adj.r.squared</th>
-<th style="text-align: right;">sigma</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">df</th>
-<th style="text-align: right;">logLik</th>
-<th style="text-align: right;">AIC</th>
-<th style="text-align: right;">BIC</th>
-<th style="text-align: right;">deviance</th>
-<th style="text-align: right;">df.residual</th>
-<th style="text-align: right;">nobs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.0218929</td>
-<td style="text-align: right;">0.02147</td>
-<td style="text-align: right;">8.850149</td>
-<td style="text-align: right;">51.77173</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-8331.548</td>
-<td style="text-align: right;">16669.1</td>
-<td style="text-align: right;">16686.34</td>
-<td style="text-align: right;">181166</td>
-<td style="text-align: right;">2313</td>
-<td style="text-align: right;">2315</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gss2018,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> female,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> pincome)) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom=</span><span class="st">"bar"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="chapter7_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="chapter7_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="explanation-part-1-fewer-cases" class="level3" data-number="7.2.5">
-<h3 data-number="7.2.5" class="anchored" data-anchor-id="explanation-part-1-fewer-cases"><span class="header-section-number">7.2.5</span> Explanation Part 1: Fewer Cases</h3>
+<section id="explanation-part-1-fewer-cases" class="level3" data-number="7.2.6">
+<h3 data-number="7.2.6" class="anchored" data-anchor-id="explanation-part-1-fewer-cases"><span class="header-section-number">7.2.6</span> Explanation Part 1: Fewer Cases</h3>
 <p>Let’s look at a subset of the data to understand what happened above. We’ll look at the first 20 rows of the data, and do the analysis again.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gss_small <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pincome, female) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>gss_small <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pincome, female) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gss_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gss_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 2
    pincome female
-     &lt;dbl&gt; &lt;chr&gt; 
+     &lt;dbl&gt; &lt;fct&gt; 
  1      11 male  
  2       0 female
  3      22 male  
@@ -475,13 +464,18 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 20      12 male  </code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>gss_small <span class="ot">&lt;-</span> gss_small <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">as_factor</span>(female)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">relevel</span>(female, <span class="at">ref =</span> <span class="st">"female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Now let’s do the regression:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lm7_small <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> gss_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lm7_small <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> gss_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -515,106 +509,65 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gss_small,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> female,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> pincome)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom=</span><span class="st">"bar"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 9%">
-<col style="width: 12%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 2%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 4%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">r.squared</th>
-<th style="text-align: right;">adj.r.squared</th>
-<th style="text-align: right;">sigma</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">df</th>
-<th style="text-align: right;">logLik</th>
-<th style="text-align: right;">AIC</th>
-<th style="text-align: right;">BIC</th>
-<th style="text-align: right;">deviance</th>
-<th style="text-align: right;">df.residual</th>
-<th style="text-align: right;">nobs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.1830769</td>
-<td style="text-align: right;">0.1376923</td>
-<td style="text-align: right;">8.681211</td>
-<td style="text-align: right;">4.033898</td>
-<td style="text-align: right;">0.0598397</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-70.54839</td>
-<td style="text-align: right;">147.0968</td>
-<td style="text-align: right;">150.084</td>
-<td style="text-align: right;">1356.542</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">20</td>
-</tr>
-</tbody>
-</table>
+<p><img src="chapter7_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="explanation-part-2-numeric-coding" class="level3" data-number="7.2.6">
-<h3 data-number="7.2.6" class="anchored" data-anchor-id="explanation-part-2-numeric-coding"><span class="header-section-number">7.2.6</span> Explanation Part 2: Numeric Coding</h3>
+<section id="explanation-part-2-numeric-coding" class="level3" data-number="7.2.7">
+<h3 data-number="7.2.7" class="anchored" data-anchor-id="explanation-part-2-numeric-coding"><span class="header-section-number">7.2.7</span> Explanation Part 2: Numeric Coding</h3>
 <p>We create a column with 0 for female and 1 for male.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>gss_numeric_small <span class="ot">&lt;-</span> gss_small</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>gss_numeric_small<span class="sc">$</span>numeric_female <span class="ot">&lt;-</span><span class="dv">0</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> gss_numeric_small<span class="sc">$</span>female <span class="sc">==</span> <span class="st">"male"</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>gss_numeric_small<span class="sc">$</span>numeric_female[id] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gss_numeric_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>gss_numeric_small <span class="ot">&lt;-</span> gss_small</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>gss_numeric_small<span class="sc">$</span>reference_female <span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> gss_numeric_small<span class="sc">$</span>female <span class="sc">==</span> <span class="st">"male"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>gss_numeric_small<span class="sc">$</span>reference_female[id] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gss_numeric_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 3
-   pincome female numeric_female
-     &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
- 1      11 male                1
- 2       0 female              0
- 3      22 male                1
- 4      23 female              0
- 5       0 male                1
- 6       0 female              0
- 7      12 female              0
- 8      17 male                1
- 9       2 female              0
-10      22 male                1
-11      23 male                1
-12      12 female              0
-13       0 female              0
-14      22 male                1
-15       0 female              0
-16       9 female              0
-17      20 female              0
-18       0 female              0
-19      20 female              0
-20      12 male                1</code></pre>
+   pincome female reference_female
+     &lt;dbl&gt; &lt;fct&gt;             &lt;dbl&gt;
+ 1      11 male                  1
+ 2       0 female                0
+ 3      22 male                  1
+ 4      23 female                0
+ 5       0 male                  1
+ 6       0 female                0
+ 7      12 female                0
+ 8      17 male                  1
+ 9       2 female                0
+10      22 male                  1
+11      23 male                  1
+12      12 female                0
+13       0 female                0
+14      22 male                  1
+15       0 female                0
+16       9 female                0
+17      20 female                0
+18       0 female                0
+19      20 female                0
+20      12 male                  1</code></pre>
 </div>
 </div>
 <p>Now let’s do the regression again!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>lm7__numeric_small <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> numeric_female,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> gss_numeric_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lm7_numeric_small <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> reference_female,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> gss_numeric_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7__numeric_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_numeric_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -637,7 +590,7 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 <td style="text-align: right;">0.0043602</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">numeric_female</td>
+<td style="text-align: left;">reference_female</td>
 <td style="text-align: right;">7.958333</td>
 <td style="text-align: right;">3.962413</td>
 <td style="text-align: right;">2.008456</td>
@@ -648,183 +601,17 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7__numeric_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gss_numeric_small,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> reference_female,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> pincome)) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom=</span><span class="st">"bar"</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 9%">
-<col style="width: 12%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 2%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 4%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">r.squared</th>
-<th style="text-align: right;">adj.r.squared</th>
-<th style="text-align: right;">sigma</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">df</th>
-<th style="text-align: right;">logLik</th>
-<th style="text-align: right;">AIC</th>
-<th style="text-align: right;">BIC</th>
-<th style="text-align: right;">deviance</th>
-<th style="text-align: right;">df.residual</th>
-<th style="text-align: right;">nobs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.1830769</td>
-<td style="text-align: right;">0.1376923</td>
-<td style="text-align: right;">8.681211</td>
-<td style="text-align: right;">4.033898</td>
-<td style="text-align: right;">0.0598397</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-70.54839</td>
-<td style="text-align: right;">147.0968</td>
-<td style="text-align: right;">150.084</td>
-<td style="text-align: right;">1356.542</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">20</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="explanation-part-3-the-right-way" class="level3" data-number="7.2.7">
-<h3 data-number="7.2.7" class="anchored" data-anchor-id="explanation-part-3-the-right-way"><span class="header-section-number">7.2.7</span> Explanation Part 3: The Right Way</h3>
-<p>The is how you should accomplish this task with “proper” R-code. The above seciton were presented so you understand what’s happening “under the hood”.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>gss_small <span class="sc">%&gt;%</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 20
-Columns: 2
-$ pincome &lt;dbl&gt; 11, 0, 22, 23, 0, 0, 12, 17, 2, 22, 23, 12, 0, 22, 0, 9, 20, 0…
-$ female  &lt;chr&gt; "male", "female", "male", "female", "male", "female", "female"…</code></pre>
-</div>
-</div>
-<p>We need to make female a factor variable. Then indicate that female is the reference. That is female = 0 and male = 1.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gss_small <span class="ot">&lt;-</span> gss_small <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">as_factor</span>(female)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">relevel</span>(female, <span class="at">ref =</span> <span class="st">"female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>See how female is now a factor:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>gss_small <span class="sc">%&gt;%</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 20
-Columns: 2
-$ pincome &lt;dbl&gt; 11, 0, 22, 23, 0, 0, 12, 17, 2, 22, 23, 12, 0, 22, 0, 9, 20, 0…
-$ female  &lt;fct&gt; male, female, male, female, male, female, female, male, female…</code></pre>
-</div>
-</div>
-<p>Now let’s do the regression again!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>lm7_right <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female,</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> gss_small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_right)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">8.166667</td>
-<td style="text-align: right;">2.506050</td>
-<td style="text-align: right;">3.258781</td>
-<td style="text-align: right;">0.0043602</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">femalemale</td>
-<td style="text-align: right;">7.958333</td>
-<td style="text-align: right;">3.962413</td>
-<td style="text-align: right;">2.008456</td>
-<td style="text-align: right;">0.0598397</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_right)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 9%">
-<col style="width: 12%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 2%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 4%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">r.squared</th>
-<th style="text-align: right;">adj.r.squared</th>
-<th style="text-align: right;">sigma</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">df</th>
-<th style="text-align: right;">logLik</th>
-<th style="text-align: right;">AIC</th>
-<th style="text-align: right;">BIC</th>
-<th style="text-align: right;">deviance</th>
-<th style="text-align: right;">df.residual</th>
-<th style="text-align: right;">nobs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.1830769</td>
-<td style="text-align: right;">0.1376923</td>
-<td style="text-align: right;">8.681211</td>
-<td style="text-align: right;">4.033898</td>
-<td style="text-align: right;">0.0598397</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-70.54839</td>
-<td style="text-align: right;">147.0968</td>
-<td style="text-align: right;">150.084</td>
-<td style="text-align: right;">1356.542</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">20</td>
-</tr>
-</tbody>
-</table>
+<p><img src="chapter7_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

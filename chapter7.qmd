@@ -69,6 +69,25 @@ gss2018 %>%
 
 Notice female is a chr variable. 
 
+### Making female a factor (don't skip this step)
+
+We need to make female a factor variable. Then indicate that female is the reference. That is female = 0 and male = 1.
+
+```{r}
+gss2018 <- gss2018 %>%
+  mutate(female = as_factor(female)) %>%
+  mutate(female = relevel(female, ref = "female"))
+```
+
+
+See how female is now a factor:
+
+```{r}
+gss2018 %>% 
+  glimpse()  
+```
+
+
 ### Regression (as per textbook)
 
 ```{r}
@@ -89,28 +108,29 @@ knitr::kable(tidy(lm7_1))
 ```
 
 
-
 ```{r}
 #| eval: false
-glance(lm7_1)
-
-```
-
-```{r}
-#| eval: true
-#| echo: false
-knitr::kable(glance(lm7_1))
-
-```
-
-
-```{r}
 ggplot(data = gss2018,
        mapping = aes(x = female,
                      y = pincome)) +
-  stat_summary(fun = mean,
-               geom="bar",
-               size = 3) +
+  stat_summary(fun = "mean",
+               geom="bar") +
+  scale_y_continuous(breaks = seq(0, 15)) +
+  theme_classic(12)
+```
+
+
+```{r}
+#| echo: false
+
+ggplot(data = gss2018,
+       mapping = aes(x = female,
+                     y = pincome)) +
+  stat_summary(fun = "mean",
+               geom="bar") +
+  annotate(geom = "text", label = "8.221350", x= 1, y = 8.221350+.5) +
+  annotate(geom = "text", label = "8.221350 + 2.660494", x= 2, y = 8.221350+2.660494+.5) +
+  scale_y_continuous(breaks = seq(0, 15)) +
   theme_classic(12)
 ```
 
@@ -127,6 +147,13 @@ gss_small <- gss2018 %>%
 
 ```{r}
 print(gss_small)
+```
+
+
+```{r}
+gss_small <- gss_small %>%
+  mutate(female = as_factor(female)) %>%
+  mutate(female = relevel(female, ref = "female"))
 ```
 
 Now let's do the regression:
@@ -152,27 +179,43 @@ knitr::kable(tidy(lm7_small))
 
 ```{r}
 #| eval: false
-glance(lm7_small)
 
+ggplot(data = gss_small,
+       mapping = aes(x = female,
+                     y = pincome)) +
+  stat_summary(fun = mean,
+               geom="bar") +
+  scale_y_continuous(breaks = seq(0, 20)) +
+  theme_classic(12)
 ```
+
 
 ```{r}
-#| eval: true
 #| echo: false
-knitr::kable(glance(lm7_small))
 
+ggplot(data = gss_small,
+       mapping = aes(x = female,
+                     y = pincome)) +
+  stat_summary(fun = mean,
+               geom="bar") +
+  annotate(geom = "text", label = "8.166667", x= 1, y = 8.221350+.5) +
+  annotate(geom = "text", label = "8.166667 + 7.958333", x= 2, y = 8.221350+7.958333+.5) +
+  scale_y_continuous(breaks = seq(0, 20)) +
+  theme_classic(12)
 ```
+
 
 ### Explanation Part 2: Numeric Coding
 
 We create a column with 0 for female and 1 for male. 
+
 ```{r}
 gss_numeric_small <- gss_small
 
-gss_numeric_small$numeric_female <-0
+gss_numeric_small$reference_female <-0
 
 id <- gss_numeric_small$female == "male"
-gss_numeric_small$numeric_female[id] <- 1
+gss_numeric_small$reference_female[id] <- 1
 
 print(gss_numeric_small)
 ```
@@ -180,93 +223,46 @@ print(gss_numeric_small)
 Now let's do the regression again!
 
 ```{r}
-lm7__numeric_small <- lm(pincome ~ numeric_female,
+lm7_numeric_small <- lm(pincome ~ reference_female,
             data = gss_numeric_small)
 ```
 
 
 ```{r}
 #| eval: false
-tidy(lm7__numeric_small)
+tidy(lm7_numeric_small)
 ```
 
 ```{r}
 #| eval: true
 #| echo: false
-knitr::kable(tidy(lm7__numeric_small))
-```
-
-
-
-```{r}
-#| eval: false
-glance(lm7__numeric_small)
-
-```
-
-```{r}
-#| eval: true
-#| echo: false
-knitr::kable(glance(lm7__numeric_small))
-
-```
-
-### Explanation Part 3: The Right Way
-
-The is how you should accomplish this task with "proper" R-code. The above seciton were presented so you understand what's happening "under the hood".
-
-```{r}
-gss_small %>% 
-  glimpse()  
-```
-
-We need to make female a factor variable. Then indicate that female is the reference. That is female = 0 and male = 1.
-
-```{r}
-gss_small <- gss_small %>%
-  mutate(female = as_factor(female)) %>%
-  mutate(female = relevel(female, ref = "female"))
-```
-
-
-See how female is now a factor:
-
-```{r}
-gss_small %>% 
-  glimpse()  
-```
-
-Now let's do the regression again!
-
-```{r}
-lm7_right <- lm(pincome ~ female,
-                data = gss_small)
+knitr::kable(tidy(lm7_numeric_small))
 ```
 
 
 ```{r}
 #| eval: false
-tidy(lm7_right)
+
+ggplot(data = gss_numeric_small,
+       mapping = aes(x = reference_female,
+                     y = pincome)) +
+  stat_summary(fun = mean,
+               geom="bar") +
+  scale_y_continuous(breaks = seq(0, 20)) +
+  theme_classic(12)
 ```
 
+
 ```{r}
-#| eval: true
 #| echo: false
-knitr::kable(tidy(lm7_right))
+
+ggplot(data = gss_numeric_small,
+       mapping = aes(x = reference_female,
+                     y = pincome)) +
+  stat_summary(fun = mean,
+               geom="bar") +
+  annotate(geom = "text", label = "8.166667", x= 0, y = 8.221350+.5) +
+  annotate(geom = "text", label = "8.166667 + 7.958333", x= 1, y = 8.221350+7.958333+.5) +
+  scale_y_continuous(breaks = seq(0, 20)) +
+  theme_classic(12)
 ```
-
-
-
-```{r}
-#| eval: false
-glance(lm7_right)
-
-```
-
-```{r}
-#| eval: true
-#| echo: false
-knitr::kable(glance(lm7_right))
-
-```
-
