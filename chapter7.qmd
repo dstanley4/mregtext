@@ -14,16 +14,29 @@ The following CRAN packages must be installed:
 
 
 
-## Page 34 GSS t-test
+## Page 118 GSS Data Revisited
 
 ```{r}
+#| eval: false
+
 library(usethis) # use_github_file 
-library(tidyverse) # read_csv 
+library(tidyverse) # read_csv()
 library(janitor) # clean_names() 
-library(skimr) # skim
+library(skimr) # skim()
+library(tidymodels) #tidy() glance()
 ```
 
-#### Obtain data and save it to your computer
+```{r}
+#| include: false
+
+library(usethis) # use_github_file 
+library(tidyverse) # read_csv()
+library(janitor) # clean_names() 
+library(skimr) # skim()
+library(tidymodels) #tidy() glance()
+```
+
+### Obtain data and save it to your computer
 
 ```{r}
 #| include: false
@@ -39,7 +52,7 @@ use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/
                 save_as = "gss2018.csv")
 ```
 
-#### Load data from your computer
+### Load data from your computer
 
 ```{r}
 #| eval: false
@@ -47,19 +60,213 @@ gss2018 <- read_csv("gss2018.csv") %>%
   clean_names()
 ```
 
-#### Inspect data
+### Inspect data
 
 ```{r}
 gss2018 %>% 
   glimpse()  
 ```
 
-#### skimr(): Describe focal variables
+Notice female is a chr variable. 
+
+### Regression (as per textbook)
 
 ```{r}
-library(skimr)
-
-gss2018 %>% 
-  select(pincome, female) %>%
-  skim()  
+lm7_1 <- lm(pincome ~ female,
+            data = gss2018)
 ```
+
+
+```{r}
+#| eval: false
+tidy(lm7_1)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm7_1))
+```
+
+
+
+```{r}
+#| eval: false
+glance(lm7_1)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm7_1))
+
+```
+
+
+```{r}
+ggplot(data = gss2018,
+       mapping = aes(x = female,
+                     y = pincome)) +
+  stat_summary(fun = mean,
+               geom="bar",
+               size = 3) +
+  theme_classic(12)
+```
+
+
+### Explanation Part 1: Fewer Cases
+
+Let's look at a subset of the data to understand what happened above. We'll look at the first 20 rows of the data, and do the analysis again.
+
+```{r}
+gss_small <- gss2018 %>%
+  select(pincome, female) %>%
+  slice_head(n = 20)
+```
+
+```{r}
+print(gss_small)
+```
+
+Now let's do the regression:
+
+```{r}
+lm7_small <- lm(pincome ~ female,
+            data = gss_small)
+```
+
+
+```{r}
+#| eval: false
+tidy(lm7_small)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm7_small))
+```
+
+
+
+```{r}
+#| eval: false
+glance(lm7_small)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm7_small))
+
+```
+
+### Explanation Part 2: Numeric Coding
+
+We create a column with 0 for female and 1 for male. 
+```{r}
+gss_numeric_small <- gss_small
+
+gss_numeric_small$numeric_female <-0
+
+id <- gss_numeric_small$female == "male"
+gss_numeric_small$numeric_female[id] <- 1
+
+print(gss_numeric_small)
+```
+
+Now let's do the regression again!
+
+```{r}
+lm7__numeric_small <- lm(pincome ~ numeric_female,
+            data = gss_numeric_small)
+```
+
+
+```{r}
+#| eval: false
+tidy(lm7__numeric_small)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm7__numeric_small))
+```
+
+
+
+```{r}
+#| eval: false
+glance(lm7__numeric_small)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm7__numeric_small))
+
+```
+
+### Explanation Part 3: The Right Way
+
+The is how you should accomplish this task with "proper" R-code. The above seciton were presented so you understand what's happening "under the hood".
+
+```{r}
+gss_small %>% 
+  glimpse()  
+```
+
+We need to make female a factor variable. Then indicate that female is the reference. That is female = 0 and male = 1.
+
+```{r}
+gss_small <- gss_small %>%
+  mutate(female = as_factor(female)) %>%
+  mutate(female = relevel(female, ref = "female"))
+```
+
+
+See how female is now a factor:
+
+```{r}
+gss_small %>% 
+  glimpse()  
+```
+
+Now let's do the regression again!
+
+```{r}
+lm7_right <- lm(pincome ~ female,
+                data = gss_small)
+```
+
+
+```{r}
+#| eval: false
+tidy(lm7_right)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm7_right))
+```
+
+
+
+```{r}
+#| eval: false
+glance(lm7_right)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm7_right))
+
+```
+
