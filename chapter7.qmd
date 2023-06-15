@@ -329,34 +329,7 @@ gss2018 <- gss2018 %>%
 ```
 
 
-```{r}
-# We use as.data.frame() got get more decimials
 
-gss2018 %>% 
-  summarise(group_mean = mean(pincome)) %>%
-  as.data.frame()
-
-```
-
-```{r}
-# We use as.data.frame() got get more decimials
-
-gss2018 %>% 
-  group_by(female) %>%
-  summarise(group_mean = mean(pincome)) %>%
-  as.data.frame()
-
-```
-
-```{r}
-# We use as.data.frame() got get more decimials
-
-gss2018 %>% 
-  group_by(ethnic) %>%
-  summarise(group_mean = mean(pincome)) %>%
-  as.data.frame()
-
-```
 
 ```{r}
 lm7_2 <- lm(pincome ~ female + ethnic, data = gss2018)
@@ -367,6 +340,57 @@ lm7_2 <- lm(pincome ~ female + ethnic, data = gss2018)
 ```{r}
 library(tidymodels)
 tidy(lm7_2)
-glance(lm7_2)
+```
+
+
+```{r}
+#| echho: false
+# We use as.data.frame() got get more decimials
+cell_means <- gss2018 %>% 
+  group_by(female, ethnic) %>%
+  summarise(pincome_mean = mean(pincome)) %>%
+  as.data.frame()
+
+print(cell_means)
+```
+
+
+```{r}
+#| echo: false
+cell_means <- cell_means %>%
+  unite("cell_label", female, ethnic)
+
+print(cell_means)
+```
+```{r}
+ggplot(data = cell_means,
+       mapping = aes(x = cell_label,
+                     y = pincome_mean)) +
+  geom_col() +
+  scale_y_continuous(breaks = seq(0, 16, by = 1)) +
+  theme(axis.text.x = element_text(angle = 60, 
+                                   hjust = 1))  
+
+```
+
+
+```{r}
+#| eval: false
+# We use as.data.frame() got get more decimials
+cell_means <- gss2018 %>% 
+  group_by(female, ethnic) %>%
+  summarise(pincome_mean = mean(pincome)) %>%
+  as.data.frame()
+
+print(cell_means)
+```
+
+
+```{r}
+#| eval: false
+cell_means <- cell_means %>%
+  unite("cell_label", female, ethnic)
+
+print(cell_means)
 ```
 
