@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#explanation-part-2-numeric-coding" id="toc-explanation-part-2-numeric-coding" class="nav-link" data-scroll-target="#explanation-part-2-numeric-coding"><span class="header-section-number">7.2.8</span> Explanation Part 2: Numeric Coding</a></li>
   </ul></li>
   <li><a href="#page-120-single-categorical-t-test" id="toc-page-120-single-categorical-t-test" class="nav-link" data-scroll-target="#page-120-single-categorical-t-test"><span class="header-section-number">7.3</span> Page 120 Single Categorical t-test</a></li>
-  <li><a href="#page-122-single-categorical-predictor" id="toc-page-122-single-categorical-predictor" class="nav-link" data-scroll-target="#page-122-single-categorical-predictor"><span class="header-section-number">7.4</span> Page 122 Single Categorical Predictor</a></li>
+  <li><a href="#page-122-multiple-categorical-predictor" id="toc-page-122-multiple-categorical-predictor" class="nav-link" data-scroll-target="#page-122-multiple-categorical-predictor"><span class="header-section-number">7.4</span> Page 122 Multiple Categorical Predictor</a></li>
   </ul>
 </nav>
     </div>
@@ -681,8 +681,8 @@ mean in group female   mean in group male
 </div>
 </div>
 </section>
-<section id="page-122-single-categorical-predictor" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="page-122-single-categorical-predictor"><span class="header-section-number">7.4</span> Page 122 Single Categorical Predictor</h2>
+<section id="page-122-multiple-categorical-predictor" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="page-122-multiple-categorical-predictor"><span class="header-section-number">7.4</span> Page 122 Multiple Categorical Predictor</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">as_factor</span>(female)) <span class="sc">%&gt;%</span></span>
@@ -694,11 +694,50 @@ mean in group female   mean in group male
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ethnic =</span> <span class="fu">relevel</span>(ethnic, <span class="at">ref =</span> <span class="st">"White"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lm7_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female <span class="sc">+</span> ethnic, <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We use as.data.frame() got get more decimials</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">group_mean =</span> <span class="fu">mean</span>(pincome)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  group_mean
+1   9.417711</code></pre>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We use as.data.frame() got get more decimials</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(female) <span class="sc">%&gt;%</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">group_mean =</span> <span class="fu">mean</span>(pincome)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  female group_mean
+1 female    8.22135
+2   male   10.88184</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We use as.data.frame() got get more decimials</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ethnic) <span class="sc">%&gt;%</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">group_mean =</span> <span class="fu">mean</span>(pincome)) <span class="sc">%&gt;%</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           ethnic group_mean
+1           White   9.564171
+2          Latinx   9.029070
+3 AfricanAmerican   8.845730
+4           Other  10.508929</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>lm7_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female <span class="sc">+</span> ethnic, <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
   term                  estimate std.error statistic   p.value
@@ -709,7 +748,7 @@ mean in group female   mean in group male
 4 ethnicAfricanAmerican   -0.605     0.518    -1.17  2.43e-  1
 5 ethnicOther              0.993     0.867     1.15  2.52e-  1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
   r.squared adj.r.squared sigma statistic  p.value    df logLik    AIC    BIC

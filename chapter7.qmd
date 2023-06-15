@@ -312,7 +312,7 @@ gss2018 %>%
 ```
 
 
-## Page 122 Single Categorical Predictor
+## Page 122 Multiple Categorical Predictor
 
 ```{r}
 gss2018 <- gss2018 %>%
@@ -328,6 +328,35 @@ gss2018 <- gss2018 %>%
 
 ```
 
+
+```{r}
+# We use as.data.frame() got get more decimials
+
+gss2018 %>% 
+  summarise(group_mean = mean(pincome)) %>%
+  as.data.frame()
+
+```
+
+```{r}
+# We use as.data.frame() got get more decimials
+
+gss2018 %>% 
+  group_by(female) %>%
+  summarise(group_mean = mean(pincome)) %>%
+  as.data.frame()
+
+```
+
+```{r}
+# We use as.data.frame() got get more decimials
+
+gss2018 %>% 
+  group_by(ethnic) %>%
+  summarise(group_mean = mean(pincome)) %>%
+  as.data.frame()
+
+```
 
 ```{r}
 lm7_2 <- lm(pincome ~ female + ethnic, data = gss2018)
