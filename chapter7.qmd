@@ -14,7 +14,7 @@ The following CRAN packages must be installed:
 
 
 
-## Page 118 GSS Data Revisited
+## Page 118 Single Categorical Predictor
 
 ```{r}
 #| eval: false
@@ -87,6 +87,19 @@ gss2018 %>%
   glimpse()  
 ```
 
+### Group means
+
+```{r}
+# We use as.data.frame() got get more decimials
+
+gss2018 %>% 
+  group_by(female) %>%
+  summarise(group_mean = mean(pincome)) %>%
+  as.data.frame()
+
+```
+
+
 
 ### Regression (as per textbook)
 
@@ -129,7 +142,7 @@ ggplot(data = gss2018,
   stat_summary(fun = "mean",
                geom="bar") +
   annotate(geom = "text", label = "8.221350", x= 1, y = 8.221350+.5) +
-  annotate(geom = "text", label = "8.221350 + 2.660494", x= 2, y = 8.221350+2.660494+.5) +
+  annotate(geom = "text", label = "8.221350 + 2.660494 = 10.88184", x= 2, y = 8.221350+2.660494+.5) +
   scale_y_continuous(breaks = seq(0, 15)) +
   theme_classic(12)
 ```
@@ -155,6 +168,19 @@ gss_small <- gss_small %>%
   mutate(female = as_factor(female)) %>%
   mutate(female = relevel(female, ref = "female"))
 ```
+
+Let's check out the group means for this smaller data set:
+
+```{r}
+# We use as.data.frame() got get more decimials
+
+gss_small %>% 
+  group_by(female) %>%
+  summarise(group_mean = mean(pincome)) %>%
+  as.data.frame()
+
+```
+
 
 Now let's do the regression:
 
@@ -199,7 +225,7 @@ ggplot(data = gss_small,
   stat_summary(fun = mean,
                geom="bar") +
   annotate(geom = "text", label = "8.166667", x= 1, y = 8.221350+.5) +
-  annotate(geom = "text", label = "8.166667 + 7.958333", x= 2, y = 8.221350+7.958333+.5) +
+  annotate(geom = "text", label = "8.166667 + 7.958333 = 16.125", x= 2, y = 8.221350+7.958333+.5) +
   scale_y_continuous(breaks = seq(0, 20)) +
   theme_classic(12)
 ```
@@ -262,7 +288,56 @@ ggplot(data = gss_numeric_small,
   stat_summary(fun = mean,
                geom="bar") +
   annotate(geom = "text", label = "8.166667", x= 0, y = 8.221350+.5) +
-  annotate(geom = "text", label = "8.166667 + 7.958333", x= 1, y = 8.221350+7.958333+.5) +
+  annotate(geom = "text", label = "8.166667 + 7.958333 = 16.125", x= 1, y = 8.221350+7.958333+.5) +
   scale_y_continuous(breaks = seq(0, 20)) +
   theme_classic(12)
 ```
+
+
+## Page 120 Single Categorical t-test
+
+```{r}
+t.test(pincome ~ female, gss2018)
+
+```
+
+```{r}
+# We use as.data.frame() got get more decimials
+
+gss2018 %>% 
+  group_by(female) %>%
+  summarise(group_mean = mean(pincome)) %>%
+  as.data.frame()
+
+```
+
+
+## Page 122 Single Categorical Predictor
+
+```{r}
+gss2018 <- gss2018 %>%
+  mutate(female = as_factor(female)) %>%
+  mutate(female = relevel(female, ref = "female"))
+
+```
+
+```{r}
+gss2018 <- gss2018 %>%
+  mutate(ethnic = as_factor(ethnic)) %>%
+  mutate(ethnic = relevel(ethnic, ref = "White"))
+
+```
+
+
+```{r}
+lm7_2 <- lm(pincome ~ female + ethnic, data = gss2018)
+
+```
+
+
+```{r}
+library(tidymodels)
+tidy(lm7_2)
+glance(lm7_2)
+```
+
