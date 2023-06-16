@@ -90,7 +90,7 @@ gss2018 %>%
 ### Group means
 
 ```{r}
-# We use as.data.frame() got get more decimials
+# We use as.data.frame() to get more decimals
 
 gss2018 %>% 
   group_by(female) %>%
@@ -173,7 +173,7 @@ gss_small <- gss_small %>%
 Let's check out the group means for this smaller data set:
 
 ```{r}
-# We use as.data.frame() got get more decimials
+# We use as.data.frame() to get more decimals
 
 gss_small %>% 
   group_by(female) %>%
@@ -304,7 +304,7 @@ t.test(pincome ~ female, gss2018)
 ```
 
 ```{r}
-# We use as.data.frame() got get more decimials
+# We use as.data.frame() to get more decimals
 
 gss2018 %>% 
   group_by(female) %>%
@@ -352,11 +352,12 @@ knitr::kable(tidy(lm7_2))
 ```
 
 The intercept corresponds to the cell composed of both reference groups (White/Female). Each weight is the change associated that category membership.
-Each cell mean (excludeding combined reference group: white/female) is obtained by combining multiple regression weights.
+Each cell mean (excluding combined reference group: white/female) is obtained by combining multiple regression weights.
 
 ```{r}
 #| include: false
-# We use as.data.frame() got get more decimials
+# We use as.data.frame() to get more decimals
+
 cell_means <- gss2018 %>% 
   group_by(female, ethnic) %>%
   summarise(pincome_mean = mean(pincome)) %>%
@@ -387,7 +388,8 @@ ggplot(data = cell_means,
 
 ```{r}
 #| eval: false
-# We use as.data.frame() got get more decimials
+# We use as.data.frame() to get more decimals
+
 cell_means <- gss2018 %>% 
   group_by(female, ethnic) %>%
   summarise(pincome_mean = mean(pincome)) %>%
