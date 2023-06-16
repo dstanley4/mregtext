@@ -13,7 +13,6 @@ The following CRAN packages must be installed:
 | tidymodels             |
 
 
-
 ## Page 118 Single Categorical Predictor
 
 ```{r}
@@ -387,7 +386,7 @@ ggplot(data = cell_means,
 
 
 ```{r}
-#| eval: false
+#| eval: true
 # We use as.data.frame() to get more decimals
 
 cell_means <- gss2018 %>% 
@@ -400,7 +399,7 @@ print(cell_means)
 
 
 ```{r}
-#| eval: false
+#| eval: true
 cell_means <- cell_means %>%
   unite("cell_label", female, ethnic)
 
