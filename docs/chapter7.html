@@ -95,6 +95,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -216,6 +218,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#page-120-single-categorical-t-test" id="toc-page-120-single-categorical-t-test" class="nav-link" data-scroll-target="#page-120-single-categorical-t-test"><span class="header-section-number">7.3</span> Page 120 Single Categorical t-test</a></li>
   <li><a href="#page-122-multiple-categorical-predictor" id="toc-page-122-multiple-categorical-predictor" class="nav-link" data-scroll-target="#page-122-multiple-categorical-predictor"><span class="header-section-number">7.4</span> Page 122 Multiple Categorical Predictor</a></li>
+  <li><a href="#page-125-two-categorical-predictors-ancova" id="toc-page-125-two-categorical-predictors-ancova" class="nav-link" data-scroll-target="#page-125-two-categorical-predictors-ancova"><span class="header-section-number">7.5</span> Page 125 Two Categorical Predictors (ANCOVA)</a></li>
+  <li><a href="#page-126-one-continuous-two-categorical-predictors" id="toc-page-126-one-continuous-two-categorical-predictors" class="nav-link" data-scroll-target="#page-126-one-continuous-two-categorical-predictors"><span class="header-section-number">7.6</span> Page 126 One Continuous Two Categorical Predictors</a></li>
   </ul>
 </nav>
     </div>
@@ -808,6 +812,339 @@ mean in group female   mean in group male
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="page-125-two-categorical-predictors-ancova" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="page-125-two-categorical-predictors-ancova"><span class="header-section-number">7.5</span> Page 125 Two Categorical Predictors (ANCOVA)</h2>
+<p>Notice the fund column in the glimpse output. Notice that is a chr column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">sort</span>(<span class="fu">names</span>(gss2018))) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,315
+Columns: 28
+$ age        &lt;dbl&gt; 43, 74, 42, 63, 71, 67, 59, 43, 62, 55, 59, 34, 61, 44, 41,…
+$ attend     &lt;dbl&gt; 5, 2, 2, 6, 8, 4, 7, 7, 0, 2, 4, 5, 0, 3, 0, 7, 1, 0, 4, 5,…
+$ cappunish  &lt;chr&gt; "yes", "no", "yes", "no", "no", "yes", "yes", "yes", "yes",…
+$ childs     &lt;dbl&gt; 0, 3, 2, 2, 0, 2, 6, 0, 4, 2, 2, 3, 2, 2, 2, 4, 0, 2, 2, 0,…
+$ civliberty &lt;dbl&gt; 12, 11, 0, 0, 12, 12, 10, 6, 0, 0, 12, 0, 5, 4, 0, 9, 0, 3,…
+$ cohort     &lt;dbl&gt; 1975, 1944, 1976, 1955, 1947, 1951, 1959, 1975, 1956, 1963,…
+$ confidence &lt;dbl&gt; 0, 10, 3, 3, 7, 1, 4, 2, 1, 4, 4, 1, 1, 3, 3, 1, 0, 3, 2, 3…
+$ educate    &lt;dbl&gt; 14, 10, 16, 16, 18, 16, 13, 12, 8, 12, 19, 14, 13, 16, 12, …
+$ ethnic     &lt;fct&gt; White, White, Latinx, White, AfricanAmerican, White, Africa…
+$ female     &lt;fct&gt; male, female, male, female, male, female, female, male, fem…
+$ fincome    &lt;dbl&gt; 11, 12, 12, 13, 10, 10, 10, 12, 5, 12, 12, 11, 11, 12, 2, 1…
+$ fund       &lt;chr&gt; "moderate", "moderate", "liberal", "liberal", "moderate", "…
+$ id         &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …
+$ latinx     &lt;chr&gt; "no", "no", "yes", "no", "no", "no", "no", "no", "no", "no"…
+$ legalmarij &lt;chr&gt; NA, "no", "yes", "no", "no", NA, "yes", "yes", "yes", "yes"…
+$ lifesatis  &lt;dbl&gt; NA, 87.91, NA, 78.23, 77.39, NA, 72.31, 80.96, NA, 71.21, N…
+$ marital    &lt;dbl&gt; 4, 3, 1, 1, 3, 2, 3, 4, 2, 1, 3, 3, 3, 1, 4, 2, 1, 1, 3, 4,…
+$ occprest   &lt;dbl&gt; 47, 22, 61, 59, 53, 53, 48, 35, 35, 39, 72, 35, 45, 72, 28,…
+$ owngun     &lt;chr&gt; "no", "no", "no", "no", "yes", "yes", "no", "no", "no", "no…
+$ partyaff   &lt;dbl&gt; 6, 3, 5, 3, 7, 3, 1, 6, 4, 2, 7, 2, 2, 1, 5, 4, 3, 4, 2, 5,…
+$ pincome    &lt;dbl&gt; 11, 0, 22, 23, 0, 0, 12, 17, 2, 22, 23, 12, 0, 22, 0, 9, 20…
+$ polviews   &lt;dbl&gt; 6, 4, 5, 4, 7, 3, 4, 5, 4, 4, 6, 4, 4, 3, 2, 5, 2, 6, 2, 4,…
+$ race       &lt;chr&gt; "White", "White", "White", "White", "AfricanAmerican", "Whi…
+$ relig      &lt;dbl&gt; 1, 2, 6, 1, 2, 2, 1, 2, 6, 1, 2, 1, 2, 2, 6, 2, 6, 4, 1, 2,…
+$ sei        &lt;dbl&gt; 65.30, 14.80, 83.40, 69.30, 68.60, 69.30, 24.20, 23.70, 21.…
+$ spanking   &lt;dbl&gt; 2, NA, 2, 3, NA, 3, NA, NA, 1, 2, 3, NA, 3, NA, 3, 2, 3, 3,…
+$ volunteer  &lt;dbl&gt; 1, 1, 1, 3, 3, 1, 3, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 5, 1,…
+$ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3, 1, …</code></pre>
+</div>
+</div>
+<p>We convert it to factor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fund =</span> <span class="fu">as_factor</span>(fund))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The we check out the levels of that factor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(fund) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fct_count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  f                  n
+  &lt;fct&gt;          &lt;int&gt;
+1 moderate         869
+2 liberal          787
+3 fundamentalist   539
+4 none             120</code></pre>
+</div>
+</div>
+<p>We see there are four levels to this factor: moderate, liberal, fundamentalist, none. We also see how many people are at each level.</p>
+<p>But we want there to be only two levels: fundamentalist, not_fundamentalist. How do we do that? We collapse moderate, liberal, none into non_fundamentalist.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fund =</span> <span class="fu">fct_collapse</span>(fund,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">not_fundamentalist =</span> <span class="fu">c</span>(<span class="st">"moderate"</span>,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">"liberal"</span>,</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">"none"</span>) ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we check the levels of our factor and we can see it worked. The number of people is the same for fundamentalist, 539 people, and all the other groups have been collapsed into a single category called not_fundamentalist with 1776 people.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(fund) <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fct_count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  f                      n
+  &lt;fct&gt;              &lt;int&gt;
+1 not_fundamentalist  1776
+2 fundamentalist       539</code></pre>
+</div>
+</div>
+<p>We can no use fund as predictor that simply indicates fundamentalist or not. We are going to use a treatment contrast for this analysis. Therefore, we need to see the reference group. We set the reference group (i.e., the group that will have it’s mean represented by the intercept) as the non_fundamentalist group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fund =</span> <span class="fu">relevel</span>(fund, <span class="at">ref =</span> <span class="st">"not_fundamentalist"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Recall we set “female” the as the reference group for the female variable previously:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">as_factor</span>(female)) <span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">relevel</span>(female, <span class="at">ref =</span> <span class="st">"female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we create out linear model predicting FAMILY income represented by fincome. We have two categorical predictors: fund and female. We also have one numerical predictor, educate, which indicates years of education.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>lm7_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fincome <span class="sc">~</span> fund <span class="sc">+</span> female, <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see the regression weights with tidy():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">10.9768286</td>
+<td style="text-align: right;">0.0684558</td>
+<td style="text-align: right;">160.349032</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fundfundamentalist</td>
+<td style="text-align: right;">-0.2120114</td>
+<td style="text-align: right;">0.1099137</td>
+<td style="text-align: right;">-1.928889</td>
+<td style="text-align: right;">0.0538669</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">femalemale</td>
+<td style="text-align: right;">0.2026089</td>
+<td style="text-align: right;">0.0933808</td>
+<td style="text-align: right;">2.169705</td>
+<td style="text-align: right;">0.0301307</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can see the confidence intervals for those weights weights with confint():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm7_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         2.5 %       97.5 %
+(Intercept)        10.84258737 11.111069911
+fundfundamentalist -0.42755123  0.003528386
+femalemale          0.01948994  0.385727833</code></pre>
+</div>
+</div>
+<p>And the overall summary info with glance(). The <span class="math inline">\(R^2\)</span> value indicates very little variance in family income is accounted for (&lt; 1%) with this model. So although we have weights - the model doesn’t seem to do much.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.0038381</td>
+<td style="text-align: right;">0.0029764</td>
+<td style="text-align: right;">2.231792</td>
+<td style="text-align: right;">4.453991</td>
+<td style="text-align: right;">0.011732</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">-5141.835</td>
+<td style="text-align: right;">10291.67</td>
+<td style="text-align: right;">10314.66</td>
+<td style="text-align: right;">11515.83</td>
+<td style="text-align: right;">2312</td>
+<td style="text-align: right;">2315</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="page-126-one-continuous-two-categorical-predictors" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="page-126-one-continuous-two-categorical-predictors"><span class="header-section-number">7.6</span> Page 126 One Continuous Two Categorical Predictors</h2>
+<p>Now we add education (years of education) as a continuous predictor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>lm7_4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fincome <span class="sc">~</span> fund <span class="sc">+</span> female <span class="sc">+</span> educate, <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see the regression weights with tidy():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">7.9564748</td>
+<td style="text-align: right;">0.2202198</td>
+<td style="text-align: right;">36.1296903</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fundfundamentalist</td>
+<td style="text-align: right;">-0.0364600</td>
+<td style="text-align: right;">0.1060401</td>
+<td style="text-align: right;">-0.3438321</td>
+<td style="text-align: right;">0.7310038</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">femalemale</td>
+<td style="text-align: right;">0.2264217</td>
+<td style="text-align: right;">0.0895051</td>
+<td style="text-align: right;">2.5297064</td>
+<td style="text-align: right;">0.0114818</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">educate</td>
+<td style="text-align: right;">0.2161229</td>
+<td style="text-align: right;">0.0150425</td>
+<td style="text-align: right;">14.3674995</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can see the confidence intervals for those weights weights with confint():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm7_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         2.5 %    97.5 %
+(Intercept)         7.52462567 8.3883240
+fundfundamentalist -0.24440363 0.1714837
+femalemale          0.05090294 0.4019404
+educate             0.18662471 0.2456211</code></pre>
+</div>
+</div>
+<p>And the overall summary info with glance():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.0855219</td>
+<td style="text-align: right;">0.0843348</td>
+<td style="text-align: right;">2.138796</td>
+<td style="text-align: right;">72.0415</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-5042.804</td>
+<td style="text-align: right;">10095.61</td>
+<td style="text-align: right;">10124.34</td>
+<td style="text-align: right;">10571.55</td>
+<td style="text-align: right;">2311</td>
+<td style="text-align: right;">2315</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 

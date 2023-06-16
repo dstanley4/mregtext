@@ -418,3 +418,165 @@ ggplot(data = cell_means,
                                    hjust = 1))  
 
 ```
+
+
+## Page 125 Two Categorical Predictors (ANCOVA)
+
+Notice the fund column in the glimpse output. Notice that is a chr column.
+
+```{r}
+gss2018 %>%
+  select(sort(names(gss2018))) %>%
+  glimpse()
+```
+
+We convert it to factor:
+
+```{r}
+gss2018 <- gss2018 %>%
+  mutate(fund = as_factor(fund))
+```
+
+The we check out the levels of that factor:
+
+```{r}
+gss2018 %>%
+  pull(fund) %>%
+  fct_count()
+```
+
+
+
+We see there are four levels to this factor: moderate, liberal, fundamentalist, none. We also see how many people are at each level.
+
+But we want there to be only two levels: fundamentalist, not_fundamentalist. How do we do that? We collapse moderate, liberal, none into non_fundamentalist.
+
+```{r}
+gss2018 <- gss2018 %>%
+  mutate(fund = fct_collapse(fund,
+                             not_fundamentalist = c("moderate",
+                                                    "liberal",
+                                                    "none") ) )
+```
+
+Now we check the levels of our factor and we can see it worked. The number of people is the same for fundamentalist, 539 people, and all the other groups have been collapsed into a single category called not_fundamentalist with 1776 people.
+
+
+```{r}
+gss2018 %>%
+  pull(fund) %>%
+  fct_count()
+```
+
+We can no use fund as predictor that simply indicates fundamentalist or not. We are going to use a treatment contrast for this analysis. Therefore, we need to see the reference group. We set the reference group (i.e., the group that will have it's mean represented by the intercept) as the non_fundamentalist group.
+
+```{r}
+gss2018 <- gss2018 %>%
+  mutate(fund = relevel(fund, ref = "not_fundamentalist"))
+```
+
+Recall we set "female" the as the reference group for the female variable previously:
+
+```{r}
+#| eval: false
+gss2018 <- gss2018 %>%
+  mutate(female = as_factor(female)) %>%
+  mutate(female = relevel(female, ref = "female"))
+
+```
+
+
+
+Now we create out linear model predicting FAMILY income represented by fincome. We have two categorical predictors: fund and female. We also have one numerical predictor, educate, which indicates years of education.
+
+```{r}
+lm7_3 <- lm(fincome ~ fund + female, data = gss2018)
+```
+
+We can see the regression weights with tidy():
+
+```{r}
+#| eval: false
+
+library(tidymodels)
+
+tidy(lm7_3)
+```
+
+```{r}
+#| echo: false
+library(tidymodels)
+
+knitr::kable(tidy(lm7_3))
+```
+
+We can see the confidence intervals for those weights weights with confint():
+
+```{r}
+confint(lm7_3)
+```
+
+And the overall summary info with glance(). The $R^2$ value indicates very little variance in family income is accounted for (< 1%) with this model. So although we have weights - the model doesn't seem to do much.
+
+
+```{r}
+#| eval: false
+glance(lm7_3)
+```
+
+```{r}
+#| echo: false
+knitr::kable(glance(lm7_3))
+```
+
+
+## Page 126 One Continuous Two Categorical Predictors
+
+Now we add education (years of education) as a continuous predictor:
+
+```{r}
+lm7_4 <- lm(fincome ~ fund + female + educate, data = gss2018)
+```
+
+We can see the regression weights with tidy():
+
+```{r}
+#| eval: false
+
+library(tidymodels)
+
+tidy(lm7_4)
+```
+
+```{r}
+#| echo: false
+library(tidymodels)
+
+knitr::kable(tidy(lm7_4))
+```
+
+We can see the confidence intervals for those weights weights with confint():
+
+```{r}
+confint(lm7_4)
+```
+
+And the overall summary info with glance():
+
+
+```{r}
+#| eval: false
+glance(lm7_4)
+```
+
+```{r}
+#| echo: false
+knitr::kable(glance(lm7_4))
+```
+
+
+
+
+
+
+
