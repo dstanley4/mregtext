@@ -121,17 +121,6 @@ knitr::kable(tidy(lm7_1))
 ```
 
 
-```{r}
-#| eval: false
-ggplot(data = gss2018,
-       mapping = aes(x = female,
-                     y = pincome)) +
-  stat_summary(fun = "mean",
-               geom="bar") +
-  scale_y_continuous(breaks = seq(0, 15)) +
-  theme_classic(12)
-```
-
 
 ```{r}
 #| echo: false
@@ -147,6 +136,18 @@ ggplot(data = gss2018,
   theme_classic(12)
 ```
 
+
+
+```{r}
+#| eval: false
+ggplot(data = gss2018,
+       mapping = aes(x = female,
+                     y = pincome)) +
+  stat_summary(fun = "mean",
+               geom="bar") +
+  scale_y_continuous(breaks = seq(0, 15)) +
+  theme_classic(12)
+```
 
 ### Explanation Part 1: Fewer Cases
 
@@ -204,19 +205,6 @@ knitr::kable(tidy(lm7_small))
 
 
 ```{r}
-#| eval: false
-
-ggplot(data = gss_small,
-       mapping = aes(x = female,
-                     y = pincome)) +
-  stat_summary(fun = mean,
-               geom="bar") +
-  scale_y_continuous(breaks = seq(0, 20)) +
-  theme_classic(12)
-```
-
-
-```{r}
 #| echo: false
 
 ggplot(data = gss_small,
@@ -226,6 +214,20 @@ ggplot(data = gss_small,
                geom="bar") +
   annotate(geom = "text", label = "8.166667", x= 1, y = 8.221350+.5) +
   annotate(geom = "text", label = "8.166667 + 7.958333 = 16.125", x= 2, y = 8.221350+7.958333+.5) +
+  scale_y_continuous(breaks = seq(0, 20)) +
+  theme_classic(12)
+```
+
+
+
+```{r}
+#| eval: false
+
+ggplot(data = gss_small,
+       mapping = aes(x = female,
+                     y = pincome)) +
+  stat_summary(fun = mean,
+               geom="bar") +
   scale_y_continuous(breaks = seq(0, 20)) +
   theme_classic(12)
 ```
@@ -266,18 +268,6 @@ knitr::kable(tidy(lm7_numeric_small))
 ```
 
 
-```{r}
-#| eval: false
-
-ggplot(data = gss_numeric_small,
-       mapping = aes(x = reference_female,
-                     y = pincome)) +
-  stat_summary(fun = mean,
-               geom="bar") +
-  scale_y_continuous(breaks = seq(0, 20)) +
-  theme_classic(12)
-```
-
 
 ```{r}
 #| echo: false
@@ -293,6 +283,18 @@ ggplot(data = gss_numeric_small,
   theme_classic(12)
 ```
 
+
+```{r}
+#| eval: false
+
+ggplot(data = gss_numeric_small,
+       mapping = aes(x = reference_female,
+                     y = pincome)) +
+  stat_summary(fun = mean,
+               geom="bar") +
+  scale_y_continuous(breaks = seq(0, 20)) +
+  theme_classic(12)
+```
 
 ## Page 120 Single Categorical t-test
 
@@ -338,29 +340,35 @@ lm7_2 <- lm(pincome ~ female + ethnic, data = gss2018)
 
 
 ```{r}
+#| eval: false
 library(tidymodels)
 tidy(lm7_2)
 ```
 
+```{r}
+#| echo: false
+library(tidymodels)
+knitr::kable(tidy(lm7_2))
+```
+
+The intercept corresponds to the cell composed of both reference groups (White/Female). Each weight is the change associated that category membership.
+Each cell mean (excludeding combined reference group: white/female) is obtained by combining multiple regression weights.
 
 ```{r}
-#| echho: false
+#| include: false
 # We use as.data.frame() got get more decimials
 cell_means <- gss2018 %>% 
   group_by(female, ethnic) %>%
   summarise(pincome_mean = mean(pincome)) %>%
   as.data.frame()
 
-print(cell_means)
 ```
 
 
 ```{r}
-#| echo: false
+#| include: false
 cell_means <- cell_means %>%
   unite("cell_label", female, ethnic)
-
-print(cell_means)
 ```
 
 ```{r}
