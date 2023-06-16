@@ -362,12 +362,14 @@ cell_means <- cell_means %>%
 
 print(cell_means)
 ```
+
 ```{r}
 ggplot(data = cell_means,
        mapping = aes(x = cell_label,
                      y = pincome_mean)) +
   geom_col() +
-  scale_y_continuous(breaks = seq(0, 16, by = 1)) +
+  scale_y_continuous(breaks = seq(0, 16, by = 1)) + 
+  coord_cartesian(ylim = c(0, 15)) +
   theme(axis.text.x = element_text(angle = 60, 
                                    hjust = 1))  
 
