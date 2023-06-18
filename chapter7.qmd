@@ -574,9 +574,60 @@ glance(lm7_4)
 knitr::kable(glance(lm7_4))
 ```
 
+## Page 129 Predicted Means
+
+The textbook may have used an approach that leads to incorrect values due to the way factors are handled.
+Put both levels of the the factors in the same data frame for prediction.
+Then explicity set the factors as before. Otherwise the reference group may get set differenctly than the orignal analysis and this can cause problems (and incorrect predictions).
+
+```{r}
+library(tidyverse)
+
+predict4values <- data.frame(fund = c("not_fundamentalist",
+                                      "not_fundamentalist",
+                                      "fundamentalist",
+                                      "fundamentalist"),
+                             female =  c("male",
+                                         "female",
+                                         "male",
+                                         "female"),
+                             educate = 12)
 
 
+predict4values <- predict4values %>%
+  mutate(fund = as_factor(fund)) %>%
+  mutate(fund = relevel(fund, ref = "not_fundamentalist")) %>%
+  mutate(female = as_factor(female)) %>%
+  mutate(female = relevel(female, ref = "female"))
+
+print(predict4values)
+```
+
+We will now create predicted value for the predictor values above:
+
+```{r}
+predicted_fincome <- predict(lm7_4, predict4values)
 
 
+predict4values <- predict4values %>%
+  mutate(predicted_mean_adj_4_edu = predicted_fincome)
+
+print(predict4values)
+```
+
+
+```{r}
+actual_means <- gss2018 %>%
+  group_by(fund, female) %>%
+  summarise(group_mean = mean(fincome))
+
+print(actual_means)
+```
+
+Now let's combine them into a single table:
+
+```{r}
+full_join(predict4values, actual_means)
+```
 
 
