@@ -11,3 +11,128 @@ The following CRAN packages must be installed:
 | janitor                |
 | skimr                  |
 | tidymodels             |
+| survey             |
+
+
+
+
+## Page 140
+
+```{r}
+#| eval: false
+
+library(usethis) # use_github_file 
+library(tidyverse) # read_csv()
+library(janitor) # clean_names() 
+library(skimr) # skim()
+library(tidymodels) #tidy() glance()
+library(survey) 
+```
+
+```{r}
+#| include: false
+
+library(usethis) # use_github_file 
+library(tidyverse) # read_csv()
+library(janitor) # clean_names() 
+library(skimr) # skim()
+library(tidymodels) #tidy() glance()
+library(survey) 
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/MultiLevel.csv",
+                save_as = "data_multilevel.csv")
+
+data_multilevel <- read_csv("data_multilevel.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/MultiLevel.csv",
+                save_as = "data_multilevel.csv")
+```
+
+### Load data from your computer
+
+```{r}
+#| eval: false
+data_multilevel <- read_csv("data_multilevel.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+```{r}
+data_multilevel %>% 
+  glimpse()  
+```
+
+
+### View data
+
+Remember you can always use the view() command in R to see the data in a spreadsheet:
+
+```{r}
+#| eval: false
+view(data_multilevel)
+```
+
+## Analysis
+
+### Specify Design
+
+We indicate town is a grouping variable (idcomm which I think stands for id community).
+
+```{r}
+clus_multilevel <- svydesign(ids = ~idcomm,
+                             data = data_multilevel)
+
+summary(clus_multilevel)
+
+```
+
+### Calculate Mean/SE 
+
+
+In the calculation we below we us the is.na() command. This provides a vector of TRUE/FALSE non-missing values. TRUE indicates missing. We using an exclamation mark in from to the INVERT the TRUE/FALSE. That means, TRUE indicates NOT missing after we using the exclamation mark. Then we use the sum() command to add up the TRUEs. Each TRUE counts as 1 so this provides us with a count of non-missing values. We could have used the n() command but this doesn't know if there are missing values and can produce incorrect results.
+
+
+```{r}
+data_multilevel %>%
+  summarise(n = sum(!is.na(commlength)),
+            mean = mean(commlength),
+            SD= sd(commlength),
+            SE = SD/sqrt(n)) %>%
+  as.data.frame()
+
+```
+
+Consider the SE calculation here. It is the usual one.
+
+$$
+SE = \frac{SD}{\sqrt{n}}= \frac{22.44965}{\sqrt{9859}} = 0.2260962
+$$
+
+
+### Calculate Mean/SE Incorporting Cluster Dependence
+
+```{r}
+svymean(~commlength,
+        design = clus_multilevel)
+
+```
+
+
+Notice how the SE is much larger when clustering is taken into account. When the clusters are taken into account it means that we realize that within a clusters each person does not provide information independent of the other people. So from a statistical perspective this makes the effective sample size smaller when calculating SE. In this data set the 9859 people (with dependence due to clusters) are equivalent to 1796.219 independent people - see the calculation below. Note though this is not the actual calculation "under the hood", it is just a means of illustrating what we are compensating for when we take clusters into account. The lower effective sample size (due to a lack of independence) results in a larger Standard Error (0.5297 vs 0.2261).
+
+$$
+SE = \frac{SD}{\sqrt{n}}= \frac{22.44965}{\sqrt{1796.219}} = 0.5296999
+$$
+
+
+
+
