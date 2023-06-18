@@ -205,19 +205,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><span class="header-section-number">8.1</span> Required packages</a></li>
-  <li><a href="#page-140" id="toc-page-140" class="nav-link" data-scroll-target="#page-140"><span class="header-section-number">8.2</span> Page 140</a>
+  <li><a href="#page-140-independencedependence-with-means" id="toc-page-140-independencedependence-with-means" class="nav-link" data-scroll-target="#page-140-independencedependence-with-means"><span class="header-section-number">8.2</span> Page 140 Independence/Dependence with Means</a>
   <ul>
   <li><a href="#obtain-data-and-save-it-to-your-computer" id="toc-obtain-data-and-save-it-to-your-computer" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer"><span class="header-section-number">8.2.1</span> Obtain data and save it to your computer</a></li>
   <li><a href="#load-data-from-your-computer" id="toc-load-data-from-your-computer" class="nav-link" data-scroll-target="#load-data-from-your-computer"><span class="header-section-number">8.2.2</span> Load data from your computer</a></li>
   <li><a href="#inspect-data" id="toc-inspect-data" class="nav-link" data-scroll-target="#inspect-data"><span class="header-section-number">8.2.3</span> Inspect data</a></li>
   <li><a href="#view-data" id="toc-view-data" class="nav-link" data-scroll-target="#view-data"><span class="header-section-number">8.2.4</span> View data</a></li>
+  <li><a href="#specify-design" id="toc-specify-design" class="nav-link" data-scroll-target="#specify-design"><span class="header-section-number">8.2.5</span> Specify Design</a></li>
+  <li><a href="#calculate-meanse" id="toc-calculate-meanse" class="nav-link" data-scroll-target="#calculate-meanse"><span class="header-section-number">8.2.6</span> Calculate Mean/SE</a></li>
+  <li><a href="#calculate-meanse-incorporting-cluster-dependence" id="toc-calculate-meanse-incorporting-cluster-dependence" class="nav-link" data-scroll-target="#calculate-meanse-incorporting-cluster-dependence"><span class="header-section-number">8.2.7</span> Calculate Mean/SE Incorporting Cluster Dependence</a></li>
   </ul></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis"><span class="header-section-number">8.3</span> Analysis</a>
+  <li><a href="#page-142-independencedependence-with-regression" id="toc-page-142-independencedependence-with-regression" class="nav-link" data-scroll-target="#page-142-independencedependence-with-regression"><span class="header-section-number">8.3</span> Page 142 Independence/Dependence with Regression</a>
   <ul>
-  <li><a href="#specify-design" id="toc-specify-design" class="nav-link" data-scroll-target="#specify-design"><span class="header-section-number">8.3.1</span> Specify Design</a></li>
-  <li><a href="#calculate-meanse" id="toc-calculate-meanse" class="nav-link" data-scroll-target="#calculate-meanse"><span class="header-section-number">8.3.2</span> Calculate Mean/SE</a></li>
-  <li><a href="#calculate-meanse-incorporting-cluster-dependence" id="toc-calculate-meanse-incorporting-cluster-dependence" class="nav-link" data-scroll-target="#calculate-meanse-incorporting-cluster-dependence"><span class="header-section-number">8.3.3</span> Calculate Mean/SE Incorporting Cluster Dependence</a></li>
+  <li><a href="#regular-regression-no-adjustment" id="toc-regular-regression-no-adjustment" class="nav-link" data-scroll-target="#regular-regression-no-adjustment"><span class="header-section-number">8.3.1</span> Regular Regression No Adjustment</a></li>
+  <li><a href="#dependence-adjusted-regression" id="toc-dependence-adjusted-regression" class="nav-link" data-scroll-target="#dependence-adjusted-regression"><span class="header-section-number">8.3.2</span> Dependence Adjusted Regression</a></li>
+  <li><a href="#comparing-results" id="toc-comparing-results" class="nav-link" data-scroll-target="#comparing-results"><span class="header-section-number">8.3.3</span> Comparing results</a>
+  <ul>
+  <li><a href="#regular-regression---see-se-for-weights" id="toc-regular-regression---see-se-for-weights" class="nav-link" data-scroll-target="#regular-regression---see-se-for-weights"><span class="header-section-number">8.3.3.1</span> Regular regression - see SE for weights</a></li>
+  <li><a href="#dependence-adjusted---see-se-for-weights" id="toc-dependence-adjusted---see-se-for-weights" class="nav-link" data-scroll-target="#dependence-adjusted---see-se-for-weights"><span class="header-section-number">8.3.3.2</span> Dependence Adjusted - see SE for weights</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#serial-correlation" id="toc-serial-correlation" class="nav-link" data-scroll-target="#serial-correlation"><span class="header-section-number">8.4</span> Serial Correlation</a></li>
   </ul>
 </nav>
     </div>
@@ -272,8 +280,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="page-140" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="page-140"><span class="header-section-number">8.2</span> Page 140</h2>
+<section id="page-140-independencedependence-with-means" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="page-140-independencedependence-with-means"><span class="header-section-number">8.2</span> Page 140 Independence/Dependence with Means</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis) <span class="co"># use_github_file </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># read_csv()</span></span>
@@ -328,11 +336,8 @@ $ disadvantage &lt;dbl&gt; -1.219, -1.219, -1.219, -1.219, -1.219, -1.219, -1.21
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(data_multilevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-</section>
-<section id="analysis" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="analysis"><span class="header-section-number">8.3</span> Analysis</h2>
-<section id="specify-design" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="specify-design"><span class="header-section-number">8.3.1</span> Specify Design</h3>
+<section id="specify-design" class="level3" data-number="8.2.5">
+<h3 data-number="8.2.5" class="anchored" data-anchor-id="specify-design"><span class="header-section-number">8.2.5</span> Specify Design</h3>
 <p>We indicate town is a grouping variable (idcomm which I think stands for id community).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>clus_multilevel <span class="ot">&lt;-</span> <span class="fu">svydesign</span>(<span class="at">ids =</span> <span class="sc">~</span>idcomm,</span>
@@ -356,8 +361,8 @@ Data variables:
 </div>
 </div>
 </section>
-<section id="calculate-meanse" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="calculate-meanse"><span class="header-section-number">8.3.2</span> Calculate Mean/SE</h3>
+<section id="calculate-meanse" class="level3" data-number="8.2.6">
+<h3 data-number="8.2.6" class="anchored" data-anchor-id="calculate-meanse"><span class="header-section-number">8.2.6</span> Calculate Mean/SE</h3>
 <p>In the calculation we below we us the is.na() command. This provides a vector of TRUE/FALSE non-missing values. TRUE indicates missing. We using an exclamation mark in from to the INVERT the TRUE/FALSE. That means, TRUE indicates NOT missing after we using the exclamation mark. Then we use the sum() command to add up the TRUEs. Each TRUE counts as 1 so this provides us with a count of non-missing values. We could have used the n() command but this doesn’t know if there are missing values and can produce incorrect results.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data_multilevel <span class="sc">%&gt;%</span></span>
@@ -376,8 +381,8 @@ Data variables:
 SE = \frac{SD}{\sqrt{n}}= \frac{22.44965}{\sqrt{9859}} = 0.2260962
 \]</span></p>
 </section>
-<section id="calculate-meanse-incorporting-cluster-dependence" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="calculate-meanse-incorporting-cluster-dependence"><span class="header-section-number">8.3.3</span> Calculate Mean/SE Incorporting Cluster Dependence</h3>
+<section id="calculate-meanse-incorporting-cluster-dependence" class="level3" data-number="8.2.7">
+<h3 data-number="8.2.7" class="anchored" data-anchor-id="calculate-meanse-incorporting-cluster-dependence"><span class="header-section-number">8.2.7</span> Calculate Mean/SE Incorporting Cluster Dependence</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>commlength,</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">design =</span> clus_multilevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -390,9 +395,337 @@ commlength 33.259 0.5297</code></pre>
 <p><span class="math display">\[
 SE = \frac{SD}{\sqrt{n}}= \frac{22.44965}{\sqrt{1796.219}} = 0.5296999
 \]</span></p>
-
-
 </section>
+</section>
+<section id="page-142-independencedependence-with-regression" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="page-142-independencedependence-with-regression"><span class="header-section-number">8.3</span> Page 142 Independence/Dependence with Regression</h2>
+<section id="regular-regression-no-adjustment" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="regular-regression-no-adjustment"><span class="header-section-number">8.3.1</span> Regular Regression No Adjustment</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lm8_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> male <span class="sc">+</span> married, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> data_multilevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm8_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">2.9309727</td>
+<td style="text-align: right;">0.0363492</td>
+<td style="text-align: right;">80.63368</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">malemale</td>
+<td style="text-align: right;">0.5187255</td>
+<td style="text-align: right;">0.0394160</td>
+<td style="text-align: right;">13.16028</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">marriedyes</td>
+<td style="text-align: right;">1.7475797</td>
+<td style="text-align: right;">0.0422214</td>
+<td style="text-align: right;">41.39084</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm8_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                2.5 %    97.5 %
+(Intercept) 2.8597208 3.0022247
+malemale    0.4414621 0.5959889
+marriedyes  1.6648171 1.8303423</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm8_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.1810082</td>
+<td style="text-align: right;">0.180842</td>
+<td style="text-align: right;">1.908896</td>
+<td style="text-align: right;">1089.154</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">-20361.91</td>
+<td style="text-align: right;">40731.81</td>
+<td style="text-align: right;">40760.6</td>
+<td style="text-align: right;">35914.12</td>
+<td style="text-align: right;">9856</td>
+<td style="text-align: right;">9859</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="dependence-adjusted-regression" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="dependence-adjusted-regression"><span class="header-section-number">8.3.2</span> Dependence Adjusted Regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>clus_multilevel <span class="ot">&lt;-</span> <span class="fu">svydesign</span>(<span class="at">ids =</span> <span class="sc">~</span>idcomm,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">data =</span> data_multilevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in svydesign.default(ids = ~idcomm, data = data_multilevel): No weights
+or probabilities supplied, assuming equal probability</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clus_multilevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 - level Cluster Sampling design (with replacement)
+With (99) clusters.
+svydesign(ids = ~idcomm, data = data_multilevel)
+Probabilities:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      1       1       1       1       1       1 
+Data variables:
+ [1] "idcomm"       "id"           "male"         "white"        "married"     
+ [6] "age"          "educate"      "income"       "commlength"   "commtrust"   
+[11] "trust"        "pop2020"      "relighomog"   "disadvantage"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lm8_2 <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(income <span class="sc">~</span> male <span class="sc">+</span> married, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">design =</span> clus_multilevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm8_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">2.9309727</td>
+<td style="text-align: right;">0.0406152</td>
+<td style="text-align: right;">72.16442</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">malemale</td>
+<td style="text-align: right;">0.5187255</td>
+<td style="text-align: right;">0.0420681</td>
+<td style="text-align: right;">12.33060</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">marriedyes</td>
+<td style="text-align: right;">1.7475797</td>
+<td style="text-align: right;">0.0441621</td>
+<td style="text-align: right;">39.57192</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm8_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                2.5 %    97.5 %
+(Intercept) 2.8503522 3.0115933
+malemale    0.4352209 0.6022301
+marriedyes  1.6599186 1.8352408</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm8_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">null.deviance</th>
+<th style="text-align: right;">df.null</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">43851.62</td>
+<td style="text-align: right;">9858</td>
+<td style="text-align: right;">11183.24</td>
+<td style="text-align: right;">35941.71</td>
+<td style="text-align: right;">35914.12</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">9859</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="comparing-results" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="comparing-results"><span class="header-section-number">8.3.3</span> Comparing results</h3>
+<p>In the two outputs below notice the standard error is higher in the Dependence Adjusted results. This follows the same principle as when we dealt with means: when dependence is taken into account the standard error is larger. This correspondingly affects p-values - making them larger (further from 0) but more accurate.</p>
+<section id="regular-regression---see-se-for-weights" class="level4" data-number="8.3.3.1">
+<h4 data-number="8.3.3.1" class="anchored" data-anchor-id="regular-regression---see-se-for-weights"><span class="header-section-number">8.3.3.1</span> Regular regression - see SE for weights</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm8_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">2.9309727</td>
+<td style="text-align: right;">0.0363492</td>
+<td style="text-align: right;">80.63368</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">malemale</td>
+<td style="text-align: right;">0.5187255</td>
+<td style="text-align: right;">0.0394160</td>
+<td style="text-align: right;">13.16028</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">marriedyes</td>
+<td style="text-align: right;">1.7475797</td>
+<td style="text-align: right;">0.0422214</td>
+<td style="text-align: right;">41.39084</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="dependence-adjusted---see-se-for-weights" class="level4" data-number="8.3.3.2">
+<h4 data-number="8.3.3.2" class="anchored" data-anchor-id="dependence-adjusted---see-se-for-weights"><span class="header-section-number">8.3.3.2</span> Dependence Adjusted - see SE for weights</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm8_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">2.9309727</td>
+<td style="text-align: right;">0.0406152</td>
+<td style="text-align: right;">72.16442</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">malemale</td>
+<td style="text-align: right;">0.5187255</td>
+<td style="text-align: right;">0.0420681</td>
+<td style="text-align: right;">12.33060</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">marriedyes</td>
+<td style="text-align: right;">1.7475797</td>
+<td style="text-align: right;">0.0441621</td>
+<td style="text-align: right;">39.57192</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="serial-correlation" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="serial-correlation"><span class="header-section-number">8.4</span> Serial Correlation</h2>
+
+
 </section>
 
 </main> <!-- /main -->

@@ -16,7 +16,7 @@ The following CRAN packages must be installed:
 
 
 
-## Page 140
+## Page 140 Independence/Dependence with Means
 
 ```{r}
 #| eval: false
@@ -81,8 +81,6 @@ Remember you can always use the view() command in R to see the data in a spreads
 view(data_multilevel)
 ```
 
-## Analysis
-
 ### Specify Design
 
 We indicate town is a grouping variable (idcomm which I think stands for id community).
@@ -135,4 +133,128 @@ $$
 
 
 
+## Page 142 Independence/Dependence with Regression
+
+### Regular Regression No Adjustment
+
+```{r}
+lm8_1 <- lm(income ~ male + married, 
+            data = data_multilevel)
+```
+
+
+```{r}
+#| eval: false
+tidy(lm8_1)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm8_1))
+```
+
+
+```{r}
+confint(lm8_1)
+```
+
+
+```{r}
+#| eval: false
+glance(lm8_1)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm8_1))
+
+```
+
+
+
+
+### Dependence Adjusted Regression
+
+
+
+```{r}
+clus_multilevel <- svydesign(ids = ~idcomm,
+                             data = data_multilevel)
+
+summary(clus_multilevel)
+
+```
+
+
+```{r}
+lm8_2 <- svyglm(income ~ male + married, 
+                design = clus_multilevel)
+```
+
+
+```{r}
+#| eval: false
+tidy(lm8_2)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm8_2))
+```
+
+
+```{r}
+confint(lm8_2)
+```
+
+
+```{r}
+#| eval: false
+glance(lm8_2)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm8_2))
+
+```
+
+### Comparing results
+
+In the two outputs below notice the standard error is higher in the Dependence Adjusted results. This follows the same principle as when we dealt with means: when dependence is taken into account the standard error is larger. This correspondingly affects p-values - making them larger (further from 0) but more accurate.
+
+#### Regular regression - see SE for weights
+
+```{r}
+#| eval: false
+tidy(lm8_1)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm8_1))
+```
+
+#### Dependence Adjusted - see SE for weights
+
+
+```{r}
+#| eval: false
+tidy(lm8_2)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm8_2))
+```
+
+## Serial Correlation
 
