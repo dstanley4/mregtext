@@ -221,6 +221,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#page-125-two-categorical-predictors-ancova" id="toc-page-125-two-categorical-predictors-ancova" class="nav-link" data-scroll-target="#page-125-two-categorical-predictors-ancova"><span class="header-section-number">7.5</span> Page 125 Two Categorical Predictors (ANCOVA)</a></li>
   <li><a href="#page-126-one-continuous-two-categorical-predictors" id="toc-page-126-one-continuous-two-categorical-predictors" class="nav-link" data-scroll-target="#page-126-one-continuous-two-categorical-predictors"><span class="header-section-number">7.6</span> Page 126 One Continuous Two Categorical Predictors</a></li>
   <li><a href="#page-129-predicted-means" id="toc-page-129-predicted-means" class="nav-link" data-scroll-target="#page-129-predicted-means"><span class="header-section-number">7.7</span> Page 129 Predicted Means</a></li>
+  <li><a href="#page-129-martial-status-and-family-income" id="toc-page-129-martial-status-and-family-income" class="nav-link" data-scroll-target="#page-129-martial-status-and-family-income"><span class="header-section-number">7.8</span> Page 129 Martial Status and Family Income</a></li>
+  <li><a href="#page-131-martial-status-family-income-education-age" id="toc-page-131-martial-status-family-income-education-age" class="nav-link" data-scroll-target="#page-131-martial-status-family-income-education-age"><span class="header-section-number">7.9</span> Page 131 Martial Status, Family Income, Education, Age</a></li>
+  <li><a href="#page-133-chapter-exercises" id="toc-page-133-chapter-exercises" class="nav-link" data-scroll-target="#page-133-chapter-exercises"><span class="header-section-number">7.10</span> Page 133 Chapter Exercises</a>
+  <ul>
+  <li><a href="#activate-packages" id="toc-activate-packages" class="nav-link" data-scroll-target="#activate-packages"><span class="header-section-number">7.10.1</span> Activate packages</a></li>
+  <li><a href="#obtain-data-and-save-it-to-your-computer-1" id="toc-obtain-data-and-save-it-to-your-computer-1" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer-1"><span class="header-section-number">7.10.2</span> Obtain data and save it to your computer</a>
+  <ul>
+  <li><a href="#load-data-from-your-computer-1" id="toc-load-data-from-your-computer-1" class="nav-link" data-scroll-target="#load-data-from-your-computer-1"><span class="header-section-number">7.10.2.1</span> Load data from your computer</a></li>
+  </ul></li>
+  <li><a href="#inspect-data-1" id="toc-inspect-data-1" class="nav-link" data-scroll-target="#inspect-data-1"><span class="header-section-number">7.10.3</span> Inspect data</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -399,10 +410,14 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 </section>
 <section id="regression-as-per-textbook" class="level3" data-number="7.2.6">
 <h3 data-number="7.2.6" class="anchored" data-anchor-id="regression-as-per-textbook"><span class="header-section-number">7.2.6</span> Regression (as per textbook)</h3>
+<p>Even though don’t specify it, the lm() command below use the treatment (or dummy) contrast. That is the default contrast that is used if we don’t indicate the contrast. Better practice would be to explicitly specify the contrast with the command that has been commented out.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lm7_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># options(contrasts = c("contr.treatment", "contr.poly"))</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>lm7_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pincome <span class="sc">~</span> female,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Use tidy() to see the weights:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -437,6 +452,7 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 </table>
 </div>
 </div>
+<p>Compare the weights to values in the graph:</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="chapter7_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
@@ -546,6 +562,7 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 </table>
 </div>
 </div>
+<p>Compare the weights to the values in the graph:</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="chapter7_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
@@ -638,6 +655,7 @@ $ watchtv    &lt;dbl&gt; 3, NA, 1, 1, NA, 8, NA, NA, 4, 2, 3, 3, 7, NA, 7, 5, 3,
 </table>
 </div>
 </div>
+<p>Comapre the weights to the values in the graph:</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="chapter7_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
@@ -1197,6 +1215,7 @@ educate             0.18662471 0.2456211</code></pre>
 4     fundamentalist female      12                 10.51349</code></pre>
 </div>
 </div>
+<p>Calculating the actual means:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>actual_means <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fund, female) <span class="sc">%&gt;%</span></span>
@@ -1217,7 +1236,7 @@ educate             0.18662471 0.2456211</code></pre>
 4 fundamentalist     male         10.9</code></pre>
 </div>
 </div>
-<p>Now let’s combine them into a single table:</p>
+<p>Now let’s combine predicted means and actual means into a single table. The full join command will make sure the values line up with the right rows when we combine the tables:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(predict4values, actual_means)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -1231,8 +1250,363 @@ educate             0.18662471 0.2456211</code></pre>
 4     fundamentalist female      12                 10.51349   10.80495</code></pre>
 </div>
 </div>
+</section>
+<section id="page-129-martial-status-and-family-income" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="page-129-martial-status-and-family-income"><span class="header-section-number">7.8</span> Page 129 Martial Status and Family Income</h2>
+<p>We select the maritial column and then glimpse it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(marital) <span class="sc">%&gt;%</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,315
+Columns: 1
+$ marital &lt;dbl&gt; 4, 3, 1, 1, 3, 2, 3, 4, 2, 1, 3, 3, 3, 1, 4, 2, 1, 1, 3, 4, 1,…</code></pre>
+</div>
+</div>
+<p>We see the values 1, 2, 3, 4. Not very helpful. We know that 1 = married, 2 = widowed, 3 = divorced or separated, 4 = never married. These numbers are ordinal - but the factor is really categorical and not ordinal. We fix this by turning the numbers into factors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="ot">&lt;-</span> gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">marital =</span> <span class="fu">as_factor</span>(marital)) <span class="sc">%&gt;%</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">marital =</span> <span class="fu">fct_recode</span>(marital,</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">married =</span> <span class="st">"1"</span>,</span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">widowed =</span> <span class="st">"2"</span>,</span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">div_sep =</span> <span class="st">"3"</span>,</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">never_married =</span> <span class="st">"4"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s see if it’s a factor that usings the new labels:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(marital) <span class="sc">%&gt;%</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,315
+Columns: 1
+$ marital &lt;fct&gt; never_married, div_sep, married, married, div_sep, widowed, di…</code></pre>
+</div>
+</div>
+<p>Now let’s see the number at each level of the factor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>gss2018 <span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(marital) <span class="sc">%&gt;%</span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fct_count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  f                 n
+  &lt;fct&gt;         &lt;int&gt;
+1 married         981
+2 widowed         199
+3 div_sep         472
+4 never_married   663</code></pre>
+</div>
+</div>
+<p>Now the regression:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>lm7_5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fincome <span class="sc">~</span> marital, <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use glance() to see the summary. Remember glance() is from the tidymodels package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.0712264</td>
+<td style="text-align: right;">0.0700207</td>
+<td style="text-align: right;">2.155449</td>
+<td style="text-align: right;">59.07578</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-5060.758</td>
+<td style="text-align: right;">10131.52</td>
+<td style="text-align: right;">10160.25</td>
+<td style="text-align: right;">10736.81</td>
+<td style="text-align: right;">2311</td>
+<td style="text-align: right;">2315</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Use tidy() to see the weights:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">11.6748216</td>
+<td style="text-align: right;">0.0688182</td>
+<td style="text-align: right;">169.647353</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maritalwidowed</td>
+<td style="text-align: right;">-0.9713040</td>
+<td style="text-align: right;">0.1675782</td>
+<td style="text-align: right;">-5.796123</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">maritaldiv_sep</td>
+<td style="text-align: right;">-0.8464318</td>
+<td style="text-align: right;">0.1207438</td>
+<td style="text-align: right;">-7.010145</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maritalnever_married</td>
+<td style="text-align: right;">-1.3972952</td>
+<td style="text-align: right;">0.1083671</td>
+<td style="text-align: right;">-12.894095</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can use confint() to see the CI’s on the weights:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm7_5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         2.5 %     97.5 %
+(Intercept)          11.539870 11.8097734
+maritalwidowed       -1.299923 -0.6426846
+maritaldiv_sep       -1.083209 -0.6096542
+maritalnever_married -1.609802 -1.1847884</code></pre>
+</div>
+</div>
+</section>
+<section id="page-131-martial-status-family-income-education-age" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="page-131-martial-status-family-income-education-age"><span class="header-section-number">7.9</span> Page 131 Martial Status, Family Income, Education, Age</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>lm7_6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fincome <span class="sc">~</span> marital <span class="sc">+</span> age <span class="sc">+</span> educate, <span class="at">data =</span> gss2018)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use glance() to see the summary. Remember glance() is from the tidymodels package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm7_6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.1441545</td>
+<td style="text-align: right;">0.1423012</td>
+<td style="text-align: right;">2.069991</td>
+<td style="text-align: right;">77.78339</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">-4966.104</td>
+<td style="text-align: right;">9946.207</td>
+<td style="text-align: right;">9986.437</td>
+<td style="text-align: right;">9893.746</td>
+<td style="text-align: right;">2309</td>
+<td style="text-align: right;">2315</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Use tidy() to see the weights:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm7_6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">9.1880161</td>
+<td style="text-align: right;">0.2635322</td>
+<td style="text-align: right;">34.864874</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maritalwidowed</td>
+<td style="text-align: right;">-0.6123468</td>
+<td style="text-align: right;">0.1747161</td>
+<td style="text-align: right;">-3.504810</td>
+<td style="text-align: right;">0.0004656</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">maritaldiv_sep</td>
+<td style="text-align: right;">-0.6918057</td>
+<td style="text-align: right;">0.1172288</td>
+<td style="text-align: right;">-5.901328</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maritalnever_married</td>
+<td style="text-align: right;">-1.4055785</td>
+<td style="text-align: right;">0.1140496</td>
+<td style="text-align: right;">-12.324279</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">-0.0068112</td>
+<td style="text-align: right;">0.0029634</td>
+<td style="text-align: right;">-2.298465</td>
+<td style="text-align: right;">0.0216243</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">educate</td>
+<td style="text-align: right;">0.2009513</td>
+<td style="text-align: right;">0.0145513</td>
+<td style="text-align: right;">13.809848</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can use confint() to see the CI’s on the weights:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm7_6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           2.5 %       97.5 %
+(Intercept)           8.67123167  9.704800598
+maritalwidowed       -0.95496372 -0.269729858
+maritaldiv_sep       -0.92169052 -0.461920943
+maritalnever_married -1.62922880 -1.181928290
+age                  -0.01262235 -0.001000059
+educate               0.17241630  0.229486281</code></pre>
+</div>
+</div>
+</section>
+<section id="page-133-chapter-exercises" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="page-133-chapter-exercises"><span class="header-section-number">7.10</span> Page 133 Chapter Exercises</h2>
+<section id="activate-packages" class="level3" data-number="7.10.1">
+<h3 data-number="7.10.1" class="anchored" data-anchor-id="activate-packages"><span class="header-section-number">7.10.1</span> Activate packages</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis) <span class="co"># use_github_file()</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># read_csv() </span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># clean_names() </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="obtain-data-and-save-it-to-your-computer-1" class="level3" data-number="7.10.2">
+<h3 data-number="7.10.2" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer-1"><span class="header-section-number">7.10.2</span> Obtain data and save it to your computer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/Opinion.csv"</span>,</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"opinion.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="load-data-from-your-computer-1" class="level4" data-number="7.10.2.1">
+<h4 data-number="7.10.2.1" class="anchored" data-anchor-id="load-data-from-your-computer-1"><span class="header-section-number">7.10.2.1</span> Load data from your computer</h4>
+<p>Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>opinion <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"opinion.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="inspect-data-1" class="level3" data-number="7.10.3">
+<h3 data-number="7.10.3" class="anchored" data-anchor-id="inspect-data-1"><span class="header-section-number">7.10.3</span> Inspect data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>opinion <span class="sc">%&gt;%</span> </span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,604
+Columns: 10
+$ id               &lt;dbl&gt; 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 20,…
+$ female           &lt;dbl&gt; 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1,…
+$ educate          &lt;dbl&gt; 18, 18, 16, 18, 18, 20, 20, 19, 15, 15, 15, 18, 16, 1…
+$ african_american &lt;dbl&gt; 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0,…
+$ other_ethnic     &lt;dbl&gt; 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,…
+$ latinx           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,…
+$ income           &lt;dbl&gt; 12, 10, 11, 6, 16, 13, 9, 3, 8, 14, 12, 19, 12, 16, 1…
+$ immigrant        &lt;dbl&gt; 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ same_opinions    &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0,…
+$ candidate_same   &lt;dbl&gt; 18.732189, 18.358946, 21.590763, 19.313181, 7.678196,…</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

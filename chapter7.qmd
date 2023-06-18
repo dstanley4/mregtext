@@ -102,11 +102,16 @@ gss2018 %>%
 
 ### Regression (as per textbook)
 
+Even though don't specify it, the lm() command below use the treatment (or dummy) contrast. That is the default contrast that is used if we don't indicate the contrast. Better practice would be to explicitly specify the contrast with the command that has been commented out.
+
 ```{r}
+# options(contrasts = c("contr.treatment", "contr.poly"))
+
 lm7_1 <- lm(pincome ~ female,
             data = gss2018)
 ```
 
+Use tidy() to see the weights:
 
 ```{r}
 #| eval: false
@@ -119,7 +124,7 @@ tidy(lm7_1)
 knitr::kable(tidy(lm7_1))
 ```
 
-
+Compare the weights to values in the graph:
 
 ```{r}
 #| echo: false
@@ -201,7 +206,7 @@ tidy(lm7_small)
 knitr::kable(tidy(lm7_small))
 ```
 
-
+Compare the weights to the values in the graph:
 
 ```{r}
 #| echo: false
@@ -266,7 +271,7 @@ tidy(lm7_numeric_small)
 knitr::kable(tidy(lm7_numeric_small))
 ```
 
-
+Comapre the weights to the values in the graph:
 
 ```{r}
 #| echo: false
@@ -615,6 +620,7 @@ predict4values <- predict4values %>%
 print(predict4values)
 ```
 
+Calculating the actual means:
 
 ```{r}
 actual_means <- gss2018 %>%
@@ -624,10 +630,173 @@ actual_means <- gss2018 %>%
 print(actual_means)
 ```
 
-Now let's combine them into a single table:
+Now let's combine predicted means and actual means into a single table. The full join command will make sure the values line up with the right rows when we combine the tables:
 
 ```{r}
 full_join(predict4values, actual_means)
+```
+
+## Page 129 Martial Status and Family Income
+
+We select the maritial column and then glimpse it.  
+
+```{r}
+gss2018 %>%
+  select(marital) %>%
+  glimpse()
+
+```
+
+We see the values 1, 2, 3, 4. Not very helpful. We know that 1 = married, 2 = widowed, 3 = divorced or separated, 4 = never married. These numbers are ordinal - but the factor is really categorical and not ordinal. We fix this by turning the numbers into factors.
+
+```{r}
+gss2018 <- gss2018 %>%
+  mutate(marital = as_factor(marital)) %>%
+  mutate(marital = fct_recode(marital,
+                              married = "1",
+                              widowed = "2",
+                              div_sep = "3",
+                              never_married = "4"))
+
+```
+
+Let's see if it's a factor that usings the new labels:
+
+```{r}
+gss2018 %>%
+  select(marital) %>%
+  glimpse()
+
+```
+
+Now let's see the number at each level of the factor:
+
+```{r}
+gss2018 %>%
+  pull(marital) %>%
+  fct_count()
+```
+
+
+Now the regression:
+
+```{r}
+lm7_5 <- lm(fincome ~ marital, data = gss2018)
+```
+
+Use glance() to see the summary. Remember glance() is from the tidymodels package.
+
+```{r}
+#| eval: false
+glance(lm7_5)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm7_5))
+```
+
+
+Use tidy() to see the weights:
+
+```{r}
+#| eval: false
+tidy(lm7_5)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm7_5))
+```
+
+We can use confint() to see the CI's on the weights:
+```{r}
+confint(lm7_5)
+```
+
+## Page 131 Martial Status, Family Income, Education, Age
+
+
+```{r}
+lm7_6 <- lm(fincome ~ marital + age + educate, data = gss2018)
+```
+
+Use glance() to see the summary. Remember glance() is from the tidymodels package.
+
+```{r}
+#| eval: false
+glance(lm7_6)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm7_6))
+```
+
+
+Use tidy() to see the weights:
+
+```{r}
+#| eval: false
+tidy(lm7_6)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm7_6))
+```
+
+We can use confint() to see the CI's on the weights:
+```{r}
+confint(lm7_6)
+```
+
+## Page 133 Chapter Exercises
+
+
+### Activate packages
+
+```{r}
+library(usethis) # use_github_file()
+library(tidyverse) # read_csv() 
+library(janitor) # clean_names() 
+```
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/Opinion.csv",
+                save_as = "opinion.csv")
+
+opinion <- read_csv("opinion.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/Opinion.csv",
+                save_as = "opinion.csv")
+```
+
+#### Load data from your computer
+
+Clean names is essential here. It makes sure all column names are lower case. They are not all lower case in the original data file.
+
+```{r}
+#| eval: false
+opinion <- read_csv("opinion.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+```{r}
+opinion %>% 
+  glimpse()  
 ```
 
 
