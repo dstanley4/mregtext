@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#view-data-1" id="toc-view-data-1" class="nav-link" data-scroll-target="#view-data-1"><span class="header-section-number">8.4.4</span> View data</a></li>
   <li><a href="#regular-regression" id="toc-regular-regression" class="nav-link" data-scroll-target="#regular-regression"><span class="header-section-number">8.4.5</span> Regular Regression</a>
   <ul>
-  <li><a href="#check-residuals" id="toc-check-residuals" class="nav-link" data-scroll-target="#check-residuals"><span class="header-section-number">8.4.5.1</span> Check residuals</a></li>
+  <li><a href="#check-autocorrelation-of-residuals" id="toc-check-autocorrelation-of-residuals" class="nav-link" data-scroll-target="#check-autocorrelation-of-residuals"><span class="header-section-number">8.4.5.1</span> Check Autocorrelation of Residuals</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -289,6 +289,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td>olsrr</td>
+</tr>
+<tr class="even">
+<td>car</td>
 </tr>
 </tbody>
 </table>
@@ -881,8 +884,8 @@ poverty       1.054009  1.761876</code></pre>
 </table>
 </div>
 </div>
-<section id="check-residuals" class="level4" data-number="8.4.5.1">
-<h4 data-number="8.4.5.1" class="anchored" data-anchor-id="check-residuals"><span class="header-section-number">8.4.5.1</span> Check residuals</h4>
+<section id="check-autocorrelation-of-residuals" class="level4" data-number="8.4.5.1">
+<h4 data-number="8.4.5.1" class="anchored" data-anchor-id="check-autocorrelation-of-residuals"><span class="header-section-number">8.4.5.1</span> Check Autocorrelation of Residuals</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(olsrr)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1118,6 +1121,118 @@ d = \frac{\sum\limits_{ti=2}^n(\epsilon_{ti}-\epsilon_{ti-1})^2}{\sum\limits_{ti
 <p><span class="math display">\[
 d = \frac{\sum\limits_{ti=2}^n(\epsilon_{ti}-\epsilon_{ti-1})^2}{\sum\limits_{ti=1}^n\epsilon_{ti}^2} = \frac{438.059}{629.6975} = 0.6956658
 \]</span></p>
+<p>Compare this to the output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'car'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    recode</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    some</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> lag Autocorrelation D-W Statistic p-value
+   1       0.5641004     0.6956658       0
+ Alternative hypothesis: rho != 0</code></pre>
+</div>
+</div>
+<p>This output also contains an autocorrelation value. It is calculated using the formula below. Not this is the formula used by R. The formula in the text book on p.&nbsp;149 Footnote 10 is not used by the R durbinWatsonTest() command.</p>
+<p><span class="math display">\[
+r = \frac{\sum\limits_{ti=2}^n\epsilon_{ti}\epsilon_{ti-1}}{\sum\limits_{ti=1}^n\epsilon_{ti}^2} = 0.5641004
+\]</span></p>
+<p>Autocorrelation of residuals is a way of determining if the independence of rows assumption for regression is true. The autocorrelation of residuals is a way of examining if the residuals at time 1 are related to residuals at time 2. The the two are unrelated the rows are independent - and the regression assumption is true.</p>
+<p>Consider the table below. The first column on the left is the original residuals. The second column on the right is the residuals shifted by one spot (i.e., a lag of 1 time period). Autocorrelation of residuals (lag 1) checks to see if these two columns are correlated. If the residuals are correlated (i.e., the columns below are correlated) this indicates the errors at one time are related to the errors at another time. That is, the errors on one row are related to the errors on another row. If this is true, the rows are not independent and the regression assumption is violated.</p>
+<p>The textbook autcorrelation would give you the actual correlation formula between the two columns below which is .62. For technical R actually uses a slightly different calculation formula, above, which is conceptually similar but produces a value of 0.56.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">residuals</th>
+<th style="text-align: right;">shifted_residuals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2.375043</td>
+<td style="text-align: right;">9.849052</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12.953024</td>
+<td style="text-align: right;">2.375043</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.091291</td>
+<td style="text-align: right;">12.953024</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-7.767915</td>
+<td style="text-align: right;">1.091291</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-7.195350</td>
+<td style="text-align: right;">-7.767915</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-6.334700</td>
+<td style="text-align: right;">-7.195350</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-7.449140</td>
+<td style="text-align: right;">-6.334700</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-7.600404</td>
+<td style="text-align: right;">-7.449140</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-5.210873</td>
+<td style="text-align: right;">-7.600404</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.668634</td>
+<td style="text-align: right;">-5.210873</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.995988</td>
+<td style="text-align: right;">-2.668634</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.885519</td>
+<td style="text-align: right;">2.995988</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.801404</td>
+<td style="text-align: right;">1.885519</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.498877</td>
+<td style="text-align: right;">1.801404</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.047614</td>
+<td style="text-align: right;">3.498877</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3.729203</td>
+<td style="text-align: right;">4.047614</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
 </section>
