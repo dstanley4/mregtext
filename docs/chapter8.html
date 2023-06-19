@@ -1144,7 +1144,7 @@ Attaching package: 'car'</code></pre>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1       0.5641004     0.6956658       0
+   1       0.5641004     0.6956658   0.002
  Alternative hypothesis: rho != 0</code></pre>
 </div>
 </div>
@@ -1154,7 +1154,7 @@ r = \frac{\sum\limits_{ti=2}^n\epsilon_{ti}\epsilon_{ti-1}}{\sum\limits_{ti=1}^n
 \]</span></p>
 <p>Autocorrelation of residuals is a way of determining if the independence of rows assumption for regression is true. The autocorrelation of residuals is a way of examining if the residuals at time 1 are related to residuals at time 2. The the two are unrelated the rows are independent - and the regression assumption is true.</p>
 <p>Consider the table below. The first column on the left is the original residuals. The second column on the right is the residuals shifted by one spot (i.e., a lag of 1 time period). Autocorrelation of residuals (lag 1) checks to see if these two columns are correlated. If the residuals are correlated (i.e., the columns below are correlated) this indicates the errors at one time are related to the errors at another time. That is, the errors on one row are related to the errors on another row. If this is true, the rows are not independent and the regression assumption is violated.</p>
-<p>The textbook autcorrelation would give you the actual correlation formula between the two columns below which is .62. For technical R actually uses a slightly different calculation formula, above, which is conceptually similar but produces a value of 0.56.</p>
+<p>The textbook autcorrelation formula would give you the actual correlation between the two columns below which is .62. For technical R actually uses a slightly different calculation formula, above, which is conceptually similar, but produces a value of 0.56.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -1166,68 +1166,68 @@ r = \frac{\sum\limits_{ti=2}^n\epsilon_{ti}\epsilon_{ti-1}}{\sum\limits_{ti=1}^n
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">2.375043</td>
 <td style="text-align: right;">9.849052</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">12.953024</td>
 <td style="text-align: right;">2.375043</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">1.091291</td>
+<tr class="even">
+<td style="text-align: right;">2.375043</td>
 <td style="text-align: right;">12.953024</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">-7.767915</td>
+<tr class="odd">
+<td style="text-align: right;">12.953024</td>
 <td style="text-align: right;">1.091291</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">-7.195350</td>
+<tr class="even">
+<td style="text-align: right;">1.091291</td>
 <td style="text-align: right;">-7.767915</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">-6.334700</td>
+<tr class="odd">
+<td style="text-align: right;">-7.767915</td>
 <td style="text-align: right;">-7.195350</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">-7.449140</td>
+<tr class="even">
+<td style="text-align: right;">-7.195350</td>
 <td style="text-align: right;">-6.334700</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">-7.600404</td>
+<tr class="odd">
+<td style="text-align: right;">-6.334700</td>
 <td style="text-align: right;">-7.449140</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">-5.210873</td>
+<tr class="even">
+<td style="text-align: right;">-7.449140</td>
 <td style="text-align: right;">-7.600404</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">-2.668634</td>
+<tr class="odd">
+<td style="text-align: right;">-7.600404</td>
 <td style="text-align: right;">-5.210873</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">2.995988</td>
+<tr class="even">
+<td style="text-align: right;">-5.210873</td>
 <td style="text-align: right;">-2.668634</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">1.885519</td>
+<tr class="odd">
+<td style="text-align: right;">-2.668634</td>
 <td style="text-align: right;">2.995988</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">1.801404</td>
+<tr class="even">
+<td style="text-align: right;">2.995988</td>
 <td style="text-align: right;">1.885519</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">3.498877</td>
+<tr class="odd">
+<td style="text-align: right;">1.885519</td>
 <td style="text-align: right;">1.801404</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">4.047614</td>
+<tr class="even">
+<td style="text-align: right;">1.801404</td>
 <td style="text-align: right;">3.498877</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">3.729203</td>
+<tr class="odd">
+<td style="text-align: right;">3.498877</td>
 <td style="text-align: right;">4.047614</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4.047614</td>
+<td style="text-align: right;">3.729203</td>
 </tr>
 </tbody>
 </table>
