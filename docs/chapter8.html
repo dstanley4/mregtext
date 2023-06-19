@@ -225,7 +225,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#dependence-adjusted---see-se-for-weights" id="toc-dependence-adjusted---see-se-for-weights" class="nav-link" data-scroll-target="#dependence-adjusted---see-se-for-weights"><span class="header-section-number">8.3.3.2</span> Dependence Adjusted - see SE for weights</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#serial-correlation" id="toc-serial-correlation" class="nav-link" data-scroll-target="#serial-correlation"><span class="header-section-number">8.4</span> Serial Correlation</a></li>
+  <li><a href="#serial-correlation" id="toc-serial-correlation" class="nav-link" data-scroll-target="#serial-correlation"><span class="header-section-number">8.4</span> Serial Correlation</a>
+  <ul>
+  <li><a href="#obtain-data-and-save-it-to-your-computer-1" id="toc-obtain-data-and-save-it-to-your-computer-1" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer-1"><span class="header-section-number">8.4.1</span> Obtain data and save it to your computer</a></li>
+  <li><a href="#load-data-from-your-computer-1" id="toc-load-data-from-your-computer-1" class="nav-link" data-scroll-target="#load-data-from-your-computer-1"><span class="header-section-number">8.4.2</span> Load data from your computer</a></li>
+  <li><a href="#inspect-data-1" id="toc-inspect-data-1" class="nav-link" data-scroll-target="#inspect-data-1"><span class="header-section-number">8.4.3</span> Inspect data</a></li>
+  <li><a href="#view-data-1" id="toc-view-data-1" class="nav-link" data-scroll-target="#view-data-1"><span class="header-section-number">8.4.4</span> View data</a></li>
+  <li><a href="#regular-regression" id="toc-regular-regression" class="nav-link" data-scroll-target="#regular-regression"><span class="header-section-number">8.4.5</span> Regular Regression</a>
+  <ul>
+  <li><a href="#check-residuals" id="toc-check-residuals" class="nav-link" data-scroll-target="#check-residuals"><span class="header-section-number">8.4.5.1</span> Check residuals</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -276,6 +286,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>survey</td>
+</tr>
+<tr class="odd">
+<td>olsrr</td>
 </tr>
 </tbody>
 </table>
@@ -724,8 +737,391 @@ marriedyes  1.6599186 1.8352408</code></pre>
 </section>
 <section id="serial-correlation" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="serial-correlation"><span class="header-section-number">8.4</span> Serial Correlation</h2>
+<section id="obtain-data-and-save-it-to-your-computer-1" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer-1"><span class="header-section-number">8.4.1</span> Obtain data and save it to your computer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/Colombia2000_16.csv"</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"columbia.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-data-from-your-computer-1" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="load-data-from-your-computer-1"><span class="header-section-number">8.4.2</span> Load data from your computer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>columbia <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"columbia.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="inspect-data-1" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="inspect-data-1"><span class="header-section-number">8.4.3</span> Inspect data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>columbia <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 17
+Columns: 9
+$ index         &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+$ year          &lt;dbl&gt; 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 20…
+$ homicide_rate &lt;dbl&gt; 66.5, 68.6, 68.9, 53.8, 44.8, 39.6, 36.8, 34.7, 33.0, 33…
+$ homicides     &lt;dbl&gt; 26540, 27840, 28387, 22526, 19036, 17086, 16119, 15423, …
+$ population    &lt;dbl&gt; 39.64, 40.26, 40.88, 41.48, 42.08, 42.65, 43.20, 43.74, …
+$ unemploy      &lt;dbl&gt; 20.52, 15.04, 15.63, 14.19, 13.72, 11.87, 11.51, 11.20, …
+$ poverty       &lt;dbl&gt; 53.7, 60.5, 53.2, 50.9, 50.8, 46.7, 44.1, 43.4, 42.3, 41…
+$ gni           &lt;dbl&gt; 2340, 2330, 2370, 2370, 2620, 2990, 3500, 4120, 4700, 51…
+$ education     &lt;dbl&gt; 6.50, 6.50, 6.60, 6.65, 6.75, 6.00, 6.90, 7.00, 7.10, 7.…</code></pre>
+</div>
+</div>
+</section>
+<section id="view-data-1" class="level3" data-number="8.4.4">
+<h3 data-number="8.4.4" class="anchored" data-anchor-id="view-data-1"><span class="header-section-number">8.4.4</span> View data</h3>
+<p>Remember you can always use the view() command in R to see the data in a spreadsheet:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(columbia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="regular-regression" class="level3" data-number="8.4.5">
+<h3 data-number="8.4.5" class="anchored" data-anchor-id="regular-regression"><span class="header-section-number">8.4.5</span> Regular Regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>lm8_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(homicide_rate <span class="sc">~</span> poverty,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>columbia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-18.955563</td>
+<td style="text-align: right;">7.1414543</td>
+<td style="text-align: right;">-2.654300</td>
+<td style="text-align: right;">0.0180357</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">poverty</td>
+<td style="text-align: right;">1.407943</td>
+<td style="text-align: right;">0.1660531</td>
+<td style="text-align: right;">8.478867</td>
+<td style="text-align: right;">0.0000004</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %    97.5 %
+(Intercept) -34.177213 -3.733914
+poverty       1.054009  1.761876</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.8273703</td>
+<td style="text-align: right;">0.8158617</td>
+<td style="text-align: right;">6.479184</td>
+<td style="text-align: right;">71.89119</td>
+<td style="text-align: right;">4e-07</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-54.82418</td>
+<td style="text-align: right;">115.6484</td>
+<td style="text-align: right;">118.148</td>
+<td style="text-align: right;">629.6975</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">17</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="check-residuals" class="level4" data-number="8.4.5.1">
+<h4 data-number="8.4.5.1" class="anchored" data-anchor-id="check-residuals"><span class="header-section-number">8.4.5.1</span> Check residuals</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(olsrr)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Deleted studentized residual vs fitted values plot</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ols_plot_resid_stud_fit</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chapter8_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Obtain the residuals using the augment() command from the broom package. The residuals are in the .resid column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">augment</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 9%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">homicide_rate</th>
+<th style="text-align: right;">poverty</th>
+<th style="text-align: right;">.fitted</th>
+<th style="text-align: right;">.resid</th>
+<th style="text-align: right;">.hat</th>
+<th style="text-align: right;">.sigma</th>
+<th style="text-align: right;">.cooksd</th>
+<th style="text-align: right;">.std.resid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">66.5</td>
+<td style="text-align: right;">53.7</td>
+<td style="text-align: right;">56.65095</td>
+<td style="text-align: right;">9.849052</td>
+<td style="text-align: right;">0.1494618</td>
+<td style="text-align: right;">6.068935</td>
+<td style="text-align: right;">0.2387046</td>
+<td style="text-align: right;">1.6482656</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">68.6</td>
+<td style="text-align: right;">60.5</td>
+<td style="text-align: right;">66.22496</td>
+<td style="text-align: right;">2.375043</td>
+<td style="text-align: right;">0.2847689</td>
+<td style="text-align: right;">6.664462</td>
+<td style="text-align: right;">0.0374001</td>
+<td style="text-align: right;">0.4334390</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">68.9</td>
+<td style="text-align: right;">53.2</td>
+<td style="text-align: right;">55.94698</td>
+<td style="text-align: right;">12.953024</td>
+<td style="text-align: right;">0.1419102</td>
+<td style="text-align: right;">5.568849</td>
+<td style="text-align: right;">0.3851410</td>
+<td style="text-align: right;">2.1581640</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">53.8</td>
+<td style="text-align: right;">50.9</td>
+<td style="text-align: right;">52.70871</td>
+<td style="text-align: right;">1.091291</td>
+<td style="text-align: right;">0.1114027</td>
+<td style="text-align: right;">6.699452</td>
+<td style="text-align: right;">0.0020012</td>
+<td style="text-align: right;">0.1786767</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">44.8</td>
+<td style="text-align: right;">50.8</td>
+<td style="text-align: right;">52.56791</td>
+<td style="text-align: right;">-7.767915</td>
+<td style="text-align: right;">0.1102340</td>
+<td style="text-align: right;">6.335170</td>
+<td style="text-align: right;">0.1000696</td>
+<td style="text-align: right;">-1.2710019</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">39.6</td>
+<td style="text-align: right;">46.7</td>
+<td style="text-align: right;">46.79535</td>
+<td style="text-align: right;">-7.195350</td>
+<td style="text-align: right;">0.0736249</td>
+<td style="text-align: right;">6.402063</td>
+<td style="text-align: right;">0.0529035</td>
+<td style="text-align: right;">-1.1538203</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">36.8</td>
+<td style="text-align: right;">44.1</td>
+<td style="text-align: right;">43.13470</td>
+<td style="text-align: right;">-6.334700</td>
+<td style="text-align: right;">0.0618514</td>
+<td style="text-align: right;">6.474805</td>
+<td style="text-align: right;">0.0335883</td>
+<td style="text-align: right;">-1.0094153</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">34.7</td>
+<td style="text-align: right;">43.4</td>
+<td style="text-align: right;">42.14914</td>
+<td style="text-align: right;">-7.449140</td>
+<td style="text-align: right;">0.0601989</td>
+<td style="text-align: right;">6.384431</td>
+<td style="text-align: right;">0.0450462</td>
+<td style="text-align: right;">-1.1859540</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">33.0</td>
+<td style="text-align: right;">42.3</td>
+<td style="text-align: right;">40.60040</td>
+<td style="text-align: right;">-7.600404</td>
+<td style="text-align: right;">0.0589026</td>
+<td style="text-align: right;">6.371341</td>
+<td style="text-align: right;">0.0457581</td>
+<td style="text-align: right;">-1.2092025</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">33.7</td>
+<td style="text-align: right;">41.1</td>
+<td style="text-align: right;">38.91087</td>
+<td style="text-align: right;">-5.210873</td>
+<td style="text-align: right;">0.0593014</td>
+<td style="text-align: right;">6.551077</td>
+<td style="text-align: right;">0.0216727</td>
+<td style="text-align: right;">-0.8292106</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">32.3</td>
+<td style="text-align: right;">38.3</td>
+<td style="text-align: right;">34.96863</td>
+<td style="text-align: right;">-2.668634</td>
+<td style="text-align: right;">0.0675883</td>
+<td style="text-align: right;">6.665796</td>
+<td style="text-align: right;">0.0065942</td>
+<td style="text-align: right;">-0.4265449</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">33.6</td>
+<td style="text-align: right;">35.2</td>
+<td style="text-align: right;">30.60401</td>
+<td style="text-align: right;">2.995988</td>
+<td style="text-align: right;">0.0887765</td>
+<td style="text-align: right;">6.653930</td>
+<td style="text-align: right;">0.0114303</td>
+<td style="text-align: right;">0.4844035</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30.8</td>
+<td style="text-align: right;">34.0</td>
+<td style="text-align: right;">28.91448</td>
+<td style="text-align: right;">1.885519</td>
+<td style="text-align: right;">0.1003676</td>
+<td style="text-align: right;">6.685516</td>
+<td style="text-align: right;">0.0052512</td>
+<td style="text-align: right;">0.3068160</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">27.9</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">26.09860</td>
+<td style="text-align: right;">1.801404</td>
+<td style="text-align: right;">0.1238899</td>
+<td style="text-align: right;">6.686840</td>
+<td style="text-align: right;">0.0062384</td>
+<td style="text-align: right;">0.2970376</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">26.5</td>
+<td style="text-align: right;">29.8</td>
+<td style="text-align: right;">23.00112</td>
+<td style="text-align: right;">3.498877</td>
+<td style="text-align: right;">0.1558335</td>
+<td style="text-align: right;">6.628916</td>
+<td style="text-align: right;">0.0318854</td>
+<td style="text-align: right;">0.5877523</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">25.5</td>
+<td style="text-align: right;">28.7</td>
+<td style="text-align: right;">21.45239</td>
+<td style="text-align: right;">4.047614</td>
+<td style="text-align: right;">0.1741896</td>
+<td style="text-align: right;">6.600100</td>
+<td style="text-align: right;">0.0498413</td>
+<td style="text-align: right;">0.6874460</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">24.9</td>
+<td style="text-align: right;">28.5</td>
+<td style="text-align: right;">21.17080</td>
+<td style="text-align: right;">3.729203</td>
+<td style="text-align: right;">0.1776978</td>
+<td style="text-align: right;">6.615918</td>
+<td style="text-align: right;">0.0435292</td>
+<td style="text-align: right;">0.6347167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can calculate the Durbin-Watson test statistic with the formula below. But that notation can be hard to understand.</p>
+<p><span class="math display">\[
+d = \frac{\sum\limits_{ti=2}^n(\epsilon_{ti}-\epsilon_{ti-1})^2}{\sum\limits_{ti=1}^n\epsilon_{ti}^2}
+\]</span></p>
+<p>Let’s consider the numerator first. Look the values in the .resid column and see how they are used.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum\limits_{ti=2}^n(\epsilon_{ti}-\epsilon_{ti-1})^2 &amp;= (2.375043 - 9.849052)^2 + (12.953023-2.375043)^2 + (1.091291-12.953023)^2 + ... + (3.729203 - 4.047614) ^2\\
+&amp;= 438.059
+\end{aligned}
+\]</span></p>
+<p>Now the denominator:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum\limits_{ti=1}^n\epsilon_{ti}^2 &amp;= 9.849052^2 +  2.375043^2 + 12.953023^2 + ... + 3.729203^2\\
+&amp;= 629.6975
+\end{aligned}
+\]</span></p>
+<p>We combine them to get the final Durbin-Watson statistic:</p>
+<p><span class="math display">\[
+d = \frac{\sum\limits_{ti=2}^n(\epsilon_{ti}-\epsilon_{ti-1})^2}{\sum\limits_{ti=1}^n\epsilon_{ti}^2} = \frac{438.059}{629.6975} = 0.6956658
+\]</span></p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -11,7 +11,8 @@ The following CRAN packages must be installed:
 | janitor                |
 | skimr                  |
 | tidymodels             |
-| survey             |
+| survey                |
+| olsrr                |
 
 
 
@@ -257,4 +258,147 @@ knitr::kable(tidy(lm8_2))
 ```
 
 ## Serial Correlation
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/Colombia2000_16.csv",
+                save_as = "columbia.csv")
+
+columbia <- read_csv("columbia.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/Colombia2000_16.csv",
+                save_as = "columbia.csv")
+```
+
+### Load data from your computer
+
+```{r}
+#| eval: false
+columbia <- read_csv("columbia.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+```{r}
+columbia %>% 
+  glimpse()  
+```
+
+
+### View data
+
+Remember you can always use the view() command in R to see the data in a spreadsheet:
+
+```{r}
+#| eval: false
+view(columbia)
+```
+
+
+
+### Regular Regression
+
+
+```{r}
+lm8_3 <- lm(homicide_rate ~ poverty,
+            data=columbia)
+```
+
+
+
+```{r}
+#| eval: false
+tidy(lm8_3)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm8_3))
+```
+
+
+```{r}
+confint(lm8_3)
+```
+
+
+```{r}
+#| eval: false
+glance(lm8_3)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm8_3))
+
+```
+
+#### Check residuals
+```{r}
+#| include: false
+library(olsrr)
+```
+
+
+
+```{r}
+library(olsrr)
+
+# Deleted studentized residual vs fitted values plot
+ols_plot_resid_stud_fit(lm8_3)
+```
+
+
+Obtain the residuals using the augment() command from the broom package. The residuals are in the .resid column.
+
+```{r}
+#| eval: false
+augment(lm8_3)
+```
+
+```{r}
+#| echo: false
+lm8_3aug <- augment(lm8_3)
+knitr::kable(lm8_3aug, align = rep("r",8))
+```
+
+We can calculate the Durbin-Watson test statistic with the formula below. But that notation can be hard to understand.
+
+$$
+d = \frac{\sum\limits_{ti=2}^n(\epsilon_{ti}-\epsilon_{ti-1})^2}{\sum\limits_{ti=1}^n\epsilon_{ti}^2}
+$$
+
+Let's consider the numerator first. Look the values in the .resid column and see how they are used.
+
+$$
+\begin{aligned}
+\sum\limits_{ti=2}^n(\epsilon_{ti}-\epsilon_{ti-1})^2 &= (2.375043 - 9.849052)^2 + (12.953023-2.375043)^2 + (1.091291-12.953023)^2 + ... + (3.729203 - 4.047614) ^2\\
+&= 438.059
+\end{aligned}
+$$
+
+
+Now the denominator:
+
+$$
+\begin{aligned}
+\sum\limits_{ti=1}^n\epsilon_{ti}^2 &= 9.849052^2 +  2.375043^2 + 12.953023^2 + ... + 3.729203^2\\
+&= 629.6975
+\end{aligned}
+$$
+
+We combine them to get the final Durbin-Watson statistic:
+
+$$
+d = \frac{\sum\limits_{ti=2}^n(\epsilon_{ti}-\epsilon_{ti-1})^2}{\sum\limits_{ti=1}^n\epsilon_{ti}^2} = \frac{438.059}{629.6975} = 0.6956658
+$$
 
