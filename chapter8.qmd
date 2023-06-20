@@ -613,11 +613,6 @@ summary(lm8_8)
 
 ## Page 162 Chapter Exercises
 
-https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv
-
-
-
-
 ### Obtain data and save it to your computer
 
 ```{r}
