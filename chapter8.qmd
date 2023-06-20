@@ -625,7 +625,7 @@ https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv
 use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv",
                 save_as = "data_uscounties.csv")
 
-data_counties <- read_csv("data_esteem.csv", show_col_types = FALSE) %>% clean_names()
+data_counties <- read_csv("data_uscounties.csv", show_col_types = FALSE) %>% clean_names()
 ```
 
 ```{r}
