@@ -542,12 +542,36 @@ view(data_esteem)
 head(data_esteem)
 ```
 
+### Just essential variables
+
+To make things easier to follow later. We'll select() just the columns we need:
+
+```{r}
+data_esteem_working <- data_esteem %>%
+  select(newid, esteem, cohesion, stress)
+```
+
+```{r}
+data_esteem_working %>% 
+  glimpse()  
+```
+
+
+```{r}
+#| eval: false
+view(data_esteem_working)
+```
+
+```{r}
+head(data_esteem_working)
+```
+
 
 ### Regular Regression
 
 ```{r}
 lm8_6 <- lm(esteem ~ cohesion + stress,
-            data = data_esteem)
+            data = data_esteem_working)
 ```
 
 
@@ -588,7 +612,7 @@ library(gee)
 
 lm8_7 <- gee(esteem ~ cohesion + stress,
              id = newid,
-             data = data_esteem,
+             data = data_esteem_working,
              corstr = "AR-M",
              Mv = 1)
 
@@ -602,7 +626,7 @@ summary(lm8_7)
 
 lm8_8 <- gee(esteem ~ cohesion + stress,
              id = newid,
-             data = data_esteem,
+             data = data_esteem_working,
              corstr = "unstructured")
 
 summary(lm8_8)
@@ -610,6 +634,48 @@ summary(lm8_8)
 ```
 
 ## Page 157 
+
+```{r}
+
+# Create a lag versions of stress and cohesion
+data_esteem_working <- data_esteem_working %>%
+  group_by(newid) %>%
+  mutate(stress_lag = lag(stress, order_by = newid)) %>%
+  mutate(cohesion_lag = lag(cohesion, order_by = newid)) %>%
+  ungroup()
+```
+
+
+Now reorder the columns to it's easer to see what happened. We start by gettting all the column names. Then selecting them in a desirable order.
+
+```{r}
+
+print(names(data_esteem_working))
+  
+data_esteem_working <- data_esteem_working %>%
+  select(newid, esteem, stress, stress_lag, cohesion, cohesion_lag)
+  
+```
+
+Check out the data. See that we have a lagged version of stress and cohesion for each person.
+
+```{r}
+#| eval: false
+view(data_esteem_working)
+```
+
+Let's see the first 15 rows. Remember newid indicates the scores for each person.
+
+```{r}
+#| eval: false
+head(data_esteem_working, 15)
+```
+
+```{r}
+#| echo: false
+knitr::kable(head(data_esteem_working, 15))
+```
+
 
 ## Page 162 Chapter Exercises
 
