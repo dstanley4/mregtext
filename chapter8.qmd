@@ -611,3 +611,52 @@ summary(lm8_8)
 
 ## Page 157 
 
+## Page 162 Chapter Exercises
+
+https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv
+
+
+
+
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv",
+                save_as = "data_uscounties.csv")
+
+data_counties <- read_csv("data_esteem.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv",
+                save_as = "data_uscounties.csv")
+```
+
+### Load data from your computer
+
+```{r}
+#| eval: false
+data_counties <- read_csv("data_uscounties.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+```{r}
+data_counties %>% 
+  glimpse()  
+```
+
+
+### View data
+
+Remember you can always use the view() command in R to see the data in a spreadsheet:
+
+```{r}
+#| eval: false
+view(data_counties)
+```
+
+

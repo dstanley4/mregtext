@@ -252,6 +252,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#page-154-gee-regression-ar1-pattern" id="toc-page-154-gee-regression-ar1-pattern" class="nav-link" data-scroll-target="#page-154-gee-regression-ar1-pattern"><span class="header-section-number">8.7</span> Page 154 GEE Regression AR(1) Pattern</a></li>
   <li><a href="#page-155-gee-regression-unstructured-pattern" id="toc-page-155-gee-regression-unstructured-pattern" class="nav-link" data-scroll-target="#page-155-gee-regression-unstructured-pattern"><span class="header-section-number">8.8</span> Page 155 GEE Regression Unstructured Pattern</a></li>
   <li><a href="#page-157" id="toc-page-157" class="nav-link" data-scroll-target="#page-157"><span class="header-section-number">8.9</span> Page 157</a></li>
+  <li><a href="#page-162-chapter-exercises" id="toc-page-162-chapter-exercises" class="nav-link" data-scroll-target="#page-162-chapter-exercises"><span class="header-section-number">8.10</span> Page 162 Chapter Exercises</a>
+  <ul>
+  <li><a href="#obtain-data-and-save-it-to-your-computer-3" id="toc-obtain-data-and-save-it-to-your-computer-3" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer-3"><span class="header-section-number">8.10.1</span> Obtain data and save it to your computer</a></li>
+  <li><a href="#load-data-from-your-computer-3" id="toc-load-data-from-your-computer-3" class="nav-link" data-scroll-target="#load-data-from-your-computer-3"><span class="header-section-number">8.10.2</span> Load data from your computer</a></li>
+  <li><a href="#inspect-data-3" id="toc-inspect-data-3" class="nav-link" data-scroll-target="#inspect-data-3"><span class="header-section-number">8.10.3</span> Inspect data</a></li>
+  <li><a href="#view-data-3" id="toc-view-data-3" class="nav-link" data-scroll-target="#view-data-3"><span class="header-section-number">8.10.4</span> View data</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1730,8 +1737,58 @@ Working Correlation
 </section>
 <section id="page-157" class="level2" data-number="8.9">
 <h2 data-number="8.9" class="anchored" data-anchor-id="page-157"><span class="header-section-number">8.9</span> Page 157</h2>
+</section>
+<section id="page-162-chapter-exercises" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="page-162-chapter-exercises"><span class="header-section-number">8.10</span> Page 162 Chapter Exercises</h2>
+<p>https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv</p>
+<section id="obtain-data-and-save-it-to-your-computer-3" class="level3" data-number="8.10.1">
+<h3 data-number="8.10.1" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer-3"><span class="header-section-number">8.10.1</span> Obtain data and save it to your computer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv"</span>,</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"data_uscounties.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-data-from-your-computer-3" class="level3" data-number="8.10.2">
+<h3 data-number="8.10.2" class="anchored" data-anchor-id="load-data-from-your-computer-3"><span class="header-section-number">8.10.2</span> Load data from your computer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>data_counties <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_uscounties.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="inspect-data-3" class="level3" data-number="8.10.3">
+<h3 data-number="8.10.3" class="anchored" data-anchor-id="inspect-data-3"><span class="header-section-number">8.10.3</span> Inspect data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>data_counties <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 5,250
+Columns: 14
+$ newid      &lt;dbl&gt; 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 23,…
+$ year       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6,…
+$ age        &lt;dbl&gt; 11, 12, 13, 14, 15, 16, 17, 14, 15, 16, 17, 18, 19, 20, 14,…
+$ male       &lt;chr&gt; "male", "male", "male", "male", "male", "male", "male", "ma…
+$ income     &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3, 3,…
+$ nonwhite   &lt;chr&gt; "white", "white", "white", "white", "white", "white", "whit…
+$ fstruct    &lt;chr&gt; "yes", "yes", "yes", "yes", "yes", "yes", "yes", "yes", "ye…
+$ stress     &lt;dbl&gt; -6.84, -6.14, -3.42, -5.64, -6.28, -1.27, -0.73, -6.84, -6.…
+$ cohesion   &lt;dbl&gt; 6.88, 6.15, -9.28, -7.41, -13.57, -19.26, -21.08, -3.21, -2…
+$ sattach    &lt;dbl&gt; -6.34, -1.47, -4.35, -3.46, -8.48, -12.83, 0.14, -5.22, -10…
+$ depress    &lt;dbl&gt; -9.47, 17.51, 13.18, -1.03, -6.63, -8.76, 12.68, 0.08, -5.3…
+$ esteem     &lt;dbl&gt; -0.56, -7.19, -11.92, -6.22, -1.83, -3.54, -4.96, 1.33, 2.0…
+$ mastery    &lt;dbl&gt; 2.81, 1.91, -3.57, -1.10, -4.64, -3.99, 3.10, -2.29, -1.57,…
+$ bi_depress &lt;chr&gt; "below", "above", "above", "below", "below", "below", "abov…</code></pre>
+</div>
+</div>
+</section>
+<section id="view-data-3" class="level3" data-number="8.10.4">
+<h3 data-number="8.10.4" class="anchored" data-anchor-id="view-data-3"><span class="header-section-number">8.10.4</span> View data</h3>
+<p>Remember you can always use the view() command in R to see the data in a spreadsheet:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(data_counties)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
