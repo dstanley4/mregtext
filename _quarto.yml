@@ -16,6 +16,7 @@ book:
     - chapter6.qmd
     - chapter7.qmd
     - chapter8.qmd
+    - chapter9.qmd
     - references.qmd
 
 bibliography: references.bib
