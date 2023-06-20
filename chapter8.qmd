@@ -596,7 +596,7 @@ summary(lm8_7)
 
 ```
 
-### Page 155 GEE Regression Unstructured Pattern
+## Page 155 GEE Regression Unstructured Pattern
 
 ```{r}
 
@@ -609,5 +609,5 @@ summary(lm8_8)
 
 ```
 
-### Page 157 
+## Page 157 
 

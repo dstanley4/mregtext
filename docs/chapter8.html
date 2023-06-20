@@ -249,11 +249,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#view-data-2" id="toc-view-data-2" class="nav-link" data-scroll-target="#view-data-2"><span class="header-section-number">8.6.4</span> View data</a></li>
   <li><a href="#regular-regression-2" id="toc-regular-regression-2" class="nav-link" data-scroll-target="#regular-regression-2"><span class="header-section-number">8.6.5</span> Regular Regression</a></li>
   </ul></li>
-  <li><a href="#page-154-gee-regression-ar1-pattern" id="toc-page-154-gee-regression-ar1-pattern" class="nav-link" data-scroll-target="#page-154-gee-regression-ar1-pattern"><span class="header-section-number">8.7</span> Page 154 GEE Regression AR(1) Pattern</a>
-  <ul>
-  <li><a href="#page-155-gee-regression-unstructured-pattern" id="toc-page-155-gee-regression-unstructured-pattern" class="nav-link" data-scroll-target="#page-155-gee-regression-unstructured-pattern"><span class="header-section-number">8.7.1</span> Page 155 GEE Regression Unstructured Pattern</a></li>
-  <li><a href="#page-157" id="toc-page-157" class="nav-link" data-scroll-target="#page-157"><span class="header-section-number">8.7.2</span> Page 157</a></li>
-  </ul></li>
+  <li><a href="#page-154-gee-regression-ar1-pattern" id="toc-page-154-gee-regression-ar1-pattern" class="nav-link" data-scroll-target="#page-154-gee-regression-ar1-pattern"><span class="header-section-number">8.7</span> Page 154 GEE Regression AR(1) Pattern</a></li>
+  <li><a href="#page-155-gee-regression-unstructured-pattern" id="toc-page-155-gee-regression-unstructured-pattern" class="nav-link" data-scroll-target="#page-155-gee-regression-unstructured-pattern"><span class="header-section-number">8.8</span> Page 155 GEE Regression Unstructured Pattern</a></li>
+  <li><a href="#page-157" id="toc-page-157" class="nav-link" data-scroll-target="#page-157"><span class="header-section-number">8.9</span> Page 157</a></li>
   </ul>
 </nav>
     </div>
@@ -1168,7 +1166,7 @@ Attaching package: 'car'</code></pre>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1       0.5641004     0.6956658   0.002
+   1       0.5641004     0.6956658       0
  Alternative hypothesis: rho != 0</code></pre>
 </div>
 </div>
@@ -1671,8 +1669,9 @@ Working Correlation
 [7,] 0.03916618 0.06720879 0.1153296 0.1979045 0.3396021 0.58275393 1.00000000</code></pre>
 </div>
 </div>
-<section id="page-155-gee-regression-unstructured-pattern" class="level3" data-number="8.7.1">
-<h3 data-number="8.7.1" class="anchored" data-anchor-id="page-155-gee-regression-unstructured-pattern"><span class="header-section-number">8.7.1</span> Page 155 GEE Regression Unstructured Pattern</h3>
+</section>
+<section id="page-155-gee-regression-unstructured-pattern" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="page-155-gee-regression-unstructured-pattern"><span class="header-section-number">8.8</span> Page 155 GEE Regression Unstructured Pattern</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>lm8_8 <span class="ot">&lt;-</span> <span class="fu">gee</span>(esteem <span class="sc">~</span> cohesion <span class="sc">+</span> stress,</span>
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">id =</span> newid,</span>
@@ -1729,11 +1728,10 @@ Working Correlation
 </div>
 </div>
 </section>
-<section id="page-157" class="level3" data-number="8.7.2">
-<h3 data-number="8.7.2" class="anchored" data-anchor-id="page-157"><span class="header-section-number">8.7.2</span> Page 157</h3>
+<section id="page-157" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="page-157"><span class="header-section-number">8.9</span> Page 157</h2>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
