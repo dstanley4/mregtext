@@ -562,10 +562,17 @@ data_esteem_working %>%
 view(data_esteem_working)
 ```
 
+Let's see the first 15 rows of this new data set:
+
 ```{r}
-head(data_esteem_working)
+#| eval: false
+head(data_esteem_working, 15)
 ```
 
+```{r}
+#| echo: false
+knitr::kable(head(data_esteem_working, 15))
+```
 
 ### Regular Regression
 
