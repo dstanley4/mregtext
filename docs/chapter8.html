@@ -241,6 +241,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#regular-regression-1" id="toc-regular-regression-1" class="nav-link" data-scroll-target="#regular-regression-1"><span class="header-section-number">8.5.1</span> Regular regression</a></li>
   <li><a href="#page-prais-winsten-regression-model" id="toc-page-prais-winsten-regression-model" class="nav-link" data-scroll-target="#page-prais-winsten-regression-model"><span class="header-section-number">8.5.2</span> Page Prais-Winsten Regression Model</a></li>
   </ul></li>
+  <li><a href="#page-153-gee-for-longitudinal-data" id="toc-page-153-gee-for-longitudinal-data" class="nav-link" data-scroll-target="#page-153-gee-for-longitudinal-data"><span class="header-section-number">8.6</span> Page 153 GEE for Longitudinal Data</a>
+  <ul>
+  <li><a href="#obtain-data-and-save-it-to-your-computer-2" id="toc-obtain-data-and-save-it-to-your-computer-2" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer-2"><span class="header-section-number">8.6.1</span> Obtain data and save it to your computer</a></li>
+  <li><a href="#load-data-from-your-computer-2" id="toc-load-data-from-your-computer-2" class="nav-link" data-scroll-target="#load-data-from-your-computer-2"><span class="header-section-number">8.6.2</span> Load data from your computer</a></li>
+  <li><a href="#inspect-data-2" id="toc-inspect-data-2" class="nav-link" data-scroll-target="#inspect-data-2"><span class="header-section-number">8.6.3</span> Inspect data</a></li>
+  <li><a href="#view-data-2" id="toc-view-data-2" class="nav-link" data-scroll-target="#view-data-2"><span class="header-section-number">8.6.4</span> View data</a></li>
+  <li><a href="#regular-regression-2" id="toc-regular-regression-2" class="nav-link" data-scroll-target="#regular-regression-2"><span class="header-section-number">8.6.5</span> Regular Regression</a></li>
+  </ul></li>
+  <li><a href="#page-154-gee-regression-ar1-pattern" id="toc-page-154-gee-regression-ar1-pattern" class="nav-link" data-scroll-target="#page-154-gee-regression-ar1-pattern"><span class="header-section-number">8.7</span> Page 154 GEE Regression AR(1) Pattern</a>
+  <ul>
+  <li><a href="#page-155-gee-regression-unstructured-pattern" id="toc-page-155-gee-regression-unstructured-pattern" class="nav-link" data-scroll-target="#page-155-gee-regression-unstructured-pattern"><span class="header-section-number">8.7.1</span> Page 155 GEE Regression Unstructured Pattern</a></li>
+  <li><a href="#page-157" id="toc-page-157" class="nav-link" data-scroll-target="#page-157"><span class="header-section-number">8.7.2</span> Page 157</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -300,6 +313,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td>prais</td>
+</tr>
+<tr class="even">
+<td>gee</td>
 </tr>
 </tbody>
 </table>
@@ -1416,6 +1432,305 @@ Durbin-Watson statistic (original): 0.6957
 Durbin-Watson statistic (transformed): 1.873</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="page-153-gee-for-longitudinal-data" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="page-153-gee-for-longitudinal-data"><span class="header-section-number">8.6</span> Page 153 GEE for Longitudinal Data</h2>
+<section id="obtain-data-and-save-it-to-your-computer-2" class="level3" data-number="8.6.1">
+<h3 data-number="8.6.1" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer-2"><span class="header-section-number">8.6.1</span> Obtain data and save it to your computer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/Esteem.csv"</span>,</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"data_esteem.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-data-from-your-computer-2" class="level3" data-number="8.6.2">
+<h3 data-number="8.6.2" class="anchored" data-anchor-id="load-data-from-your-computer-2"><span class="header-section-number">8.6.2</span> Load data from your computer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>data_esteem <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_esteem.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="inspect-data-2" class="level3" data-number="8.6.3">
+<h3 data-number="8.6.3" class="anchored" data-anchor-id="inspect-data-2"><span class="header-section-number">8.6.3</span> Inspect data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>data_esteem <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 5,250
+Columns: 14
+$ newid      &lt;dbl&gt; 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 23,…
+$ year       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6,…
+$ age        &lt;dbl&gt; 11, 12, 13, 14, 15, 16, 17, 14, 15, 16, 17, 18, 19, 20, 14,…
+$ male       &lt;chr&gt; "male", "male", "male", "male", "male", "male", "male", "ma…
+$ income     &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3, 3,…
+$ nonwhite   &lt;chr&gt; "white", "white", "white", "white", "white", "white", "whit…
+$ fstruct    &lt;chr&gt; "yes", "yes", "yes", "yes", "yes", "yes", "yes", "yes", "ye…
+$ stress     &lt;dbl&gt; -6.84, -6.14, -3.42, -5.64, -6.28, -1.27, -0.73, -6.84, -6.…
+$ cohesion   &lt;dbl&gt; 6.88, 6.15, -9.28, -7.41, -13.57, -19.26, -21.08, -3.21, -2…
+$ sattach    &lt;dbl&gt; -6.34, -1.47, -4.35, -3.46, -8.48, -12.83, 0.14, -5.22, -10…
+$ depress    &lt;dbl&gt; -9.47, 17.51, 13.18, -1.03, -6.63, -8.76, 12.68, 0.08, -5.3…
+$ esteem     &lt;dbl&gt; -0.56, -7.19, -11.92, -6.22, -1.83, -3.54, -4.96, 1.33, 2.0…
+$ mastery    &lt;dbl&gt; 2.81, 1.91, -3.57, -1.10, -4.64, -3.99, 3.10, -2.29, -1.57,…
+$ bi_depress &lt;chr&gt; "below", "above", "above", "below", "below", "below", "abov…</code></pre>
+</div>
+</div>
+</section>
+<section id="view-data-2" class="level3" data-number="8.6.4">
+<h3 data-number="8.6.4" class="anchored" data-anchor-id="view-data-2"><span class="header-section-number">8.6.4</span> View data</h3>
+<p>Remember you can always use the view() command in R to see the data in a spreadsheet:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(data_esteem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_esteem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+  newid  year   age male  income nonwhite fstruct stress cohesion sattach
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1    13     1    11 male       5 white    yes      -6.84     6.88   -6.34
+2    13     2    12 male       5 white    yes      -6.14     6.15   -1.47
+3    13     3    13 male       5 white    yes      -3.42    -9.28   -4.35
+4    13     4    14 male       5 white    yes      -5.64    -7.41   -3.46
+5    13     5    15 male       5 white    yes      -6.28   -13.6    -8.48
+6    13     6    16 male       5 white    yes      -1.27   -19.3   -12.8 
+# ℹ 4 more variables: depress &lt;dbl&gt;, esteem &lt;dbl&gt;, mastery &lt;dbl&gt;,
+#   bi_depress &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="regular-regression-2" class="level3" data-number="8.6.5">
+<h3 data-number="8.6.5" class="anchored" data-anchor-id="regular-regression-2"><span class="header-section-number">8.6.5</span> Regular Regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>lm8_6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(esteem <span class="sc">~</span> cohesion <span class="sc">+</span> stress,</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> data_esteem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm8_6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.0000029</td>
+<td style="text-align: right;">0.0870514</td>
+<td style="text-align: right;">0.0000332</td>
+<td style="text-align: right;">0.9999735</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cohesion</td>
+<td style="text-align: right;">0.2541432</td>
+<td style="text-align: right;">0.0087651</td>
+<td style="text-align: right;">28.9948569</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">stress</td>
+<td style="text-align: right;">-0.1493022</td>
+<td style="text-align: right;">0.0163233</td>
+<td style="text-align: right;">-9.1465813</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm8_6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %     97.5 %
+(Intercept) -0.1706540  0.1706598
+cohesion     0.2369599  0.2713264
+stress      -0.1813027 -0.1173018</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm8_6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.1703517</td>
+<td style="text-align: right;">0.1700355</td>
+<td style="text-align: right;">6.307471</td>
+<td style="text-align: right;">538.6834</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">-17117.03</td>
+<td style="text-align: right;">34242.07</td>
+<td style="text-align: right;">34268.33</td>
+<td style="text-align: right;">208747.7</td>
+<td style="text-align: right;">5247</td>
+<td style="text-align: right;">5250</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="page-154-gee-regression-ar1-pattern" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="page-154-gee-regression-ar1-pattern"><span class="header-section-number">8.7</span> Page 154 GEE Regression AR(1) Pattern</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gee)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>lm8_7 <span class="ot">&lt;-</span> <span class="fu">gee</span>(esteem <span class="sc">~</span> cohesion <span class="sc">+</span> stress,</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">id =</span> newid,</span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data_esteem,</span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">corstr =</span> <span class="st">"AR-M"</span>,</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">Mv =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Beginning Cgee S-function, @(#) geeformula.q 4.13 98/01/27</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>running glm to get initial regression estimate</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept)      cohesion        stress 
+ 2.893874e-06  2.541432e-01 -1.493022e-01 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm8_7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA
+ gee S-function, version 4.13 modified 98/01/27 (1998) 
+
+Model:
+ Link:                      Identity 
+ Variance to Mean Relation: Gaussian 
+ Correlation Structure:     AR-M , M = 1 
+
+Call:
+gee(formula = esteem ~ cohesion + stress, id = newid, data = data_esteem, 
+    corstr = "AR-M", Mv = 1)
+
+Summary of Residuals:
+       Min         1Q     Median         3Q        Max 
+-37.895653  -4.201059   0.689138   4.918345  15.317508 
+
+
+Coefficients:
+                 Estimate  Naive S.E.       Naive z Robust S.E.     Robust z
+(Intercept)  0.0000759361 0.144336853  0.0005261033  0.16303660  0.000465761
+cohesion     0.2019027487 0.009271432 21.7768669671  0.01211667 16.663215493
+stress      -0.0710920935 0.015016134 -4.7343807014  0.01691523 -4.202845600
+
+Estimated Scale Parameter:  40.339
+Number of Iterations:  4
+
+Working Correlation
+           [,1]       [,2]      [,3]      [,4]      [,5]       [,6]       [,7]
+[1,] 1.00000000 0.58275393 0.3396021 0.1979045 0.1153296 0.06720879 0.03916618
+[2,] 0.58275393 1.00000000 0.5827539 0.3396021 0.1979045 0.11532961 0.06720879
+[3,] 0.33960214 0.58275393 1.0000000 0.5827539 0.3396021 0.19790448 0.11532961
+[4,] 0.19790448 0.33960214 0.5827539 1.0000000 0.5827539 0.33960214 0.19790448
+[5,] 0.11532961 0.19790448 0.3396021 0.5827539 1.0000000 0.58275393 0.33960214
+[6,] 0.06720879 0.11532961 0.1979045 0.3396021 0.5827539 1.00000000 0.58275393
+[7,] 0.03916618 0.06720879 0.1153296 0.1979045 0.3396021 0.58275393 1.00000000</code></pre>
+</div>
+</div>
+<section id="page-155-gee-regression-unstructured-pattern" class="level3" data-number="8.7.1">
+<h3 data-number="8.7.1" class="anchored" data-anchor-id="page-155-gee-regression-unstructured-pattern"><span class="header-section-number">8.7.1</span> Page 155 GEE Regression Unstructured Pattern</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>lm8_8 <span class="ot">&lt;-</span> <span class="fu">gee</span>(esteem <span class="sc">~</span> cohesion <span class="sc">+</span> stress,</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">id =</span> newid,</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data_esteem,</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">corstr =</span> <span class="st">"unstructured"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Beginning Cgee S-function, @(#) geeformula.q 4.13 98/01/27</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>running glm to get initial regression estimate</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept)      cohesion        stress 
+ 2.893874e-06  2.541432e-01 -1.493022e-01 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm8_8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA
+ gee S-function, version 4.13 modified 98/01/27 (1998) 
+
+Model:
+ Link:                      Identity 
+ Variance to Mean Relation: Gaussian 
+ Correlation Structure:     Unstructured 
+
+Call:
+gee(formula = esteem ~ cohesion + stress, id = newid, data = data_esteem, 
+    corstr = "unstructured")
+
+Summary of Residuals:
+        Min          1Q      Median          3Q         Max 
+-37.8642477  -4.1993354   0.6795163   4.9434080  15.1961802 
+
+
+Coefficients:
+                 Estimate  Naive S.E.       Naive z Robust S.E.      Robust z
+(Intercept)  5.116826e-06 0.163405894  3.131359e-05  0.16073825  3.183328e-05
+cohesion     1.969405e-01 0.009046301  2.177027e+01  0.01216873  1.618414e+01
+stress      -6.733487e-02 0.014656940 -4.594060e+00  0.01675165 -4.019597e+00
+
+Estimated Scale Parameter:  40.4264
+Number of Iterations:  5
+
+Working Correlation
+          [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]
+[1,] 1.0000000 0.4196993 0.3623088 0.3109070 0.2647337 0.2320768 0.2448309
+[2,] 0.4196993 1.0000000 0.5514433 0.5118622 0.3657062 0.3415669 0.3169120
+[3,] 0.3623088 0.5514433 1.0000000 0.5903386 0.3967422 0.3780522 0.3625584
+[4,] 0.3109070 0.5118622 0.5903386 1.0000000 0.5845708 0.4775849 0.4393025
+[5,] 0.2647337 0.3657062 0.3967422 0.5845708 1.0000000 0.6950766 0.6193434
+[6,] 0.2320768 0.3415669 0.3780522 0.4775849 0.6950766 1.0000000 0.6639399
+[7,] 0.2448309 0.3169120 0.3625584 0.4393025 0.6193434 0.6639399 1.0000000</code></pre>
+</div>
+</div>
+</section>
+<section id="page-157" class="level3" data-number="8.7.2">
+<h3 data-number="8.7.2" class="anchored" data-anchor-id="page-157"><span class="header-section-number">8.7.2</span> Page 157</h3>
 
 
 </section>

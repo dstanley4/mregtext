@@ -11,10 +11,11 @@ The following CRAN packages must be installed:
 | janitor                |
 | skimr                  |
 | tidymodels             |
-| survey                |
-| olsrr                |
-| car                |
-| prais                |
+| survey                 |
+| olsrr                  |
+| car                    |
+| prais                  |
+| gee                    |
 
 
 
@@ -493,10 +494,120 @@ summary(lm8_5)
 
 
 
+## Page 153 GEE for Longitudinal Data
 
 
+### Obtain data and save it to your computer
+
+```{r}
+#| include: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/Esteem.csv",
+                save_as = "data_esteem.csv")
+
+data_esteem <- read_csv("data_esteem.csv", show_col_types = FALSE) %>% clean_names()
+```
+
+```{r}
+#| eval: false
+use_github_file(repo_spec = "https://github.com/johnhoffmannVA/LinearRegression/blob/main/Esteem.csv",
+                save_as = "data_esteem.csv")
+```
+
+### Load data from your computer
+
+```{r}
+#| eval: false
+data_esteem <- read_csv("data_esteem.csv") %>% 
+  clean_names()
+```
+
+### Inspect data
+
+```{r}
+data_esteem %>% 
+  glimpse()  
+```
 
 
+### View data
+
+Remember you can always use the view() command in R to see the data in a spreadsheet:
+
+```{r}
+#| eval: false
+view(data_esteem)
+```
+
+```{r}
+head(data_esteem)
+```
 
 
+### Regular Regression
+
+```{r}
+lm8_6 <- lm(esteem ~ cohesion + stress,
+            data = data_esteem)
+```
+
+
+```{r}
+#| eval: false
+tidy(lm8_6)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm8_6))
+```
+
+
+```{r}
+confint(lm8_6)
+```
+
+
+```{r}
+#| eval: false
+glance(lm8_6)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm8_6))
+
+```
+
+## Page 154 GEE Regression AR(1) Pattern
+
+```{r}
+library(gee)
+
+lm8_7 <- gee(esteem ~ cohesion + stress,
+             id = newid,
+             data = data_esteem,
+             corstr = "AR-M",
+             Mv = 1)
+
+summary(lm8_7)
+
+```
+
+### Page 155 GEE Regression Unstructured Pattern
+
+```{r}
+
+lm8_8 <- gee(esteem ~ cohesion + stress,
+             id = newid,
+             data = data_esteem,
+             corstr = "unstructured")
+
+summary(lm8_8)
+
+```
+
+### Page 157 
 
