@@ -252,7 +252,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#page-154-gee-regression-ar1-pattern" id="toc-page-154-gee-regression-ar1-pattern" class="nav-link" data-scroll-target="#page-154-gee-regression-ar1-pattern"><span class="header-section-number">8.7</span> Page 154 GEE Regression AR(1) Pattern</a></li>
   <li><a href="#page-155-gee-regression-unstructured-pattern" id="toc-page-155-gee-regression-unstructured-pattern" class="nav-link" data-scroll-target="#page-155-gee-regression-unstructured-pattern"><span class="header-section-number">8.8</span> Page 155 GEE Regression Unstructured Pattern</a></li>
-  <li><a href="#page-157" id="toc-page-157" class="nav-link" data-scroll-target="#page-157"><span class="header-section-number">8.9</span> Page 157</a></li>
+  <li><a href="#page-157-lagged-regression" id="toc-page-157-lagged-regression" class="nav-link" data-scroll-target="#page-157-lagged-regression"><span class="header-section-number">8.9</span> Page 157 Lagged Regression</a>
+  <ul>
+  <li><a href="#regression-with-lagged-scores" id="toc-regression-with-lagged-scores" class="nav-link" data-scroll-target="#regression-with-lagged-scores"><span class="header-section-number">8.9.1</span> Regression with lagged scores</a></li>
+  </ul></li>
   <li><a href="#page-162-chapter-exercises" id="toc-page-162-chapter-exercises" class="nav-link" data-scroll-target="#page-162-chapter-exercises"><span class="header-section-number">8.10</span> Page 162 Chapter Exercises</a>
   <ul>
   <li><a href="#obtain-data-and-save-it-to-your-computer-3" id="toc-obtain-data-and-save-it-to-your-computer-3" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer-3"><span class="header-section-number">8.10.1</span> Obtain data and save it to your computer</a></li>
@@ -1869,8 +1872,8 @@ Working Correlation
 </div>
 </div>
 </section>
-<section id="page-157" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="page-157"><span class="header-section-number">8.9</span> Page 157</h2>
+<section id="page-157-lagged-regression" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="page-157-lagged-regression"><span class="header-section-number">8.9</span> Page 157 Lagged Regression</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a lag versions of stress and cohesion</span></span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>data_esteem_working <span class="ot">&lt;-</span> data_esteem_working <span class="sc">%&gt;%</span></span>
@@ -2035,28 +2038,85 @@ Working Correlation
 </table>
 </div>
 </div>
+<section id="regression-with-lagged-scores" class="level3" data-number="8.9.1">
+<h3 data-number="8.9.1" class="anchored" data-anchor-id="regression-with-lagged-scores"><span class="header-section-number">8.9.1</span> Regression with lagged scores</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>lm8_9 <span class="ot">&lt;-</span> <span class="fu">gee</span>(esteem <span class="sc">~</span> cohesion_lag <span class="sc">+</span> stress_lag,</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">id =</span> newid,</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data_esteem_working,</span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">corstr =</span> <span class="st">"unstructured"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Beginning Cgee S-function, @(#) geeformula.q 4.13 98/01/27</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>running glm to get initial regression estimate</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept)  cohesion_lag    stress_lag 
+-0.0000548957  0.2108613566 -0.1200494250 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm8_9)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ GEE:  GENERALIZED LINEAR MODELS FOR DEPENDENT DATA
+ gee S-function, version 4.13 modified 98/01/27 (1998) 
+
+Model:
+ Link:                      Identity 
+ Variance to Mean Relation: Gaussian 
+ Correlation Structure:     Unstructured 
+
+Call:
+gee(formula = esteem ~ cohesion_lag + stress_lag, id = newid, 
+    data = data_esteem_working, corstr = "unstructured")
+
+Summary of Residuals:
+        Min          1Q      Median          3Q         Max 
+-36.6340374  -4.7280288   0.8665372   5.6560904  11.8224922 
+
+
+Coefficients:
+                  Estimate Naive S.E.       Naive z Robust S.E.      Robust z
+(Intercept)  -0.0001479426 0.18753982 -0.0007888596  0.18652032 -0.0007931715
+cohesion_lag  0.0739829966 0.01045740  7.0747034937  0.01165273  6.3489849902
+stress_lag   -0.0319850214 0.01671445 -1.9136148001  0.01735733 -1.8427387657
+
+Estimated Scale Parameter:  46.82793
+Number of Iterations:  5
+
+Working Correlation
+          [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
+[1,] 1.0000000 0.5733183 0.5312270 0.3652688 0.3458681 0.3245191
+[2,] 0.5733183 1.0000000 0.6126773 0.4022154 0.3751523 0.3863323
+[3,] 0.5312270 0.6126773 1.0000000 0.5495194 0.4757588 0.4554248
+[4,] 0.3652688 0.4022154 0.5495194 1.0000000 0.6549964 0.5889848
+[5,] 0.3458681 0.3751523 0.4757588 0.6549964 1.0000000 0.6389512
+[6,] 0.3245191 0.3863323 0.4554248 0.5889848 0.6389512 1.0000000</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="page-162-chapter-exercises" class="level2" data-number="8.10">
 <h2 data-number="8.10" class="anchored" data-anchor-id="page-162-chapter-exercises"><span class="header-section-number">8.10</span> Page 162 Chapter Exercises</h2>
 <section id="obtain-data-and-save-it-to-your-computer-3" class="level3" data-number="8.10.1">
 <h3 data-number="8.10.1" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer-3"><span class="header-section-number">8.10.1</span> Obtain data and save it to your computer</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv"</span>,</span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"data_uscounties.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_file</span>(<span class="at">repo_spec =</span> <span class="st">"https://github.com/johnhoffmannVA/LinearRegression/blob/main/USCounties2010.csv"</span>,</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">save_as =</span> <span class="st">"data_uscounties.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="load-data-from-your-computer-3" class="level3" data-number="8.10.2">
 <h3 data-number="8.10.2" class="anchored" data-anchor-id="load-data-from-your-computer-3"><span class="header-section-number">8.10.2</span> Load data from your computer</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>data_counties <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_uscounties.csv"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>data_counties <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_uscounties.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="inspect-data-3" class="level3" data-number="8.10.3">
 <h3 data-number="8.10.3" class="anchored" data-anchor-id="inspect-data-3"><span class="header-section-number">8.10.3</span> Inspect data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>data_counties <span class="sc">%&gt;%</span> </span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>data_counties <span class="sc">%&gt;%</span> </span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2,257
 Columns: 12
@@ -2079,7 +2139,7 @@ $ per_fast_food        &lt;dbl&gt; 47, 36, 64, 54, 56, 67, 47, 59, 54, 62, 58, 3
 <h3 data-number="8.10.4" class="anchored" data-anchor-id="view-data-3"><span class="header-section-number">8.10.4</span> View data</h3>
 <p>Remember you can always use the view() command in R to see the data in a spreadsheet:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(data_counties)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(data_counties)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

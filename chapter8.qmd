@@ -640,7 +640,7 @@ summary(lm8_8)
 
 ```
 
-## Page 157 
+## Page 157 Lagged Regression
 
 ```{r}
 
@@ -681,6 +681,18 @@ head(data_esteem_working, 15)
 ```{r}
 #| echo: false
 knitr::kable(head(data_esteem_working, 15))
+```
+
+### Regression with lagged scores
+
+```{r}
+lm8_9 <- gee(esteem ~ cohesion_lag + stress_lag,
+             id = newid,
+             data = data_esteem_working,
+             corstr = "unstructured")
+
+summary(lm8_9)
+
 ```
 
 
