@@ -225,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#dependence-adjusted---see-se-for-weights" id="toc-dependence-adjusted---see-se-for-weights" class="nav-link" data-scroll-target="#dependence-adjusted---see-se-for-weights"><span class="header-section-number">8.3.3.2</span> Dependence Adjusted - see SE for weights</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#serial-correlation" id="toc-serial-correlation" class="nav-link" data-scroll-target="#serial-correlation"><span class="header-section-number">8.4</span> Serial Correlation</a>
+  <li><a href="#page-145-serial-correlation" id="toc-page-145-serial-correlation" class="nav-link" data-scroll-target="#page-145-serial-correlation"><span class="header-section-number">8.4</span> Page 145 Serial Correlation</a>
   <ul>
   <li><a href="#obtain-data-and-save-it-to-your-computer-1" id="toc-obtain-data-and-save-it-to-your-computer-1" class="nav-link" data-scroll-target="#obtain-data-and-save-it-to-your-computer-1"><span class="header-section-number">8.4.1</span> Obtain data and save it to your computer</a></li>
   <li><a href="#load-data-from-your-computer-1" id="toc-load-data-from-your-computer-1" class="nav-link" data-scroll-target="#load-data-from-your-computer-1"><span class="header-section-number">8.4.2</span> Load data from your computer</a></li>
@@ -235,6 +235,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#check-autocorrelation-of-residuals" id="toc-check-autocorrelation-of-residuals" class="nav-link" data-scroll-target="#check-autocorrelation-of-residuals"><span class="header-section-number">8.4.5.1</span> Check Autocorrelation of Residuals</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#page-150-corrections-for-dependence" id="toc-page-150-corrections-for-dependence" class="nav-link" data-scroll-target="#page-150-corrections-for-dependence"><span class="header-section-number">8.5</span> Page 150 Corrections for dependence</a>
+  <ul>
+  <li><a href="#regular-regression-1" id="toc-regular-regression-1" class="nav-link" data-scroll-target="#regular-regression-1"><span class="header-section-number">8.5.1</span> Regular regression</a></li>
+  <li><a href="#page-prais-winsten-regression-model" id="toc-page-prais-winsten-regression-model" class="nav-link" data-scroll-target="#page-prais-winsten-regression-model"><span class="header-section-number">8.5.2</span> Page Prais-Winsten Regression Model</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -292,6 +297,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>car</td>
+</tr>
+<tr class="odd">
+<td>prais</td>
 </tr>
 </tbody>
 </table>
@@ -738,8 +746,8 @@ marriedyes  1.6599186 1.8352408</code></pre>
 </section>
 </section>
 </section>
-<section id="serial-correlation" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="serial-correlation"><span class="header-section-number">8.4</span> Serial Correlation</h2>
+<section id="page-145-serial-correlation" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="page-145-serial-correlation"><span class="header-section-number">8.4</span> Page 145 Serial Correlation</h2>
 <section id="obtain-data-and-save-it-to-your-computer-1" class="level3" data-number="8.4.1">
 <h3 data-number="8.4.1" class="anchored" data-anchor-id="obtain-data-and-save-it-to-your-computer-1"><span class="header-section-number">8.4.1</span> Obtain data and save it to your computer</h3>
 <div class="cell">
@@ -1144,7 +1152,7 @@ Attaching package: 'car'</code></pre>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(lm8_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1       0.5641004     0.6956658       0
+   1       0.5641004     0.6956658   0.002
  Alternative hypothesis: rho != 0</code></pre>
 </div>
 </div>
@@ -1233,9 +1241,183 @@ r = \frac{\sum\limits_{ti=2}^n\epsilon_{ti}\epsilon_{ti-1}}{\sum\limits_{ti=1}^n
 </table>
 </div>
 </div>
-
-
 </section>
+</section>
+</section>
+<section id="page-150-corrections-for-dependence" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="page-150-corrections-for-dependence"><span class="header-section-number">8.5</span> Page 150 Corrections for dependence</h2>
+<section id="regular-regression-1" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="regular-regression-1"><span class="header-section-number">8.5.1</span> Regular regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>lm8_4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(homicide_rate <span class="sc">~</span> poverty,</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> columbia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm8_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-18.955563</td>
+<td style="text-align: right;">7.1414543</td>
+<td style="text-align: right;">-2.654300</td>
+<td style="text-align: right;">0.0180357</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">poverty</td>
+<td style="text-align: right;">1.407943</td>
+<td style="text-align: right;">0.1660531</td>
+<td style="text-align: right;">8.478867</td>
+<td style="text-align: right;">0.0000004</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(lm8_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %    97.5 %
+(Intercept) -34.177213 -3.733914
+poverty       1.054009  1.761876</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(lm8_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.8273703</td>
+<td style="text-align: right;">0.8158617</td>
+<td style="text-align: right;">6.479184</td>
+<td style="text-align: right;">71.89119</td>
+<td style="text-align: right;">4e-07</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-54.82418</td>
+<td style="text-align: right;">115.6484</td>
+<td style="text-align: right;">118.148</td>
+<td style="text-align: right;">629.6975</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">17</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="page-prais-winsten-regression-model" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="page-prais-winsten-regression-model"><span class="header-section-number">8.5.2</span> Page Prais-Winsten Regression Model</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(prais)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: sandwich</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: pcse</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'pcse'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:sandwich':
+
+    vcovPC</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>lm8_5 <span class="ot">&lt;-</span> <span class="fu">prais_winsten</span>(homicide_rate <span class="sc">~</span> poverty,</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> columbia,</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">index =</span> <span class="st">"index"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Iteration 0: rho = 0
+Iteration 1: rho = 0.5768
+Iteration 2: rho = 0.6171
+Iteration 3: rho = 0.6288
+Iteration 4: rho = 0.6328
+Iteration 5: rho = 0.6342
+Iteration 6: rho = 0.6348
+Iteration 7: rho = 0.635
+Iteration 8: rho = 0.635
+Iteration 9: rho = 0.6351
+Iteration 10: rho = 0.6351
+Iteration 11: rho = 0.6351
+Iteration 12: rho = 0.6351
+Iteration 13: rho = 0.6351</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm8_5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+prais_winsten(formula = homicide_rate ~ poverty, data = columbia, 
+    index = "index")
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.6640 -7.0686 -0.6986  0.6317 13.8862 
+
+AR(1) coefficient rho after 13 iterations: 0.6351
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -10.1427    11.1090  -0.913 0.375674    
+poverty       1.2247     0.2558   4.789 0.000239 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.976 on 15 degrees of freedom
+Multiple R-squared:  0.8019,    Adjusted R-squared:  0.7887 
+F-statistic: 60.73 on 1 and 15 DF,  p-value: 1.187e-06
+
+Durbin-Watson statistic (original): 0.6957 
+Durbin-Watson statistic (transformed): 1.873</code></pre>
+</div>
+</div>
+
+
 </section>
 </section>
 

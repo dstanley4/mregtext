@@ -14,6 +14,7 @@ The following CRAN packages must be installed:
 | survey                |
 | olsrr                |
 | car                |
+| prais                |
 
 
 
@@ -258,7 +259,7 @@ tidy(lm8_2)
 knitr::kable(tidy(lm8_2))
 ```
 
-## Serial Correlation
+## Page 145 Serial Correlation
 
 ### Obtain data and save it to your computer
 
@@ -435,5 +436,67 @@ residdf <- data.frame(residuals = r2, shifted_residuals = r1)
 
 knitr::kable(residdf, align = rep("r",2))
 ```
+
+## Page 150 Corrections for dependence
+
+### Regular regression
+
+```{r}
+lm8_4 <- lm(homicide_rate ~ poverty,
+            data = columbia)
+
+```
+
+
+```{r}
+#| eval: false
+tidy(lm8_4)
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(tidy(lm8_4))
+```
+
+
+```{r}
+confint(lm8_4)
+```
+
+
+```{r}
+#| eval: false
+glance(lm8_4)
+
+```
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(glance(lm8_4))
+
+```
+
+
+### Page Prais-Winsten Regression Model
+
+```{r}
+library(prais)
+
+lm8_5 <- prais_winsten(homicide_rate ~ poverty,
+                       data = columbia,
+                       index = "index")
+
+summary(lm8_5)
+```
+
+
+
+
+
+
+
+
 
 
