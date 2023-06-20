@@ -422,7 +422,7 @@ The autocorrelation of residuals is a way of examining if the residuals at time 
 
 Consider the table below. The first column on the left is the original residuals. The second column on the right is the residuals shifted by one spot (i.e., a lag of 1 time period). Autocorrelation of residuals (lag 1) checks to see if these two columns are correlated. If the residuals are correlated (i.e., the columns below are correlated) this indicates the errors at one time are related to the errors at another time. That is, the errors on one row are related to the errors on another row. If this is true, the rows are not independent and the regression assumption is violated.
 
-The textbook autcorrelation formula would give you the actual correlation between the two columns below which is .62. For technical R actually uses a slightly different calculation formula, above, which is conceptually similar, but produces a value of 0.56.
+The textbook autcorrelation formula would give you the actual correlation between the two columns below which is .62. For technical reasons R actually uses a slightly different calculation formula, above, which is conceptually similar, but produces a value of 0.56.
 
 
 ```{r}
